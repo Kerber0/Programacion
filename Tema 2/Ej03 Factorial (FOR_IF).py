@@ -12,9 +12,22 @@ factorial = 1
 for x in range (1, numero+1): 
     factorial *= x
 """
-def factorial(n):
+def factorial_recursivo(n: int) -> int:
   if n == 0:
     return 1
   else:
-    return n * factorial(n-1)
-print(factorial(5))
+    return n * factorial_recursivo (int(n) -1)
+    
+def factorial_iterativo(n: int) -> int:
+    resultado = 1
+    for i in range(1, int(n) + 1):
+        resultado *= i
+    return resultado
+
+if __name__ == "__main__":
+  n= int(input("Ingrese el numero que desea saber su factorial: "))
+  resultado1 = factorial_recursivo(n)
+  resultado2 = factorial_iterativo(n)
+
+print(resultado1)
+print(resultado2)
