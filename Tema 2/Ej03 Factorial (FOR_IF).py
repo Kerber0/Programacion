@@ -4,14 +4,7 @@
 # principal que realice la llamada a dicha función. Como paso previo, se puede diseñar una función que 
 # calcule el factorial de un número entero.
 
-"""
-Funcion factorial
 
-numero = int(input("Introduzca el número: "))
-factorial = 1
-for x in range (1, numero+1): 
-    factorial *= x
-"""
 def factorial_recursivo(n: int) -> int:
   if n == 0:
     return 1

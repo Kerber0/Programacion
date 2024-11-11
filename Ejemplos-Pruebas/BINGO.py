@@ -40,13 +40,13 @@ def sacar_numeros(carton):
     numero = random.randint(0,100)
     if numero not in numeros_retirados:
       numeros_retirados.append(numero)
-      time.sleep(1)
+      time.sleep(0.5)
       print(f"Número {numero}: ¿Alguien lo tiene?")
       if revisar_carton(carton,numero) == True:
-        time.sleep(1)
+        time.sleep(0.5)
         imprimir_carton(carton)
       if revisar_Bingo(carton):
-        print("TENEMOS UN GANADOR!!")
+        print("BINGO!! TENEMOS UN GANADOR!!")
         return
 
 def revisar_carton(carton,numero):
