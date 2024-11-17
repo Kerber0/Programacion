@@ -35,7 +35,7 @@ def repeticiones(lista: list, numero: int) -> int:
         return 0
     return (1 if lista[0] == numero else 0) + repeticiones(lista[1:], numero)
 
-# Recursividad tipo factorial.
+################# Recursividad tipo factorial.
 
 # Diseñar una función que devuelva el factorial de un número. La función debe recibir un número entero como argumento y
 #  devolver un entero con el factorial del número.
@@ -45,7 +45,7 @@ def factorial(numero: int) -> int:
         return 1
     return numero * factorial(numero - 1)
 
-# Fibonacci.
+############## Fibonacci.
 
 # Diseñar una función que devuelva el número de la serie de Fibonacci en una posición determinada. La función debe recibir
 #  un número entero como argumento y devolver un entero con el número de la serie de Fibonacci en la posición indicada.
@@ -57,7 +57,7 @@ def fibonacci(numero: int) -> int:
         return 1
     return fibonacci(numero - 1) + fibonacci(numero - 2)
 
-# Potencia.
+############## Potencia.
 
 # Diseñar una función que devuelva la potencia de un número. La función debe recibir dos números enteros como argumentos 
 # y devolver un entero con el resultado de elevar el primer número al segundo número.
@@ -67,7 +67,7 @@ def potencia(base: int, exponente: int) -> int:
         return 1
     return base * potencia(base, exponente - 1)
 
-# Suma de los elementos de una lista.
+################ Suma de los elementos de una lista.
 
 # Diseñar una función que devuelva la suma de los elementos de una lista. La función debe recibir una lista de enteros 
 # como argumento y devolver un entero con la suma de los elementos de la lista.
@@ -77,7 +77,7 @@ def suma_lista(lista: list) -> int:
         return 0
     return lista[0] + suma_lista(lista[1:])
 
-# Inversión de una lista.
+############### Inversión de una lista.
 
 # Diseñar una función que devuelva una lista invertida. La función debe recibir una lista como argumento y devolver una 
 # lista con los elementos de la lista original en orden inverso.
@@ -97,7 +97,7 @@ def invertir_lista_de_listas(lista: list) -> list:
 
 # Más ejemplos diferentes de ejercicios sobre recursividad con funciones y listas de listas.
 
-# Tablero de ajedrez.
+# ###########################   Tablero de ajedrez.
 
 # Diseñar una función que devuelva un tablero de ajedrez. La función debe recibir dos números enteros como argumentos y
 #  devolver una lista de listas con el tablero de ajedrez.
