@@ -39,3 +39,32 @@ Entrada de muestra: 2
 
 Salida esperada: La altura de la pirámide es: 1
 """
+
+def calcular_altura_y_dibujar_piramide(bloques):
+    altura = 0
+    bloques_necesarios = 1  # Bloques necesarios para la primera capa
+    piramide = []  # Lista para almacenar cada capa de la pirámide
+    
+    # Calcular la altura y construir las capas
+    while bloques >= bloques_necesarios:
+        bloques -= bloques_necesarios  # Usamos los bloques para esta capa
+        altura += 1  # Aumentamos la altura en una capa
+        
+        # Crear la capa actual con asteriscos
+        capa = '*' * bloques_necesarios
+        piramide.append(capa)  # Agregar la capa a la lista de la pirámide
+        
+        # Aumentar la cantidad de bloques necesarios para la siguiente capa
+        bloques_necesarios += 1
+
+    # Mostrar la altura de la pirámide
+    print(f"La altura de la pirámide es: {altura}")
+    
+    # Dibujar la pirámide centrada
+    ancho_piramide = len(piramide[-1]) if piramide else 0
+    for capa in piramide:
+        print(capa.center(ancho_piramide))
+
+# Pruebas con los datos proporcionados
+bloques = int(input("Ingrese la cantidad de bloques: "))
+calcular_altura_y_dibujar_piramide(bloques)

@@ -1,13 +1,9 @@
-def tablero_ajedrez(filas: int, columnas: int) -> list:
-    if filas == 0:
-        return []
-    return [tablero_ajedrez(filas - 1, columnas)] + [tablero_ajedrez_columnas(columnas, filas)]
-
-def tablero_ajedrez_columnas(columnas: int, fila: int) -> list:
-    if columnas == 0:
-        return []
-    return [(fila + columnas) % 2] + tablero_ajedrez_columnas(columnas - 1, fila)
+def dibujar_trapecio(base_mayor, base_menor, altura):
+    diferencia = (base_mayor - base_menor) // 2
+    for i in range(altura):
+        espacios = diferencia + i
+        asteriscos = base_menor + (i * 2)
+        print(' ' * espacios + '*' * asteriscos)
 
 
-
-print(tablero_ajedrez(8,8))
+print(dibujar_trapecio(5,4,4))
