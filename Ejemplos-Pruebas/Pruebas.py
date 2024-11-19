@@ -1,9 +1,8 @@
-def dibujar_trapecio(base_mayor, base_menor, altura):
-    diferencia = (base_mayor - base_menor) // 2
-    for i in range(altura):
-        espacios = diferencia + i
-        asteriscos = base_menor + (i * 2)
-        print(' ' * espacios + '*' * asteriscos)
+def arbolNavidad(altura: int) -> str:
+  for i in range(1, altura + 1):
+    print(' ' * (altura - i) + '*' * (2 * i - 1))
+  else:
+    print(" " *(altura//2+1)+ "***")
 
 
-print(dibujar_trapecio(5,4,4))
+print(arbolNavidad(3))
