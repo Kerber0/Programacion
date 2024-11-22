@@ -145,22 +145,23 @@ finally:
 
 # El bloque finally se ejecuta al final del bloque try-except. En este caso, se muestra un mensaje de error.
 
-# Excepciones más comunes en Python
+""" Excepciones más comunes en Python
 
-# ZeroDivisionError: Se produce al intentar dividir un número por cero.
-# NameError: Se produce al intentar acceder a una variable que no está definida.
-# TypeError: Se produce al intentar realizar una operación con un tipo de dato incorrecto.
-# ValueError: Se produce al intentar realizar una operación con un valor incorrecto.
-# KeyError: Se produce al intentar acceder a una clave que no existe en un diccionario.
-# IndexError: Se produce al intentar acceder a un índice que no existe en una lista o tupla.
-# FileNotFoundError: Se produce al intentar abrir un archivo que no existe.
-# OSError: Se produce al intentar realizar una operación con un archivo que no existe.
-# AttributeError: Se produce al intentar acceder a un atributo que no existe en un objeto.
-# ImportError: Se produce al intentar importar un módulo que no existe.
-# ModuleNotFoundError: Se produce al intentar importar un módulo que no existe.
-# IndentationError: Se produce al intentar ejecutar un bloque de código con una indentación incorrecta.
-# SyntaxError: Se produce al intentar ejecutar un código con una sintaxis incorrecta.
-
+ ZeroDivisionError: Se produce al intentar dividir un número por cero.
+ NameError: Se produce al intentar acceder a una variable que no está definida.
+ TypeError: Se produce al intentar realizar una operación con un tipo de dato incorrecto.
+ ValueError: Se produce al intentar realizar una operación con un valor incorrecto.
+ KeyError: Se produce al intentar acceder a una clave que no existe en un diccionario.
+ IndexError: Se produce al intentar acceder a un índice que no existe en una lista o tupla.
+ FileNotFoundError: Se produce al intentar abrir un archivo que no existe.
+ OSError: Se produce al intentar realizar una operación con un archivo que no existe.
+ AttributeError: Se produce al intentar acceder a un atributo que no existe en un objeto.
+ ImportError: Se produce al intentar importar un módulo que no existe.
+ ModuleNotFoundError: Se produce al intentar importar un módulo que no existe.
+ IndentationError: Se produce al intentar ejecutar un bloque de código con una indentación incorrecta.
+ SyntaxError: Se produce al intentar ejecutar un código con una sintaxis incorrecta.
+ 
+"""
 # Documentación oficial de Python sobre excepciones: https://docs.python.org/3/library/exceptions.html
 
 # raise Exception 
