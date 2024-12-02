@@ -4,12 +4,9 @@
 
 def imprimir_horairo(diccionario: dict) -> None:
 
-
-
-
-
-# Pruebas
-imprimir_horario({"Lunes": ["Matemáticas", "Lengua"], "Martes": ["Historia", "Inglés"], "Miércoles": ["Física", "Química"]})    
+    # Pruebas
+imprimir_horario({"Lunes": ["Matemáticas", "Lengua"], "Martes": [
+                 "Historia", "Inglés"], "Miércoles": ["Física", "Química"]})
 # Lunes: Matemáticas, Lengua
 # Martes: Historia, Inglés
 # Miércoles: Física, Química
