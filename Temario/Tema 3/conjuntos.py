@@ -1,6 +1,7 @@
 # Conjuntos en Python
 
-# Los conjuntos son una estructura de datos que permite almacenar elementos de forma desordenada.
+# Los conjuntos son una estructura de datos que permite almacenar elementos 
+# de forma desordenada.
 # Se crean con llaves y los elementos se separan por comas.
 # Los conjuntos son mutables, es decir, se pueden modificar una vez creados.
 # Los conjuntos no permiten elementos duplicados.
@@ -11,7 +12,8 @@
 # Los conjuntos pueden contener tuplas.
 # Los conjuntos pueden contener diccionarios.
 # Los conjuntos pueden contener otros conjuntos.
-# Los conjuntos pueden contener cualquier combinación de los tipos de datos anteriores.
+# Los conjuntos pueden contener cualquier combinación de los tipos de datos
+#  anteriores.
 
 # Crear un conjunto vacío
 conjunto_vacio = set()
