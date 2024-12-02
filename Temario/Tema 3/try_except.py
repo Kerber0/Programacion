@@ -108,15 +108,18 @@ except ZeroDivisionError as e:
 finally:
     print('Bloque finally')
 
-# En este ejemplo, se produce una excepción ZeroDivisionError al intentar dividir un número por cero.
+# En este ejemplo, se produce una excepción ZeroDivisionError al intentar dividir 
+# un número por cero.
 
-# El bloque finally se ejecuta al final del bloque try-except. En este caso, se muestra un mensaje de error.
+# El bloque finally se ejecuta al final del bloque try-except. En este caso, se
+# muestra un mensaje de error.
 
 # Bloque try-except-else-finally
 
-# El bloque try-except-else-finally se utiliza para controlar las excepciones que se producen durante la
-# ejecución de un programa y ejecutar un código adicional si no se produce ninguna excepción y al final 
-# del bloque try-except.
+# El bloque try-except-else-finally se utiliza para controlar las excepciones que 
+# se producen durante la
+# ejecución de un programa y ejecutar un código adicional si no se produce ninguna
+# excepción y al final del bloque try-except.
 
 # Sintaxis:
 

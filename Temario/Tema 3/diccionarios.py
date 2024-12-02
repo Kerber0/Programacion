@@ -88,6 +88,7 @@ print(diccionario.get('f', 'No existe')) # No existe
 
 # Acceder a un elemento que no existe en el diccionario con setdefault
 print(diccionario.setdefault('f', 6)) 
+
 # Devuelve el valor por defecto si la clave no existe y lo añade al diccionario
 print(diccionario) # {'a': 10, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6}
 

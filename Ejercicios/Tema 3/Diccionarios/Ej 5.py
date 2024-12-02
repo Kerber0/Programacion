@@ -34,3 +34,17 @@
 # Distancia de Urano a la Tierra: 2722.9
 # Distancia de Mercurio al Sol: 57.9
 # Distancia de Mercurio a la Tierra: 91.7
+
+
+
+planetas = {"Mercurio": 57.9, "Venus": 108.2, "Tierra": 149.6, "Marte": 227.9, "Júpiter": 778.5, "Saturno": 1433.4, "Urano": 2872.5, "Neptuno": 4495.1, "Plutón": 5906.4}
+print(distancia_a_tierra(planetas, "Marte")) # 78.3
+print(distancia_a_tierra(planetas, "Plutón")) # 5756.8
+print(distancia_a_tierra(planetas, "Venus")) # 41.4
+print(distancia_a_tierra(planetas, "Saturno")) # 1283.8
+print(distancia_a_tierra(planetas, "Júpiter")) # 628.9
+print(distancia_a_tierra(planetas, "Neptuno")) # 4345.5
+print(distancia_a_tierra(planetas, "Urano")) # 2722.9
+print(distancia_a_tierra(planetas, "Mercurio")) # 91.7
+print(distancia_a_tierra(planetas, "Tierra")) # 0.0
+print(distancia_a_tierra(planetas, "Alderaan")) # -1

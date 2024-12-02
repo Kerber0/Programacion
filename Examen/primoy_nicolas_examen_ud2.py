@@ -31,46 +31,48 @@ Una vez creada esta función, se debe crear otra que use la lista de planetas da
 
  Nota: para poner la primera letra de un String en mayúsculas, se puede usar el método capitalize().    
 """
-planets = ["MERCURIO", "VENUS", "TIERRA", "ALDERAAN", "JUPITER", "MARTE", "SATURNO", "NEPTUNO", "PLUTON"]
+planets = ["MERCURIO", "VENUS", "TIERRA", "ALDERAAN",
+           "JUPITER", "MARTE", "SATURNO", "NEPTUNO", "PLUTON"]
+
 
 def numLunas(planeta: str) -> int:
-   match planeta:
-    case "Mercurio": 
-      return 0
-    case "Venus":
-      return 0
-    case "Tierra":
-      return 1
-    case "Marte":
-      return 2
-    case "Júpiter" | "Jupiter":
-      return 79
-    case "Saturno":
-      return 82
-    case "Urano":
-      return 27
-    case "Neptuno":
-      return 14
-    case "Plutón" | "Pluton":
-      print("Plutón ya no es considerado un planeta :(")
-      return 5
-    case _:
-      return None
+    match planeta:
+        case "Mercurio":
+            return 0
+        case "Venus":
+            return 0
+        case "Tierra":
+            return 1
+        case "Marte":
+            return 2
+        case "Júpiter" | "Jupiter":
+            return 79
+        case "Saturno":
+            return 82
+        case "Urano":
+            return 27
+        case "Neptuno":
+            return 14
+        case "Plutón" | "Pluton":
+            print("Plutón ya no es considerado un planeta :(")
+            return 5
+        case _:
+            return None
 
-  
-    
+
 def numLunasPlanetas(planetas: list) -> str:
-  planetasylunas = []
-  for i in planetas:
-    print(i.capitalize())  #nose xq sigue sin funcionar
-    i = (i.capitalize())
-    if numLunas(planetas) == None:
-      print(f"{planetas}: no existe en el sistema solar")
-    else:
-      planetasylunas.append(f"{[i]}: {numLunas(i)} lunas")
-    print([i])
-  return planetasylunas
+    planetasylunas = []
+    for i in planetas:
+        print(i.capitalize())  # nose xq sigue sin funcionar
+        i = (i.capitalize())
+        if numLunas(planetas) == None:
+            print(f"{planetas}: no existe en el sistema solar")
+        else:
+            planetasylunas.append(f"{[i]}: {numLunas(i)} lunas")
+        print([i])
+    return planetasylunas
 # Fin del ejercicio 1
+
 
 print("-"*30)
 
@@ -112,13 +114,14 @@ Notas a tener en cuenta:
 - Se deben ir concatenando los saltos de línea al final de cada línea, pero no al final del string final.
 """
 
+
 def arbolNavidad(altura: int) -> str:
-  for i in range(1, altura + 1):
-    print(' ' * (altura - i) + '*' * (2 * i - 1))
-  if altura == 3:
-    print(" " *(altura//2)+ "***")
-  else:
-    print(" " *(altura//2+1)+ "***")
+    for i in range(1, altura + 1):
+        print(' ' * (altura - i) + '*' * (2 * i - 1))
+    if altura == 3:
+        print(" " * (altura//2) + "***")
+    else:
+        print(" " * (altura//2+1) + "***")
 
 
 # Fin del ejercicio 2
@@ -151,33 +154,32 @@ materias = ["Matemáticas", "Física", "Química", "Inglés"]
 notas = [9.5, 7.2, 11, 8.9]
 notas2 = [9.5, 7.2, 8.9]
 
+
 def cualificacion(nota: float) -> str:
-    if nota ==  0  or nota < 4.9:
-      return "Suspenso"
+    if nota == 0 or nota < 4.9:
+        return "Suspenso"
     elif nota == 5 or nota < 6.9:
-      return "Aprobado"
-    elif nota == 7 or nota < 8.9: 
-      return "Notable"
+        return "Aprobado"
+    elif nota == 7 or nota < 8.9:
+        return "Notable"
     elif nota == 9 or nota < 9.9:
-      return "Sobresaliente"
+        return "Sobresaliente"
     elif nota == 10:
-      return "Matrícula de Honor"
+        return "Matrícula de Honor"
 
 
 def cualificacionMaterias(materias: list, notas: list) -> list:
-  if len(materias) != len(notas):
-    print("Error: Las listas no tienen la misma longitud")
-    for i in range(materias):
-      for k in range(notas):
-        if k < 0 or k >10:
-          print(f"{[i]}: nota incorrecta")
-        else:
-          print(f"{[i]}: {cualificacion([i][k])}")
-
+    if len(materias) != len(notas):
+        print("Error: Las listas no tienen la misma longitud")
+        for i in range(materias):
+            for k in range(notas):
+                if k < 0 or k > 10:
+                    print(f"{[i]}: nota incorrecta")
+                else:
+                    print(f"{[i]}: {cualificacion([i][k])}")
 
 
 # Fin del ejercicio 3
-
 print("-"*30)
 
 # Ejericio 4 (2,5 puntos)
@@ -191,22 +193,23 @@ y devolver si está o no el elemento en la lista.
 Ambas funciones TIENE que ser recursivas.
 """
 
+
 def sumaLista(lista: list) -> int:
-  if lista == []:
-    return 0
-  return lista[0] + sumaLista(lista[1:])
+    if lista == []:
+        return 0
+    return lista[0] + sumaLista(lista[1:])
+
 
 def buscarElemento(lista: list, elemento: int) -> bool:
-  if elemento not in lista:
-    buscarElemento(lista[1:], elemento)
-    return False
-  else:
-    return True
+    if elemento not in lista:
+        buscarElemento(lista[1:], elemento)
+        return False
+    else:
+        return True
+
+    # return ((False if lista[0] != elemento else True) + buscarElemento(lista[1:], elemento))   estaba intentando hacerlo en una unica linea, pero no termino de conseguirlo
 
 
-  # return ((False if lista[0] != elemento else True) + buscarElemento(lista[1:], elemento))   estaba intentando hacerlo en una unica linea, pero no termino de conseguirlo
-  
-  
 # Fin del ejercicio 4
 
 print("-"*30)

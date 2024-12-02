@@ -1,5 +1,5 @@
-#Diseñar un algoritmo que convierta una temperatura leída en grados Farenheit a grados Celsius,
-#usando la fórmula: C=(5/9)*(F-32).
+# Diseñar un algoritmo que convierta una temperatura leída en grados Farenheit a grados Celsius,
+# usando la fórmula: C=(5/9)*(F-32).
 
 print("hello World!")
 
