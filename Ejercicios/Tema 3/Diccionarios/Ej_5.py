@@ -1,4 +1,3 @@
-
 # Escribir una función que reciba un diccionario con los planetas del sistema solar
 # y sus distancias al sol, además debe recibir un planeta y devolver su distancia a la Tierra
 # Las distancias se expresan en millones de kilómetros.
@@ -34,6 +33,13 @@
 # Distancia de Urano a la Tierra: 2722.9
 # Distancia de Mercurio al Sol: 57.9
 # Distancia de Mercurio a la Tierra: 91.7
+
+def distancia_a_tierra(sistema: dict, n: str)-> float:
+    tierra = 146.6
+    for clave, valor in sistema:
+        nuevo_sistema = clave.upper()
+        
+
 
 
 

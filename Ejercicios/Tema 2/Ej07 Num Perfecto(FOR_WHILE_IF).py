@@ -20,3 +20,10 @@ if num_perfecto(n) == n:
     print("El número es perfecto")
 else:
     print("El número no es perfecto")
+
+
+# (6) # True
+# (10) # False
+# (28)) # True
+
+# comprobacionPerfectos(1, 50000) # 6, 28, 496, 8128

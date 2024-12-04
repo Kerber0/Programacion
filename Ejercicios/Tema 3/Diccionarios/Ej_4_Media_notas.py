@@ -1,8 +1,13 @@
 # Escribir una función que reciba un diccionario con las asignaturas y 
 # las notas de un alumno y devuelva la media de las notas. 
 
+def media_notas(resultados: dict) -> float:
+    suma = 0
+    for notas in resultados.values():
+        suma += notas
+    media = suma / len(resultados)
 
-
+    return media
 
 
 # Pruebas
