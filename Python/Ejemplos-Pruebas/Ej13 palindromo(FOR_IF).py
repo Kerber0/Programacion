@@ -19,9 +19,6 @@ if ver1 == ver2:
   print(True)
 else:
   print(False)
-# print(t)
-  # if t == text:
-  #   print(True)
-  #   print(t)
+
 
 

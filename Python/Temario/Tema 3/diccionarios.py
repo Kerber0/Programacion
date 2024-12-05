@@ -29,11 +29,13 @@ diccionario = {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}
 print(diccionario)
 
 # Crear un diccionario con claves de diferentes tipos
-diccionario_tipos = {1: 'uno', 'dos': 2, 3.0: 'tres', True: 'cuatro', False: 'cinco', 0: 'seis'}
+diccionario_tipos = {1: 'uno', 'dos': 2, 3.0: 'tres',
+                     True: 'cuatro', False: 'cinco', 0: 'seis'}
 print(diccionario_tipos)
 
 # Crear un diccionario con diccionarios
-diccionario_diccionarios = {'a': {'b': 1, 'c': 2}, 'd': {'e': 3, 'f': 4}, 'g': {'h': 5, 'i': 6}}
+diccionario_diccionarios = {'a': {'b': 1, 'c': 2},
+                            'd': {'e': 3, 'f': 4}, 'g': {'h': 5, 'i': 6}}
 print(diccionario_diccionarios)
 
 # Crear un diccionario con listas
@@ -84,26 +86,30 @@ except KeyError as e:
 print(diccionario.get('f'))
 
 # Acceder a un elemento que no existe en el diccionario con get y un valor por defecto
-print(diccionario.get('f', 'No existe')) # No existe
+print(diccionario.get('f', 'No existe'))  # No existe
 
 # Acceder a un elemento que no existe en el diccionario con setdefault
-print(diccionario.setdefault('f', 6)) 
+print(diccionario.setdefault('f', 6))
 # Devuelve el valor por defecto si la clave no existe y lo añade al diccionario
-print(diccionario) # {'a': 10, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6}
+print(diccionario)  # {'a': 10, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6}
 
 # El método update permite añadir varios elementos a la vez
 diccionario.update({'g': 7, 'h': 8, 'i': 9})
 print(diccionario)
+print("update")
 
 # El método pop permite eliminar un elemento del diccionario
 print(diccionario.pop('g'))
+print("pop")
 
 # El método popitem permite eliminar el último elemento del diccionario
 print(diccionario.popitem())
+print("popitem")
 
 # El método clear permite eliminar todos los elementos del diccionario
 diccionario.clear()
 print(diccionario)
+print("clear")
 
 # El método keys permite obtener las claves del diccionario
 diccionario = {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5}
@@ -153,4 +159,3 @@ while i < len(claves):
     clave = claves[i]
     print(clave, diccionario[clave])
     i += 1
-

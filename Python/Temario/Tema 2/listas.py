@@ -334,7 +334,7 @@ while i < len(lista):
     while j < len(lista[i]):
         print(lista[i][j])
         j += 1
-    i += 1  
+    i += 1
 
 print("Recorrido con varios índices:")
 for i in range(len(lista)):
@@ -355,4 +355,3 @@ print("Recorrido con varios índices variables:")
 for i in [0, 2]:
     for j in [0, 2]:
         print(lista[i][j])
-
