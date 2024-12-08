@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Williams Racing</title>
+    
+    <!--CONEXION CON TODOS LOS ARCHIVOS DE ESTILO-->
+    <link rel="stylesheet" href="williams.css">
+    <link rel="stylesheet" href="../../Comunes/header.css">
+    <link rel="stylesheet" href="../../Comunes/footer.css">
+    
+    <link rel="shortcut icon" href="img/logo-williams-f1-2021.png" type="image/x-icon">  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+     <!--SCRIP QUE REPITE LOS ENCABEZADOS Y PIE DE PAGINA-->
+     <script src="../../Comunes/cargarContenido.js" defer></script>
+     <!--
+ 
+     <header class="Encabezado-Principal" id="header-container"></header>
+     <footer class="site-footer" id="footer-container"></footer>
+     -->
+
+</head>
+<body>
+    <!-- TODO revisar la pagina oficial de la f1 para datos concretos-->
+    <header class="Encabezado-Principal" id="header-container" data-ruta-header="/Comunes/header.html">
+        <nav id="menu">
+            <ul class="navegacion">
+                <li><img src="../f1_logo_rojo.svg" alt=""></li>
+                <li><a href="../../Index.html">Inicio</a></li>
+                <li><a href="../../Circuitos/Circuitos.html">Circuitos</a>
+                    <ul>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/01_Bahrein/Bahrein.html">Bahrain</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/02_Arabia Saudita/Arabia Saudita.html">Arabia Saudi</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/03_Australia/Australia.html">Australia</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/04_Japon/Japon.html">Japón</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/05_China/China.html">China</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/06_Miami/Miami.html">Miami</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/07_Emilia Romagna/Emilia Romagna.html">Imola</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/08_Monaco/Monaco.html">Monaco</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/09_Canada/Canada.html">Canadá</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/10_Espanha/Espanha.html">España</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/11_Austria/Austria.html">Austria</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/12_Gran Bretanha/Gran Bretanha.html">Silverstone</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/13_Hungria/Hungria.html">Hungría</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/14_Belgica/Belgica.html">Bélgica</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/15_Paises Bajos/Paises Bajos.html">Zandvort</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/16_Italia/Italia.html">Monza</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/17_Azerbaiyan/Azerbaiyan.html">Azerbaiyan</a></li> 
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/18_Singapur/Singapur.html">Singapore</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/19_Estados Unidos/Austin.html">Austin</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/20_Mexico/Ciudad de Mexico.html">Mexico</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/21_Brasil/Sao Paulo.html">Sao Paulo</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/22_Las Vegas/Las_Vegas.html">Las Vegas</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/23_Qatar/Qatar.html">Qatar</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/24_Abu Dabi/Abu Dhabi.html">Abu Dhabi</a></li>
+                    </ul>
+                </li>
+                <li><a href="../Equipos_bis.html">Equipos</a>
+                    <ul>
+                        <li><a href="../Alpine/alpine.html">Alpine</a></li>
+                        <li><a href="../Aston-Martin/astonmartin.html">Aston-Martin</a></li>
+                        <li><a href="../Ferrari/ferrari.html">Ferrari</a></li>
+                        <li><a href="../Haas/haas.html">Haas</a></li>
+                        <li><a href="../Mclaren/mclaren.html">Mclaren</a></li>
+                        <li><a href="../Mercedes/mercedes.html">Mercedes</a></li>
+                        <li><a href="../Red-Bull/redbull.html">Red-Bull</a></li>
+                        <li><a href="../Stake/stake.html">Stake</a></li>
+                        <li><a href="../Visa-RB/visarb.html">Visa-RB</a></li>
+                        <li><a href="../Williams/williams.html">Williams</a></li>
+                    </ul>
+                </li>
+                <li><a href="../Pilotos.html">Pilotos</a>
+                    <ul>
+                        <li><a href="../Alpine/Pilotos/Gasly/pierregasly.html">Pierre Gasly</a></li>
+                        <li><a href="../Alpine/Pilotos/Ocon/estebanocon.html">Esteban Ocon</a></li>
+                        <li><a href="../Aston-Martin/pilotos/Alonso/fernandoalonso.html">Fernano Alonso</a></li>
+                        <li><a href="../Aston-Martin/pilotos/Stroll/lancestroll.html">Lance Stroll</a></li>
+                        <li><a href="../Ferrari/pilotos/Sainz/carlossainz.html">Carlos Sainz</a></li>
+                        <li><a href="../Ferrari/pilotos/Leclerc/charleslecrec.html">Charles Leclerc</a></li>
+                        <li><a href="../Haas/pilotos/Magnusen/kevinmagnusen.html">Kevin Magnusen</a></li>
+                        <li><a href="../Haas/pilotos/Hulkenberg/nicohulkenberg.html">Nico Hulkenberg</a></li>
+                        <li><a href="../Mclaren/pilotos/Norris/landonorris.html">Lando Norris</a></li>
+                        <li><a href="../Mclaren/pilotos/Piastri/oscarpiastri.html">Oscar Piastri</a></li>
+                        <li><a href="../Mercedes/pilotos/Hamilton/lewishamilton.html">Lewis Hamilton</a></li>
+                        <li><a href="../Mercedes/pilotos/Russell/gerogerussell.html">George Russell</a></li>
+                        <li><a href="../Red-Bull/Pilotos/Verstappen/maxverstapen.html">Max Verstapen</a></li>
+                        <li><a href="../Red-Bull/Pilotos/Perez/sergioperez.html">Sergio Pérrez</a></li>
+                        <li><a href="../Stake/pilotos/Bottas/valteribottas.html">Valtteri Bottas</a></li>
+                        <li><a href="../Stake/pilotos/Zhou/zhou.html">Huangyu Zhou</a></li>
+                        <li><a href="../Visa-RB/pilotos/Ricciardo/danielricciardo.html">Daniel Ricciardo</a></li>
+                        <li><a href="../Visa-RB/pilotos/Tsunoda/yukitsunoda.html">Yuki Tsunoda</a></li>
+                        <li><a href="../Williams/pilotos/Sargeant/logansargeant.html">Logan Sargeant</a></li>
+                        <li><a href="../Williams/pilotos/Albon/alexanderalbon.html">Alexander Albon</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Registro</a>
+                    <ul>
+                        <li><a href="../../Registro/FormularioAcceso.html">Acceso</a></li>
+                        <li><a href="../../Registro/FormularioRegistro.html">Registro</a></li>
+                    </ul>
+                </li>
+            </ul> 
+        </nav>
+    </header>
+    <main>
+        <div class="Pilotos-DatosEquipo">
+            <section class="tabla-container">
+                <div class="tabla">
+                    <header>
+                        <h1>Datos del equipo</h1>
+                    </header>
+                    <div class="contenido">
+                        <img src="./img/williams.avif" alt="Logo-RB" class="logo">
+                        <table class="tabla-estadisticas">
+                            <tr>
+                                <td>Sede</td>
+                                <td>Faenza, Italia</td>
+                            </tr>
+                            <tr>
+                                <td>Jefe de equipo</td>
+                                <td>Laurent Mekies</td>
+                            </tr>
+                            <tr>
+                                <td>Chasis</td>
+                                <td>VCARB 01</td>
+                            </tr>
+                            <tr>
+                                <td>Unidad de potencia</td>
+                                <td>Honda RBPT</td>
+                            </tr>
+                            <tr>
+                                <td>Primera participación</td>
+                                <td>1985</td>
+                            </tr>
+                            <tr>
+                                <td>Campeonatos del mundo</td>
+                                <td>N/A</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+    
+            <section class="Pilotos">
+                <!-- TODO pendiende de redistribuir espacios. Una zona para cada piloto con el nombre, dorsal y nacionalidad debajo-->
+                <div class="ContenedorPilotos">
+                    <a id="Piloto1" href="./pilotos/Albon/alexanderalbon.html" class="Enlace-Pagina-Piloto">
+                        <div class="Piloto">
+                            <img src="img/Alexander-Albon.avif" class="Foto-Piloto" title="A.Albon" alt="ALB">
+                            <div class="Bandera-Dorsal-Nombre">
+                                <div class="Bandera-Dorsal">
+                                    <img src="img/Alexander-Albon(dorsal).avif" alt="Dorsal-Albon">
+                                    <img src="../ZZ_Banderas/thailand-flag.avif"  alt="Bandera_Tailandia">
+                                </div>
+                                <div class="Nombre">
+                                    Alexander</BR><strong>ALBON</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a id="Piloto2" href="./pilotos/Sargeant/logansargeant.html" class="Enlace-Pagina-Piloto">
+                        <div class="Piloto">
+                            <img src="img/Logan-Sargeant.avif" class="Foto-Piloto" title="L.Sargeant" alt="SAR">
+                            <div class="Bandera-Dorsal-Nombre">
+                                <div class="Bandera-Dorsal">
+                                    <img src="img/Logan-Sargeant(dorsal).avif"  alt="Dorsal-Logan">
+                                    <img src="../ZZ_Banderas/united-states-of-america-flag.avif" alt="Bandera_Tailandia">
+                                </div>
+                                <div class="Nombre">
+                                    Logan <strong>SARGEANT</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+        <section class="Historia">
+            <header>
+                <h1>Historia</h1>
+            </header>
+            <p>
+                Williams Grand Prix Engineering, fundado en 1978 con Alan Jones como piloto, ha experimentado altibajos a lo largo de 
+                su historia en la Fórmula 1. En 1979, lograron su primera victoria con Clay Regazzoni, y en 1980, Alan Jones se consagró campeón de pilotos, 
+                asegurando también el título de constructores para Williams. Sin embargo, en 1986, el dueño del equipo, Frank Williams, 
+                sufrió un grave accidente automovilístico, pero demostró determinación al continuar liderando el equipo.
+            </p>
+            <p>
+                En 1992, Nigel Mansell llevó al equipo a la gloria al ganar tanto el campeonato de pilotos como el de constructores. 
+                Al año siguiente, Alain Prost ganó su cuarto título de pilotos y se retiró, y en 1994, Ayrton Senna perdió la vida 
+                en un trágico accidente en Imola, pero el equipo ganó el título de constructores.  
+            </p>
+            <p>
+                La década de 2000 fue menos exitosa, con Williams incapaz de desafiar seriamente a Ferrari. En 2003, mejoraron en la 
+                segunda mitad de la temporada pero terminaron en segundo lugar en el campeonato de constructores. En 2004, Ralf 
+                Schumacher se lesionó, y aunque terminaron cuartos en el campeonato de constructores, la temporada fue desafiante.
+            </p>
+            <p>
+                La transición a mediados de la década trajo consigo cambios en el motor y pilotos. En 2009, anunciaron el cambio 
+                a motor Cosworth para 2010, y ese año lograron resultados notables, incluida una pole sorpresa de Hulkenberg en Brasil 
+                y un sexto lugar en el campeonato de constructores.
+            </p>
+            <p>
+                A partir de 2011, la escudería enfrentó temporadas difíciles, con poca fiabilidad y ritmo mediocre. Sin embargo, 
+                en 2014, con una combinación de un excelente chasis, motor Mercedes y pilotos Bottas y Massa, Williams regresó a la forma, 
+                terminando tercero en el campeonato.
+            </p>
+            <p>
+                En 2019, vivieron su peor temporada en la historia con un solo punto en 21 carreras, pero el debutante George Russell 
+                mostró destellos de futuro prometedor. La temporada siguiente, a pesar de no sumar puntos, Williams aseguró su futuro 
+                con nuevos propietarios y acuerdos técnicos con Mercedes para 2021 y más allá.
+            </p>
+            <p>
+                En 2021, experimentaron una resurgencia con un podio en el GP de Bélgica, pero la muerte del fundador, Sir Frank Williams, 
+                marcó la campaña. En 2022, a pesar de momentos prometedores, terminaron décimos en la clasificación general.
+            </p>
+            <p>
+                Bajo el liderazgo del nuevo director del equipo, James Vowles, en 2023, Williams mostró mejoras al alcanzar el séptimo 
+                lugar en la clasificación general con el FW45, destacando la velocidad en clasificación y recta. Alex Albon logró su mejor 
+                resultado, séptimo lugar, en Montreal y Monza, evidenciando una temporada de altibajos en la rica historia de Williams en la F1.
+            </p>
+        </section>
+        <section class="Palmares">
+            <header>
+                <h1>Palmarés</h1>
+            </header>
+            <!-- TODO buscar el año por año de cada equipo y añadirlo aquí-->
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum.
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum.
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum.
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+        </section>
+        <section class="Galeria">
+            <h1>Galería</h1>
+            <div class="slider-box">
+                <ul>
+                    <li><img src="img/Galeria/1978.avif" alt=""></li>
+                    <li><img src="img/Galeria/1980.avif" alt=""></li>
+                    <li><img src="img/Galeria/1986.avif" alt=""></li>
+                    <li><img src="img/Galeria/1992.avif" alt=""></li>
+                    <li><img src="img/Galeria/1993.avif" alt=""></li>
+                    <li><img src="img/Galeria/1994.avif" alt=""></li>
+                    <li><img src="img/Galeria/1996.avif" alt=""></li>
+                    <li><img src="img/Galeria/1997.avif" alt=""></li>
+                    <li><img src="img/Galeria/2000-2002.avif" alt=""></li>
+                    <li><img src="img/Galeria/2003.avif" alt=""></li>
+                    <li><img src="img/Galeria/2004.avif" alt=""></li>
+                    <li><img src="img/Galeria/2005.avif" alt=""></li>
+                    <li><img src="img/Galeria/2007.avif" alt=""></li>
+                    <li><img src="img/Galeria/2008.avif" alt=""></li>
+                    <li><img src="img/Galeria/2009.avif" alt=""></li>
+                    <li><img src="img/Galeria/2010.avif" alt=""></li>
+                    <li><img src="img/Galeria/2011.avif" alt=""></li>
+                    <li><img src="img/Galeria/2013.avif" alt=""></li>
+                    <li><img src="img/Galeria/2014.avif" alt=""></li>
+                    <li><img src="img/Galeria/2015.avif" alt=""></li>
+                    <li><img src="img/Galeria/2017.avif" alt=""></li>
+                    <li><img src="img/Galeria/2018.avif" alt=""></li>
+                    <li><img src="img/Galeria/2020.avif" alt=""></li>
+                    <li><img src="img/Galeria/2021.avif" alt=""></li>
+                    <li><img src="img/Galeria/2022.avif" alt=""></li>
+                </ul>
+            </div>
+            <!--1024x576 16:9-->
+        </section> 
+    </main>
+    <footer class="site-footer" id="footer-container" data-ruta-footer="/Comunes/footer.html">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Sobre nosotros</h3>
+                <p>Esto es solo un ejemplo para una materia de DAM</p>
+            </div>
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <p>Email: email@lenmguajeDeMarcas.com</p>
+                <p>Phone: +34 670 633 975</p>
+            </div>
+            <div class="footer-column">
+                <h3>Sígueme en </h3>
+                <ul class="social-icons">
+                    <li><a href="#"><img src="../../IMG/iconmonstr-facebook-6.svg" alt="Facebook"></a></li>
+                    <li><a href="#"><img src="../../IMG/iconmonstr-twitter-1.svg" alt="Twitter"></a></li>
+                    <li><a href="#"><img src="../../IMG/iconmonstr-instagram-15.svg" alt="Instagram"></a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="copyright">© 2024 Mi entregable. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,75 @@
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+
+}
+
+html{
+    font-family: 'Roboto','sans-serif';
+    height: 100%;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    background-color: #efefef;
+    margin:0;
+
+    /*
+    display, flex-direction, min-height: Al utilizar un contenedor flexible 
+    con dirección de columna y altura mínima del viewport, se logra que el 
+    cuerpo de la página se ajuste correctamente al tamaño de la ventana del 
+    navegador,incluso si el contenido es insuficiente para llenar toda la altura.
+    */
+}
+
+main{
+    width: 100%; 
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+} 
+
+footer{
+    margin-top: auto;
+}
+
+.Bundel{
+    position: relative;
+}
+
+.Bundel > .Container-texto {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 50%; /* Ajusta la posición vertical */
+    left: 50%; /* Ajusta la posición horizontal */
+    transform: translate(-50%, -50%); /* Centra el texto */
+    color: white; /* Color del texto */
+}
+
+.Bundel > .Container-texto > p{
+    font-size: 80px; /* Tamaño de fuente */
+    text-align: center;
+}
+
+.Bundel > .Container-texto > .Fecha{
+    background-color: black;
+    width: 180px;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.Bundel > img{
+    filter:brightness(15%); 
+    width: 100%;
+    height: 800px;
+    object-fit: cover;
+    object-position: 10% 20%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}

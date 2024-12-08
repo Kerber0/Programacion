@@ -88,6 +88,27 @@ print("-----------------------------------------------------------------")
 
 """Intermedio"""
 
+
+# Busacar un parametro en tuplas recursivamente
+
+def recursivtup(tup: tuple, search):
+    if len(tup) == 0:
+        return False
+    if isinstance(tup[-1], tuple):
+        for i in tup[-1]:
+            if i == search:
+                return True
+    else:
+        if tup[-1] == search:
+            return True
+    return recursivtup(tup[0:-1], search)
+
+
+print(recursivtup((1, 2, 3, (1, "este"), 4), "esta"))
+
+print("-----------------------------------------------------------------")
+
+
 # 17.1. Escribe una función recursiva que calcule el n-ésimo número de Fibonacci.
 # Ejemplo de Entrada:
 # n: 6
@@ -131,6 +152,17 @@ print("-----------------------------------------------------------------")
 # Ejemplo de Salida:
 # Cadena invertida: 'nohtyp'
 
+
+def invertir(cadena: str) -> str:
+    if len(cadena) == 0:
+        return " "
+    if len(cadena) > 0:
+        return cadena[-1] + invertir(cadena[:-1])
+
+
+print(invertir("python"))
+
+
 print("-----------------------------------------------------------------")
 
 # 20.4. Escribe un programa recursivo para contar cuántos ceros hay en un número entero.
@@ -138,6 +170,26 @@ print("-----------------------------------------------------------------")
 # Número: 102030
 # Ejemplo de Salida:
 # Cantidad de ceros: 3
+
+
+def contar_ceros(numero: int) -> int:
+
+    # Convertir el número a positivo para evitar problemas con signos
+    numero = abs(numero)
+
+    # Caso base: Si el número tiene un solo dígito
+    if numero == 0:
+        return 1  # Si el número es 0, cuenta como un cero
+    if numero < 10:
+        return 0  # Un solo dígito que no es 0
+
+    # Caso recursivo: Verificar si el último dígito es 0 y continuar con el resto
+    ultimo_digito = numero % 10
+    ceros_en_resto = contar_ceros(numero // 10)
+    return ceros_en_resto + (1 if ultimo_digito == 0 else 0)
+
+
+print(contar_ceros(102030))
 
 print("-----------------------------------------------------------------")
 
@@ -156,6 +208,26 @@ print("-----------------------------------------------------------------")
 # Mover disco 2 de B a C
 # Mover disco 1 de A a C
 
+
+def torre_de_hanoi(n, origen, destino, auxiliar):
+    if n == 1:  # Caso base: mover un solo disco
+        print(f"Mover disco 1 de {origen} a {destino}")
+        return
+
+    # Mover los n-1 discos de origen a auxiliar
+    torre_de_hanoi(n - 1, origen, auxiliar, destino)
+
+    # Mover el disco restante de origen a destino
+    print(f"Mover disco {n} de {origen} a {destino}")
+
+    # Mover los n-1 discos de auxiliar a destino
+    torre_de_hanoi(n - 1, auxiliar, destino, origen)
+
+
+# Ejemplo de uso con 3 discos
+torre_de_hanoi(3, 'A', 'C', 'B')
+
+
 print("-----------------------------------------------------------------")
 
 
@@ -164,6 +236,29 @@ print("-----------------------------------------------------------------")
 # Lista: [1, 2]
 # Ejemplo de Salida:
 # Combinaciones: [[], [1], [2], [1, 2]]
+
+
+def generar_combinaciones(lista):
+
+    # Caso base: Si la lista está vacía, la única combinación es la lista vacía
+    if not lista:
+        return [[]]
+
+    # Tomar el primer elemento y las combinaciones del resto de la lista
+    primer_elemento = lista[0]
+    combinaciones_sin_primero = generar_combinaciones(lista[1:])
+
+    # Crear nuevas combinaciones añadiendo el primer elemento a las ya generadas
+    combinaciones_con_primero = [combinacion + [primer_elemento]
+                                 for combinacion in combinaciones_sin_primero]
+
+    # Retornar la unión de ambas partes
+    return combinaciones_sin_primero + combinaciones_con_primero
+
+
+# Ejemplo de uso
+lista = [1, 2]
+print("Combinaciones posibles:", generar_combinaciones(lista))
 
 
 print("-----------------------------------------------------------------")
@@ -175,6 +270,22 @@ print("-----------------------------------------------------------------")
 # Raíz digital: 6
 
 
+def raiz_digital(numero: int) -> int:
+
+    # Convertir a positivo para manejar números negativos
+    numero = abs(numero)
+
+    # Caso base: Si el número tiene un solo dígito
+    if numero < 10:
+        return numero
+
+    # Caso recursivo: Sumar los dígitos y llamar a la función de nuevo
+    suma_digitos = sum(int(digito) for digito in str(numero))
+    return raiz_digital(suma_digitos)
+
+
+print(raiz_digital(987))
+
 print("-----------------------------------------------------------------")
 
 # 24.4. Implementa una función recursiva que genere todas las permutaciones de una cadena.
@@ -182,3 +293,23 @@ print("-----------------------------------------------------------------")
 # Cadena: 'abc'
 # Ejemplo de Salida:
 # Permutaciones: ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
+
+
+def permutaciones(cadena: str) -> list:
+
+    # Caso base: Una cadena vacía tiene una única permutación: la vacía
+    if len(cadena) == 0:
+        return [""]
+
+    # Caso recursivo
+    resultado = []
+    for i, letra in enumerate(cadena):
+        # Excluye la letra actual y genera permutaciones del resto
+        resto = cadena[:i] + cadena[i+1:]
+        for permutacion in permutaciones(resto):
+            resultado.append(letra + permutacion)
+
+    return resultado
+
+
+print(permutaciones('abc'))
