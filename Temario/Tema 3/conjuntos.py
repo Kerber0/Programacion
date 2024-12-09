@@ -7,11 +7,11 @@
 # Los conjuntos no permiten elementos duplicados.
 # Los conjuntos no permiten elementos nulos.
 # Los conjuntos no permiten elementos vacíos.
-# Los conjuntos pueden contener cualquier tipo de dato.
-# Los conjuntos pueden contener listas.
+# Los conjuntos no pueden contener listas.
+# Los conjuntos no pueden contener diccionarios.
+# Los conjuntos no pueden contener otros conjuntos.
 # Los conjuntos pueden contener tuplas.
-# Los conjuntos pueden contener diccionarios.
-# Los conjuntos pueden contener otros conjuntos.
+# Los conjuntos pueden contener cualquier tipo de dato.
 # Los conjuntos pueden contener cualquier combinación de los tipos de datos
 #  anteriores.
 
