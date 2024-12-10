@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!-- Version SI N GRUPOS DE ATRIBUTOS
+  ******************************************************************************************************
+Definicion del elemento alumno
+  <xs:element name="alumno">
+  <xs:complexType>
+    <xs:attribute name="numeroExpediente" type="xs:string"/>
+    <xs:attribute name="nome" type="xs:string"/>
+    <xs:attribute name="apelido1" type="xs:string"/>
+    <xs:attribute name="apelido2" type="xs:string"/>
+  </xs:complexType>
+  </xs:element>
+    Definicion del elemento profesor
+   <xs:element name="profesor">
+  <xs:complexType>
+    <xs:attribute name="NRP" type="xs:string"/>
+    <xs:attribute name="nome" type="xs:string"/>
+    <xs:attribute name="apelido1" type="xs:string"/>
+    <xs:attribute name="apelido2" type="xs:string"/>
+  </xs:complexType>
+  </xs:element>
+  
+  ******************************************************************************************************
+  -->
+  <!-- Primer intento OJO!! NO FUNCIONA
+  
+  
+  
+  <xs:element name="instituto">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="alumno" minOccurs="1" maxOccurs="unbounded"/>
+        <xs:element ref="profesor" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+ Definicion del tipo usado en el grupo de atributos
+Definicion de tipo para aplicar restri
+  <xs:simpleType name="typeNomeApelidos">
+    <xs:restriction base="xs:string">
+      Collapse explicacion
+      Reemplaza secuencias de saltos de linea, tabuladores y multiples espacios en blanco
+      consecutivos por espazos simples. Elimina os espaczos inciais e finais 
+      <xs:whiteSpace value="collapse"/>
+      <xs:pattern value="^[A-ZÁÉÍÓÚÑ]{1}[a-zéíóúñ]{1,49}"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+Definicion del grupo de atributos
+  <xs:attributeGroup name="grupoAtributosNombreCompleto">
+      <xs:attribute name="nome" type="typeNomeApelidos"/>
+      <xs:attribute name="apelido1"  type="typeNomeApelidos"/>
+      <xs:attribute name="apelido2" type="typeNomeApelidos"/>
+  </xs:attributeGroup>
+Def elemento alumno
+  <xs:element name="alumno">
+  <xs:complexType>
+    <xs:attributeGroup ref="grupoAtributosNombreCompleto"/>
+    <xs:attribute ref="numeroExpediente"/>
+  </xs:complexType>
+  </xs:element>
+  
+Restricciones para el numero de expediente
+  <xs:attribute name="numeroExpediente">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="([0-9]{3,4})"/>
+      </xs:restriction>  
+    </xs:simpleType>
+  </xs:attribute>  
+  
+  Def elemento profesor
+   <xs:element name="profesor">
+  <xs:complexType>
+    <xs:attributeGroup ref="grupoAtributosNombreCompleto"/>
+    <xs:attribute ref="NRP"/>
+  </xs:complexType>
+  </xs:element>
+  
+  Restricciones para el NRP
+  <xs:attribute name="NRP">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="(\d{3}|\d{4})([A-E])\d{3}"/>
+      </xs:restriction>  
+    </xs:simpleType>
+  </xs:attribute>  -->
+  <xs:element name="instituto">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element ref="alumno"/>
+        <xs:element ref="profesor"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  
+<xs:simpleType name="typeRestriccionsNome">
+  <xs:restriction base="xs:string">
+  <xs:pattern value="[A-ZÁÉÍÓÚÑ]{1}[a-zéíóúñ]{1,49}"/> 
+  <xs:whiteSpace value="collapse"/>
+  <xs:maxLength value="50"/> 
+  </xs:restriction>
+</xs:simpleType>
+
+  
+<xs:attributeGroup name="gaNomeCompleto">
+  <xs:attribute name="nome" type="typeRestriccionsNome" use="required"/>
+  <xs:attribute name="apelido1" type="typeRestriccionsNome"  use="required"/>
+  <xs:attribute name="apelido2" type="typeRestriccionsNome"  use="required"/>
+</xs:attributeGroup>  
+  
+  <xs:element name="profesor">
+    <xs:complexType>
+      <xs:attribute name="NRP" type="typeNRP" use="required"/>
+      <xs:attributeGroup ref="gaNomeCompleto"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:simpleType name="typeNRP">
+      <xs:restriction base="xs:string">
+        <xs:pattern value="\d{3,4}[A-E]\d{3}"/>
+      </xs:restriction>  
+    </xs:simpleType>
+  
+  <xs:element name="alumno">
+  <xs:complexType>
+    <xs:attribute name="numeroExpediente" type="typeNumExp" use="required"/>
+    <xs:attributeGroup ref="gaNomeCompleto"/>
+  </xs:complexType>
+  </xs:element>
+  
+ <xs:simpleType name="typeNumExp">
+      <xs:restriction base="xs:string">
+        <xs:pattern value="([0-9]{3,4})"/>
+      </xs:restriction>  
+    </xs:simpleType>  
+  
+</xs:schema>

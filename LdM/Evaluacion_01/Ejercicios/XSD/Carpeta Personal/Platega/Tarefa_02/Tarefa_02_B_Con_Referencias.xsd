@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Documento para validar Tarefa_02_B.xml de platega Esquemas
+ 
+<Ciclo xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="Tarefa_02_B.xsd"> 
+ 
+<xs:element name="">
+    <xs:complexType>
+      <xs:sequence>
+      </xs:sequence>
+      <xs:attribute name="" type="xs:" use="required"/>
+    </xs:complexType>
+  </xs:element> 
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="Modulo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Duracion"/>
+        <xs:element name="Nome" type="xs:string"/>
+        <xs:element ref="Ciclo" maxOccurs="unbounded"/>
+        <xs:element ref="Contidos"/>
+      </xs:sequence>
+      <xs:attribute name="codigo" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  
+   <xs:element name="Duracion">
+    <xs:complexType>
+      <xs:attribute name="horas" type="xs:unsignedByte" use="required"/>
+      <xs:attribute name="sesionsSemanais" type="xs:unsignedByte"/>
+      <xs:attribute name="sesionsAnuais" type="xs:unsignedByte" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="Ciclo">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+            <xs:attribute name="codigo" type="xs:string" use="required"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="Contidos">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="UnidadeDidactica" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element> 
+  
+  <xs:element name="UnidadeDidactica">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Titulo" type="xs:string" />
+        <xs:element name="Descripcion" type="xs:string" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="numero" type="xs:short" use="required"/>
+      <xs:attribute name="sesions" type="xs:short" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  
+ 
+</xs:schema>

@@ -1,0 +1,235 @@
+
+*{
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+html{
+  font-family: 'Roboto','sans-serif';
+  height: 100%;
+}
+
+body{
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background-color: #efefef;
+  margin:0;
+}
+
+.rejilla-formulas{
+  padding: 100px;
+}
+
+img {
+width: 90%; 
+height: auto;
+}
+
+footer{
+  margin-top: auto;
+}
+
+
+.contenedor-formulas::after {
+  filter: brightness(10%);
+  }
+
+.contenedor-formulas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 5em;
+  min-height: 100%;
+  
+  }
+  
+.contenedor-formulas::after {
+  content: "";
+  display: block;
+  height: 100px; 
+}
+
+  .equipo {
+    position: relative;
+  }
+  
+  .equipo-image {
+    line-height: 5;
+    overflow: hidden;
+  }
+  
+  .equipo-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none;
+    z-index: 1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    color: black;
+
+    /* position the text in t’ middle*/
+    display: flex;
+    align-items: last baseline;
+    justify-content: center;
+  }
+  
+  .equipo:hover .equipo-title {
+    opacity: 1;
+  }
+  
+  .equipo .equipo-image img {
+    /* filter: blur(2px); */
+    position: relative;
+    transition: all 0.4s ease-in-out;
+    transform: scale(1.00);
+  }
+
+  .equipo:hover .equipo-image img {
+    /* filter: blur(2px); */
+    position: relative;
+    transition: all 0.4s ease-in-out;
+    transform: scale(1.05);
+  }
+/*PRUEBAS DESENFOQUE A LOS NO SELECCIONADOS
+
+.equipo:hover .equipo-image img {
+  filter: blur(2px);
+}
+
+.equipo:hover .equipo-image img:hover {
+  filter: none;  Esto evita que la imagen sobre la que se hace hover se vea borrosa 
+}
+
+.rejilla-formulas:hover .equipo .equipo-image img {
+  filter: blur(4px); Aplica el desenfoque a todas las imágenes 
+}
+FIN DESENFOQUE NO SELECCIONADOS*/
+
+  #redbull:hover .equipo-image img {
+    filter: drop-shadow(5px 5px 8px #0600EF );
+  }
+
+  #ferrari:hover .equipo-image img {
+    filter: drop-shadow(5px 5px 8px #DC0000);
+  }
+
+  #mercedes:hover .equipo-image img {
+    filter: drop-shadow(5px 5px 8px #00D2BE);
+  }
+
+  #mclaren:hover .equipo-image img {
+    filter: drop-shadow(5px 5px 8px #FF8700);
+  }
+
+  #astonmartin:hover .equipo-image img {
+    filter: drop-shadow(5px 5px 8px #FFD700);
+  }
+
+  #alpine:hover .equipo-image img {
+    filter: drop-shadow(5px 5px 8px #fd9cff);
+  }
+
+  #stake:hover .equipo-image img {
+    filter: drop-shadow(5px 5px 8px #00ff51);
+  }
+
+  #visarb:hover .equipo-image img {
+    filter: drop-shadow(5px 5px 8px #0299fd);
+  }
+
+  #williams:hover .equipo-image img {
+    filter: drop-shadow(5px 5px 8px #835c07);
+  }
+
+  #haas:hover .equipo-image img {
+    filter: drop-shadow(5px 5px 8px #000);
+  }
+
+  #redbull:hover #ferrari .equipo-image img , 
+  #redbull:hover #mercedes .equipo-image img{
+    filter: drop-shadow(5px 5px 8px #DC0000);
+  }
+  
+  .Logo-equipo{
+    width: 160px;
+    position: absolute;
+    top:-80%;
+    left: 20%;
+    visibility: hidden;
+    margin-bottom:10px ; 
+    padding: 20px;
+  }
+
+  .equipo:hover > .Logo-equipo{
+    transition: all ease-in-out 350ms;
+    visibility: visible; 
+    margin-bottom:30px ; 
+    padding: 20px;
+  }
+
+/* 
+  GRADIENTES DE FONDO PARA CADA EQUIPO
+
+  
+}
+
+#mercedes:hover{
+    transition: all 1s ease-in-out;
+    background: linear-gradient(45deg, #000000, #00D2BE);
+    opacity: 0.85;
+}
+
+#ferrari:hover{
+    transition: all 1s ease-in-out;
+    background: linear-gradient(45deg,#DC0000,#fff, #fff700);
+    opacity: 0.85;
+}   
+
+#mclaren:hover{
+    transition: all 1s ease-in-out;
+    background: linear-gradient(45deg, #000, #FF8700);
+    opacity: 0.85;
+}
+
+#astonmartin:hover{
+    transition: all 1s ease-in-out;
+    background: linear-gradient(35deg, #000 0%, #006F62 5%,#006F62 45%, #FFD700 50%, #006F62 55%, #fff 95%);
+    opacity: 0.85;
+}
+
+#alpine:hover{
+    transition: all 1s ease-in-out;
+    background: linear-gradient(45deg, #000 0%, #0090FF 25%, #fd9cff 55%, #fff 95%);
+    opacity: 0.85;
+}
+
+#sauber:hover{
+    transition: all 1s ease-in-out;
+    background: linear-gradient(45deg, #000,#00ff51);
+    opacity: 0.85;
+}
+
+#visarb:hover{
+    transition: all 1s ease-in-out;
+    background: linear-gradient(15deg, #000 0%, #0299fd 25%, #fff 55%, #ff0000 95%);
+    opacity: 0.85;
+}
+
+#williams:hover{
+    transition: all 1s ease-in-out;
+    background: linear-gradient(15deg, #000 0%, #0090FF 65%, #835c07 85%);
+    opacity: 0.85;
+}
+
+#hass:hover{
+    transition: all 1s ease-in-out;
+    background: linear-gradient(15deg, #000 0%, #ffffff 65%, #ff0000 95%);
+    opacity: 0.85;
+} */
+
+

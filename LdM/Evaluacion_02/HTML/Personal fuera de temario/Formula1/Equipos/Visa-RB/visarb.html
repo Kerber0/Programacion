@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Visa RB CashApp</title>
+
+    <!--CONEXION CON TODOS LOS ARCHIVOS DE ESTILO-->
+    <link rel="stylesheet" href="visarb.css">
+    <link rel="stylesheet" href="../../Comunes/header.css">
+    <link rel="stylesheet" href="../../Comunes/footer.css">
+
+    <link rel="shortcut icon" href="img/logo-williams-f1-2021.png" type="image/x-icon">  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <!--SCRIP QUE REPITE LOS ENCABEZADOS Y PIE DE PAGINA-->
+    <script src="../../Comunes/cargarContenido.js" defer></script>
+    <!--
+
+    <header class="Encabezado-Principal" id="header-container"></header>
+    <footer class="site-footer" id="footer-container"></footer>
+    -->
+</head>
+<body>
+    <!-- TODO revisar la pagina oficial de la f1 para datos concretos-->
+    <header class="Encabezado-Principal" id="header-container" data-ruta-header="/Comunes/header.html">
+        <nav id="menu">
+            <ul class="navegacion">
+                <li><img src="../f1_logo_rojo.svg" alt=""></li>
+                <li><a href="../../Index.html">Inicio</a></li>
+                <li><a href="../../Circuitos/Circuitos.html">Circuitos</a>
+                    <ul>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/01_Bahrein/Bahrein.html">Bahrain</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/02_Arabia Saudita/Arabia Saudita.html">Arabia Saudi</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/03_Australia/Australia.html">Australia</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/04_Japon/Japon.html">Japón</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/05_China/China.html">China</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/06_Miami/Miami.html">Miami</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/07_Emilia Romagna/Emilia Romagna.html">Imola</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/08_Monaco/Monaco.html">Monaco</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/09_Canada/Canada.html">Canadá</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/10_Espanha/Espanha.html">España</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/11_Austria/Austria.html">Austria</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/12_Gran Bretanha/Gran Bretanha.html">Silverstone</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/13_Hungria/Hungria.html">Hungría</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/14_Belgica/Belgica.html">Bélgica</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/15_Paises Bajos/Paises Bajos.html">Zandvort</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/16_Italia/Italia.html">Monza</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/17_Azerbaiyan/Azerbaiyan.html">Azerbaiyan</a></li> 
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/18_Singapur/Singapur.html">Singapore</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/19_Estados Unidos/Austin.html">Austin</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/20_Mexico/Ciudad de Mexico.html">Mexico</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/21_Brasil/Sao Paulo.html">Sao Paulo</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/22_Las Vegas/Las_Vegas.html">Las Vegas</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/23_Qatar/Qatar.html">Qatar</a></li>
+                        <li class="Enlace-Navegacion"><a href="../../Circuitos/24_Abu Dabi/Abu Dhabi.html">Abu Dhabi</a></li>
+                    </ul>
+                </li>
+                <li><a href="../Equipos_bis.html">Equipos</a>
+                    <ul>
+                        <li><a href="../Alpine/alpine.html">Alpine</a></li>
+                        <li><a href="../Aston-Martin/astonmartin.html">Aston-Martin</a></li>
+                        <li><a href="../Ferrari/ferrari.html">Ferrari</a></li>
+                        <li><a href="../Haas/haas.html">Haas</a></li>
+                        <li><a href="../Mclaren/mclaren.html">Mclaren</a></li>
+                        <li><a href="../Mercedes/mercedes.html">Mercedes</a></li>
+                        <li><a href="../Red-Bull/redbull.html">Red-Bull</a></li>
+                        <li><a href="../Stake/stake.html">Stake</a></li>
+                        <li><a href="../Visa-RB/visarb.html">Visa-RB</a></li>
+                        <li><a href="../Williams/williams.html">Williams</a></li>
+                    </ul>
+                </li>
+                <li><a href="../Pilotos.html">Pilotos</a>
+                    <ul>
+                        <li><a href="../Alpine/Pilotos/Gasly/pierregasly.html">Pierre Gasly</a></li>
+                        <li><a href="../Alpine/Pilotos/Ocon/estebanocon.html">Esteban Ocon</a></li>
+                        <li><a href="../Aston-Martin/pilotos/Alonso/fernandoalonso.html">Fernano Alonso</a></li>
+                        <li><a href="../Aston-Martin/pilotos/Stroll/lancestroll.html">Lance Stroll</a></li>
+                        <li><a href="../Ferrari/pilotos/Sainz/carlossainz.html">Carlos Sainz</a></li>
+                        <li><a href="../Ferrari/pilotos/Leclerc/charleslecrec.html">Charles Leclerc</a></li>
+                        <li><a href="../Haas/pilotos/Magnusen/kevinmagnusen.html">Kevin Magnusen</a></li>
+                        <li><a href="../Haas/pilotos/Hulkenberg/nicohulkenberg.html">Nico Hulkenberg</a></li>
+                        <li><a href="../Mclaren/pilotos/Norris/landonorris.html">Lando Norris</a></li>
+                        <li><a href="../Mclaren/pilotos/Piastri/oscarpiastri.html">Oscar Piastri</a></li>
+                        <li><a href="../Mercedes/pilotos/Hamilton/lewishamilton.html">Lewis Hamilton</a></li>
+                        <li><a href="../Mercedes/pilotos/Russell/gerogerussell.html">George Russell</a></li>
+                        <li><a href="../Red-Bull/Pilotos/Verstappen/maxverstapen.html">Max Verstapen</a></li>
+                        <li><a href="../Red-Bull/Pilotos/Perez/sergioperez.html">Sergio Pérrez</a></li>
+                        <li><a href="../Stake/pilotos/Bottas/valteribottas.html">Valtteri Bottas</a></li>
+                        <li><a href="../Stake/pilotos/Zhou/zhou.html">Huangyu Zhou</a></li>
+                        <li><a href="../Visa-RB/pilotos/Ricciardo/danielricciardo.html">Daniel Ricciardo</a></li>
+                        <li><a href="../Visa-RB/pilotos/Tsunoda/yukitsunoda.html">Yuki Tsunoda</a></li>
+                        <li><a href="../Williams/pilotos/Sargeant/logansargeant.html">Logan Sargeant</a></li>
+                        <li><a href="../Williams/pilotos/Albon/alexanderalbon.html">Alexander Albon</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Registro</a>
+                    <ul>
+                        <li><a href="../../Registro/FormularioAcceso.html">Acceso</a></li>
+                        <li><a href="../../Registro/FormularioRegistro.html">Registro</a></li>
+                    </ul>
+                </li>
+            </ul> 
+        </nav>
+    </header>
+    <main>
+        <div class="Pilotos-DatosEquipo">
+            <section class="tabla-container">
+                <div class="tabla">
+                    <header>
+                        <h1>Datos del equipo</h1>
+                    </header>
+                    <div class="contenido">
+                        <img src="./img/rb.avif" alt="Logo-RB" class="logo">
+                        <table class="tabla-estadisticas">
+                            <tr>
+                                <td>Sede</td>
+                                <td>Faenza, Italia</td>
+                            </tr>
+                            <tr>
+                                <td>Jefe de equipo</td>
+                                <td>Laurent Mekies</td>
+                            </tr>
+                            <tr>
+                                <td>Chasis</td>
+                                <td>VCARB 01</td>
+                            </tr>
+                            <tr>
+                                <td>Unidad de potencia</td>
+                                <td>Honda RBPT</td>
+                            </tr>
+                            <tr>
+                                <td>Primera participación</td>
+                                <td>1985</td>
+                            </tr>
+                            <tr>
+                                <td>Campeonatos del mundo</td>
+                                <td>N/A</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <section class="Pilotos">
+                <!-- TODO pendiende de redistribuir espacios. Una zona para cada piloto con el nombre, dorsal y nacionalidad debajo-->
+                <div class="ContenedorPilotos">
+                    <a id="Piloto1" href="./pilotos/Ricciardo/danielricciardo.html" class="Enlace-Pagina-Piloto">
+                        <div class="Piloto">
+                            <img src="./img/Daniel Ricciardo.avif" class="Foto-Piloto" title="D.Ricciardo" alt="RIC">
+                            <div class="Bandera-Dorsal-Nombre">
+                                <div class="Bandera-Dorsal">
+                                    <img src="./img/Daniel Ricciardo(dorsal).avif" alt="Dorsal-Ricciardo">
+                                    <img src="../ZZ_Banderas/Australia.avif"  alt="Bandera_Australia">
+                                </div>
+                                <div class="Nombre">
+                                    Daniel <strong>RICCIARDO</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a id="Piloto2" href="./pilotos/Tsunoda/yukitsunoda.html" class="Enlace-Pagina-Piloto">
+                        <div class="Piloto">
+                            <img src="./img/Yuki Tsunoda.avif" class="Foto-Piloto" title="Y.Tsunoda" alt="TSU">
+                            <div class="Bandera-Dorsal-Nombre">
+                                <div class="Bandera-Dorsal">
+                                    <img src="./img/Yuki Tsunoda(dorsal).avif"  alt="Dorsal-Logan">
+                                    <img src="../ZZ_Banderas/Japan.avif" alt="Bandera_Japon">
+                                </div>
+                                <div class="Nombre">
+                                    Yuki <br><strong>TSUNODA</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+        <section class="Historia">
+            <header>
+                <h1>Historia</h1>
+            </header>
+            <p>
+                Establecido en 2006 como un equipo en el que los jóvenes pilotos 
+                del prolífico grupo de talentos de Red Bull podían adquirir experiencia 
+                en la Fórmula 1, RB, originalmente llamado Toro Rosso y luego AlphaTauri,
+                 se formó a partir de las cenizas del valiente equipo Minardi. Sebastian 
+                 Vettel validó esta estrategia casi de inmediato al lograr una victoria de
+                  cuento de hadas en 2008, antes de disfrutar del éxito en el campeonato 
+                  mundial con el equipo principal, Red Bull Racing. Hoy en día, el ethos 
+                  de fomentar el talento sigue siendo válido, aunque el equipo italiano ya 
+                  no es simplemente un "equipo B", sino un constructor por derecho propio..
+            </p>
+            <p>
+                2023
+            La campaña final bajo el nombre de AlphaTauri culmina con un octavo lugar en la clasificación. 
+            El recién llegado Nyck de Vries fue reemplazado a mitad de temporada por el experimentado 
+            Daniel Ricciardo, quien luego se perdió cinco Grandes Premios debido a una fractura en la 
+            mano tras un accidente en los entrenamientos.
+            </p>
+            <p>
+                2022
+            El impulso se estanca y pierden terreno frente a equipos como Alfa Romeo y Haas, 
+            cayendo al noveno lugar en la clasificación final, con solo 35 puntos en comparación 
+            con los 142 puntos de 2021. Pierre Gasly logra su mejor resultado de la temporada 
+            con un quinto lugar en Bakú, pero abandona el equipo al final del año.
+            </p>
+            <p>
+                2021
+            Avanzan un lugar más hasta el sexto puesto en la clasificación,
+            mientras el cada vez mejor Pierre Gasly logra un podio en Azerbaiyán
+            y puntos en casi todas las carreras que termina. Su compañero de 
+            equipo novato, Yuki Tsunoda, tarda en adaptarse, pero asegura un excelente 
+            cuarto lugar en la última carrera de la temporada.  
+            </p>
+            <p>
+                2021
+            Avanzan un lugar más hasta el sexto puesto en la clasificación, 
+            mientras el cada vez mejor Pierre Gasly logra un podio en Azerbaiyán 
+            y puntos en casi todas las carreras que termina. Su compañero de equipo 
+            novato, Yuki Tsunoda, tarda en adaptarse, pero asegura un excelente cuarto 
+            lugar en la última carrera de la temporada.
+            </p>
+            <p>
+                2020
+            Un nuevo nombre trae nuevo impulso y AlphaTauri emerge como una verdadera fuerza en 
+            la zona media, anotando más de un centenar de puntos, 27 de ellos en suelo local en Monza,
+            donde Pierre Gasly logra su primera victoria y la del equipo.
+                
+            </p>
+            <p>2019
+            En su última temporada bajo el nombre de Toro Rosso, disfrutan de su campaña más exitosa 
+            hasta la fecha, anotando 85 puntos y asegurando el sexto lugar en la clasificación. 
+            Un cambio de piloto a mitad de temporada trae de vuelta a Pierre Gasly desde Red Bull Racing, 
+            y el francés responde a su "descenso" con un espectacular podio en Brasil.
+            </p>
+        </section>
+        <section class="Palmares">
+            <header>
+                <h1>Palmarés</h1>
+            </header>
+            <!-- TODO buscar el año por año de cada equipo y añadirlo aquí-->
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum.
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum.
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum.
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem odio consequatur ad rem accusantium aspernatur
+                adipisci cumque tenetur beatae, et eligendi consequuntur quae fugiat possimus officiis. Placeat nesciunt iste harum
+            </p>
+        </section>
+        <section class="Galeria">
+            <h1>Galería</h1>
+            <div class="slider-box">
+                <ul>
+                    <li><img src="./img/Galeria/1.avif" alt=""></li>
+                    <li><img src="img/Galeria/2.avif" alt=""></li>
+                    <li><img src="img/Galeria/3.avif" alt=""></li>
+                    <li><img src="img/Galeria/4.avif" alt=""></li>
+                    <li><img src="img/Galeria/6.avif" alt=""></li>
+                </ul>
+            </div>
+            <!--1024x576 16:9-->
+        </section> 
+    </main>
+    <footer class="site-footer" id="footer-container" data-ruta-footer="/Comunes/footer.html">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Sobre nosotros</h3>
+                <p>Esto es solo un ejemplo para una materia de DAM</p>
+            </div>
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <p>Email: email@lenmguajeDeMarcas.com</p>
+                <p>Phone: +34 670 633 975</p>
+            </div>
+            <div class="footer-column">
+                <h3>Sígueme en </h3>
+                <ul class="social-icons">
+                    <li><a href="#"><img src="../../IMG/iconmonstr-facebook-6.svg" alt="Facebook"></a></li>
+                    <li><a href="#"><img src="../../IMG/iconmonstr-twitter-1.svg" alt="Twitter"></a></li>
+                    <li><a href="#"><img src="../../IMG/iconmonstr-instagram-15.svg" alt="Instagram"></a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="copyright">© 2024 Mi entregable. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>

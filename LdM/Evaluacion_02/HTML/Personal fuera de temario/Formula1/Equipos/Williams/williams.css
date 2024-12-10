@@ -1,0 +1,266 @@
+/*CSS ELEMENTOS GENERALES*/
+
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    
+}
+
+html{
+    font-family: 'Roboto','sans-serif';
+}
+
+body{
+    background-color: #efefef;
+    margin:0;
+}
+
+main{
+   width: 1400px; 
+   margin: 0 auto;
+} 
+
+/*TODO pendiente de cambiar coloroces para marcar bordes redondeados en logos equipo*/
+.Pilotos-DatosEquipo {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px;
+    padding: 30px;
+    border-bottom: none; /* Eliminamos el borde inferior actual */
+    border-right: none; /* Eliminamos el borde derecho actual */
+    border-radius: 0 0 8px 0; /* Borde curvo solo en la esquina inferior derecha */
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1); /* Sombreado en los bordes derecho e inferior */
+}
+
+.tabla-container {
+    display: flex;
+    justify-content: center;
+}
+
+.tabla {
+    max-width: 600px;
+    padding: 20px;
+}
+
+.tabla header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.tabla img.logo {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.tabla-estadisticas {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-estadisticas td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabla-estadisticas td:first-child {
+    font-weight: bold;
+}
+
+.tabla-estadisticas tr:last-child td {
+    border-bottom: none;
+}
+
+
+.Pilotos-DatosEquipo header{
+box-sizing: border-box;
+height: 30px;
+margin-bottom: 20px;
+text-align: center;
+}
+
+.Pilotos{
+    padding: 10px;
+    float: right;
+}
+
+
+.ContenedorPilotos{
+display: flex;
+justify-content: space-between;
+width: 800px;
+height: 640px;
+}
+
+.Pilotos a{
+text-decoration: none;
+color: inherit;
+display: flex;
+}
+
+.Piloto{
+transition: all 0.5s ease;
+border-style: none;
+/* border-color: #003399; */
+border-width: 2px;
+width: 380px;
+overflow: hidden;
+align-items: center;
+border-bottom-right-radius: 10px;
+border-right: 3px solid #0090FF;
+border-bottom: 3px solid #0090FF;
+border-top: none;
+border-left: none
+} 
+
+.Piloto .Foto-Piloto{
+transition: all 0.5s ease;
+transform: scale(1.0);
+width: 380px;
+} 
+
+
+.Piloto:hover .Foto-Piloto{
+transition: all 0.5s ease;
+transform: scale(1.05);
+} 
+
+.Piloto:hover{
+    box-shadow: 8px 5px 5px #0090FF,
+    -2px -5px 5px #FFF;
+} 
+
+.Bandera-Dorsal-Nombre{
+padding:8px;
+ }
+
+.Bandera-Dorsal{
+font-size: 0px;
+}
+
+.Bandera-Dorsal img{
+font-size: 50px;
+width: 80px;  
+}
+
+.Nombre{
+font-size: 50px;
+}
+
+/*CSS PARA EL CARRUSEL DE FOTOGRAFIAS A MODO DE GALERÍA*/
+
+.Galeria{
+margin: 30px;
+box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.3);
+padding: 30px;
+}
+
+.slider-box{
+    width: 100%;
+    height: auto;
+    margin: 50px auto 0;
+    overflow: hidden;
+}
+
+.slider-box ul{
+    display: flex;
+    padding: 0;
+    width: 3000%;
+    animation: slide 100s infinite alternate ease-in-out;
+}
+
+
+.slider-box li {
+    width: 3.3333333%;
+    list-style: none;
+    position: relative;
+}
+
+.slider-box img{
+    width: 100%;
+}
+
+/*PERSONALIZACION DE LOS TIEMPOS PARA LAS ANIMACIONES*/
+
+@keyframes slide {
+    0% { margin-left: 0; }
+    2% { margin-left: 0; }
+    4% { margin-left: -100%; }
+    6% { margin-left: -100%; }
+    8% { margin-left: -200%; }
+    10% { margin-left: -200%; }
+    12% { margin-left: -300%; }
+    14% { margin-left: -300%; }
+    16% { margin-left: -400%; }
+    18% { margin-left: -400%; }
+    20% { margin-left: -500%; }
+    22% { margin-left: -500%; }
+    24% { margin-left: -600%; }
+    26% { margin-left: -600%; }
+    28% { margin-left: -700%; }
+    30% { margin-left: -700%; }
+    32% { margin-left: -800%; }
+    34% { margin-left: -800%; }
+    36% { margin-left: -900%; }
+    38% { margin-left: -900%; }
+    40% { margin-left: -1000%; }
+    42% { margin-left: -1000%; }
+    44% { margin-left: -1100%; }
+    46% { margin-left: -1100%; }
+    48% { margin-left: -1200%; }
+    50% { margin-left: -1200%; }
+    52% { margin-left: -1300%; }
+    54% { margin-left: -1300%; }
+    56% { margin-left: -1400%; }
+    58% { margin-left: -1400%; }
+    60% { margin-left: -1500%; }
+    62% { margin-left: -1500%; }
+    64% { margin-left: -1600%; }
+    66% { margin-left: -1600%; }
+    68% { margin-left: -1700%; }
+    70% { margin-left: -1700%; }
+    72% { margin-left: -1800%; }
+    74% { margin-left: -1800%; }
+    76% { margin-left: -1900%; }
+    78% { margin-left: -1900%; }
+    80% { margin-left: -2000%; }
+    82% { margin-left: -2000%; }
+    84% { margin-left: -2100%; }
+    86% { margin-left: -2100%; }
+    88% { margin-left: -2200%; }
+    90% { margin-left: -2200%; }
+    92% { margin-left: -2300%; }
+    94% { margin-left: -2300%; }
+    96% { margin-left: -2400%; }
+    98% { margin-left: -2400%; }
+    100% { margin-left: -2500%; }
+    }
+
+/* @keyframes slide {
+    El porcentaje de la izquierda es el momento dentro de la animacion
+    el de la derecha en el porcentaje dentro de la "tira" de fotos.
+    Sabiendo que tenemos 30 fotos en total le damos un ancho de 3000% en 'ul' 
+    cada foto ocupara un 3,333333% del ancho en la pantalla cuando se visualiza
+ */
+.Historia{
+margin: 30px;
+box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.3);
+padding: 30px;
+}
+
+.Historia header,p{
+padding-bottom: 30px;
+}
+
+.Palmares{
+margin: 30px;
+box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.3);
+padding: 30px
+}
+
+.Palmares header,p{
+padding-bottom: 30px;
+}
