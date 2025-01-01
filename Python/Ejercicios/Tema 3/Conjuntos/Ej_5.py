@@ -6,8 +6,11 @@ def palabras_mas_de_n_caracteres(palabras: list, n: int):
     for palabra in palabras:
         if len(palabra) > n:
             lista.append(palabra)
-    return lista
+    return set(lista)
 
+def palabras_mas_de_n_caracteresv2(palabras: list, n: int):
+
+    return { palabra for palabra in palabras if len(palabra) > n}
 
 # Pruebas
 print(palabras_mas_de_n_caracteres(
