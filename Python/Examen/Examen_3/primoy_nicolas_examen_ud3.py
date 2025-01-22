@@ -146,7 +146,7 @@ def generarFrutasEnConjunto(numFrutas: int) -> set:
         vueltas = 0
         conjuntos = []
         while vueltas < numFrutas:
-            conjuntos = generarFrutasEnTupla(3)
+            conjuntos = generarFrutasEnTupla(5)
             vueltas += 1
         return set(conjuntos)
     except TypeError:
@@ -296,70 +296,70 @@ print("-" * 50)
 # En caso de ocurrir una excepción en la segunda función, se debe devolver un diccionario vacío.
 
 
-def datosJugador() -> dict:
-    jugadores = {}
-    inicio = input("""1- Para ingresar el nombre de un jugador 
-                     2- Para ingresar el dorsal de un jugador
-                     3- Para ingresar la posición de un jugador
-                     0- Para salir""")
-    try:
-        match int(inicio):
-            case 1:
-                nombre = input(
-                    "Ingrese el nombre del jugador, este debe estar compuesto unicamente por letras: ")
-                if not isinstance(nombre, str):
-                    print("Error el dato ingresado no esta en el formato adecuado")
-                    nombre = input(
-                        "El dato ingresado no es válido. Por favor vuelva a intentar. ")
-                else:
-                    jugadores['Nombre'] = nombre
-                return jugadores
-            case 2:
-                dorsal = input(
-                    "Ingrese el dorsal del jugador, este debe ser numeros enteros positivo: ")
-                if not isinstance(dorsal, int):
-                    raise TypeError
-                if dorsal < 0:
-                    raise TypeError
-                else:
-                    jugadores['Dorsal'] = dorsal
-                    return jugadores
-            case 3:
-                jugadores['Posicion'] = input(
-                    "Ingrese la posición del jugador: ")
-                return jugadores
-            case 0:
-                return print("Adios. Fin de programa")
-            case _:
-                inicio = input(
-                    "La opcion ingresada no esta dentro del menu.Por favor, pruebe de nuevo: ")
+# def datosJugador() -> dict:
+#     jugadores = {}
+#     inicio = input("""1- Para ingresar el nombre de un jugador
+#                      2- Para ingresar el dorsal de un jugador
+#                      3- Para ingresar la posición de un jugador
+#                      0- Para salir""")
+#     try:
+#         match int(inicio):
+#             case 1:
+#                 nombre = input(
+#                     "Ingrese el nombre del jugador, este debe estar compuesto unicamente por letras: ")
+#                 if not isinstance(nombre, str):
+#                     print("Error el dato ingresado no esta en el formato adecuado")
+#                     nombre = input(
+#                         "El dato ingresado no es válido. Por favor vuelva a intentar. ")
+#                 else:
+#                     jugadores['Nombre'] = nombre
+#                 return jugadores
+#             case 2:
+#                 dorsal = input(
+#                     "Ingrese el dorsal del jugador, este debe ser numeros enteros positivo: ")
+#                 if not isinstance(dorsal, int):
+#                     raise TypeError
+#                 if dorsal < 0:
+#                     raise TypeError
+#                 else:
+#                     jugadores['Dorsal'] = dorsal
+#                     return jugadores
+#             case 3:
+#                 jugadores['Posicion'] = input(
+#                     "Ingrese la posición del jugador: ")
+#                 return jugadores
+#             case 0:
+#                 return print("Adios. Fin de programa")
+#             case _:
+#                 inicio = input(
+#                     "La opcion ingresada no esta dentro del menu.Por favor, pruebe de nuevo: ")
 
-    except TypeError:
+#     except TypeError:
 
-        return
-
-
-def contarPosiciones(numJugadores: int) -> dict:
-    equipo = {}
-    while numJugadores > 0:
-        datosJugador()
-        numJugadores -= 1
-    for jugadores
-    return
+#         return
 
 
-# Ejemplo de uso:
-print("Probando funciones ejercicio 4:")
-print("Probando función datosJugador:")
-# Devuelve un diccionario con los datos del jugador introducidos
-print(datosJugador())
-print("Probando función contarPosiciones:")
-numJugadores = 3
-print(contarPosiciones("asdf"))  # Devuelve un diccionario vacío
-print(contarPosiciones(3.4))  # Devuelve un diccionario vacío
-# Devuelve un diccionario con todas las posiciones a 0
-print(contarPosiciones(0))
-# Devuelve un diccionario con las posiciones de los jugadores introducidos
-print(contarPosiciones(numJugadores))
+# def contarPosiciones(numJugadores: int) -> dict:
+#     equipo = {}
+#     while numJugadores > 0:
+#         datosJugador()
+#         numJugadores -= 1
+#     for jugadores
+#     return
 
-print("Fin.")
+
+# # Ejemplo de uso:
+# print("Probando funciones ejercicio 4:")
+# print("Probando función datosJugador:")
+# # Devuelve un diccionario con los datos del jugador introducidos
+# print(datosJugador())
+# print("Probando función contarPosiciones:")
+# numJugadores = 3
+# print(contarPosiciones("asdf"))  # Devuelve un diccionario vacío
+# print(contarPosiciones(3.4))  # Devuelve un diccionario vacío
+# # Devuelve un diccionario con todas las posiciones a 0
+# print(contarPosiciones(0))
+# # Devuelve un diccionario con las posiciones de los jugadores introducidos
+# print(contarPosiciones(numJugadores))
+
+# print("Fin.")
