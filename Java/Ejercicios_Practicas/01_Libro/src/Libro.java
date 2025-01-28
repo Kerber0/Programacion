@@ -3,14 +3,14 @@ public class Libro {
     private String titulo;
     private String autor;
     private int numPaginas;
-    private String ISBN;
+    private String isbn;
 
 
     public Libro(String titulo, String autor, int numPaginas, String ISBN) {
         this.titulo = titulo;
         this.autor = autor;
         this.numPaginas = numPaginas;
-        this.ISBN = ISBN;
+        this.isbn = ISBN;
     }
 
     public String getTitulo(){
@@ -33,16 +33,16 @@ public class Libro {
         this.numPaginas = numPaginas;
     }
     public String getISBN(){
-        return ISBN;
+        return isbn;
     }
     public void setISBN(String ISBN){
-        this.ISBN = ISBN;
+        this.isbn = ISBN;
     }
 
     @Override
-    public String toString(){
-        return "El libro " + titulo + "con ISBN " + ISBN + "creado por" +
-                " el autor " + autor + "tiene " + numPaginas + " páginas.";
+    public String toString() {
+        return "El libro \"" + titulo + "\", con ISBN " + isbn + ", creado por " +
+                "el autor " + autor + ", tiene " + numPaginas + " páginas.";
     }
 }
 
