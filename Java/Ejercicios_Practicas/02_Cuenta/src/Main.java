@@ -12,14 +12,14 @@ public class Main {
 
         System.out.print("Nombre : ");
         nombre = sc.nextLine();
-        System.out.print("N�mero de cuenta : ");
+        System.out.print("Número de cuenta : ");
         numero = sc.nextLine();
         System.out.print("Tipo de interes : ");
         tipo = sc.nextDouble();
         System.out.print("Saldo: ");
         importe = sc.nextDouble();
 
-        cuenta1.setNombre(nombre);
+        cuenta1.setNombreCliente(nombre);
         cuenta1.setNumeroCuenta(numero);
         cuenta1.setTipoInteres(tipo);
         cuenta1.setSaldo(importe);
@@ -34,9 +34,9 @@ public class Main {
 
         //mostrar los datos de cuenta1
         System.out.println("Datos de la cuenta 1");
-        System.out.println("Nombre del titular: " + cuenta1.getNombre());
-        System.out.println("N�mero de cuenta: " + cuenta1.getNumeroCuenta());
-        System.out.println("Tipo de inter�s: " + cuenta1.getTipoInteres());
+        System.out.println("Nombre del titular: " + cuenta1.getNombreCliente());
+        System.out.println("Número de cuenta: " + cuenta1.getNumeroCuenta());
+        System.out.println("Tipo de interés: " + cuenta1.getTipoInteres());
         System.out.println("Saldo: " + cuenta1.getSaldo());
         System.out.println();
 
@@ -48,17 +48,17 @@ public class Main {
 
         //mostrar los datos de cuenta2
         System.out.println("Datos de la cuenta 2");
-        System.out.println("Nombre del titular: " + cuenta2.getNombre());
-        System.out.println("N�mero de cuenta: " + cuenta2.getNumeroCuenta());
-        System.out.println("Tipo de inter�s: " + cuenta2.getTipoInteres());
+        System.out.println("Nombre del titular: " + cuenta2.getNombreCliente());
+        System.out.println("Número de cuenta: " + cuenta2.getNumeroCuenta());
+        System.out.println("Tipo de interés: " + cuenta2.getTipoInteres());
         System.out.println("Saldo: " + cuenta2.getSaldo());
         System.out.println();
 
         //mostrar los datos de cuenta3
         System.out.println("Datos de la cuenta 3");
-        System.out.println("Nombre del titular: " + cuenta3.getNombre());
-        System.out.println("N�mero de cuenta: " + cuenta3.getNumeroCuenta());
-        System.out.println("Tipo de inter�s: " + cuenta3.getTipoInteres());
+        System.out.println("Nombre del titular: " + cuenta3.getNombreCliente());
+        System.out.println("Número de cuenta: " + cuenta3.getNumeroCuenta());
+        System.out.println("Tipo de interés: " + cuenta3.getTipoInteres());
         System.out.println("Saldo: " + cuenta3.getSaldo());
         System.out.println();
 

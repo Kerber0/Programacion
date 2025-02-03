@@ -4,10 +4,15 @@ public class Cuenta {
     private double tipoInteres;
     private double saldo;
 
+    public Cuenta(){
+        this.nombreCliente = "";
+        this.numeroCuenta = "";
+    };
+
     public Cuenta(String nombreCliente, String numeroCuenta, double tipoInteres, double saldo) {
         this.nombreCliente = nombreCliente;
         this.numeroCuenta = numeroCuenta;
-        this.tipoInteres = tipoInteres;
+        this.tipoInteres = tipoInteres;   // orden de atributos en el construtctor
         this.saldo = saldo;
     }
 
@@ -51,16 +56,31 @@ public class Cuenta {
     }
 
     public boolean ingreso(double valorAingresar){
-        if (valorAingresar < 0){
-            System.out.println("Error el importe debe ser positivo.");
+        if (valorAingresar <= 0){
+            System.out.println("Error el importe debe ser positivo y mayor que zero.");
             return false;
         } else {
             this.saldo += valorAingresar;
             return true;
         }
     }
-
-
+    public boolean reintegro(double valorAreintegrar) {
+        if ((this.saldo - valorAreintegrar) < 0) {
+            System.out.println("Error! Saldo insuficiente.");
+            return false;
+        } else {
+            this.saldo -= valorAreintegrar;   // consultar si esto es lo mismo que lo que puso el
+            return true;
+        }
+    }
+    public boolean transferencia(Cuenta cuentaDestino, double cantidad){
+        if( cantidad <= 0  || cantidad > this.saldo) return false;
+        else {
+            this.reintegro(cantidad);
+            cuentaDestino.ingreso(cantidad);
+            return true;
+        }
+    }
 }
 
 
