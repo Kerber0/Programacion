@@ -46,7 +46,11 @@ public class Empleado {
   }
 
   public void setHorasExtras(double horas) {
-    this.horasExtras = horas;
+    if (horas < 0) {
+      this.horasExtras = 0;
+    } else {
+      this.horasExtras = horas;
+    }
   }
 
   public double getIrpf() {
@@ -80,6 +84,34 @@ public class Empleado {
   public static void setImporteHorasExtra(double valorHoras) {
     importeHoraExtra = valorHoras;
   }
+
+  public double complementoHorasExtras() {
+
+    return this.horasExtras * Empleado.importeHoraExtra;
+  }
+
+  public double sueldoBruto() {
+    return this.sueldoBase + complementoHorasExtras();
+  }
+
+  public double calculoIrpf() {
+    double irpf = 2;
+
+    if ((sueldoBruto() / 12) > 0 || (sueldoBruto() / 12) < 12450) {
+      irpf = 19;
+    } else if ((sueldoBruto() / 12) > 12450 || (sueldoBruto() / 12) < 20199) {
+      irpf = 24;
+    } else if ((sueldoBruto() / 12) > 20199 || (sueldoBruto() / 12) < 35199) {
+      irpf = 30;
+    } else if ((sueldoBruto() / 12) > 35199 || (sueldoBruto() / 12) < 59999) {
+      irpf = 37;
+    } else {
+      irpf = 45;
+    }
+  }
+   if(casado = true){
+
+    }
 
 
 }
