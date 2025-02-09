@@ -61,7 +61,7 @@ public class Empleado {
     this.irpf = irpf;
   }
 
-  public boolean getcasado() {
+  public boolean getCasado() {
     return casado;
   }
 
@@ -94,24 +94,40 @@ public class Empleado {
     return this.sueldoBase + complementoHorasExtras();
   }
 
-  public double calculoIrpf() {
-    double irpf = 2;
-
-    if ((sueldoBruto() / 12) > 0 || (sueldoBruto() / 12) < 12450) {
-      irpf = 19;
-    } else if ((sueldoBruto() / 12) > 12450 || (sueldoBruto() / 12) < 20199) {
-      irpf = 24;
-    } else if ((sueldoBruto() / 12) > 20199 || (sueldoBruto() / 12) < 35199) {
-      irpf = 30;
-    } else if ((sueldoBruto() / 12) > 35199 || (sueldoBruto() / 12) < 59999) {
-      irpf = 37;
-    } else {
-      irpf = 45;
-    }
+  private  int franjaSalarial(double sueldoBruto){
+    double sueldoAnual = sueldoBruto * 12;
+    if (sueldoAnual >= 0 && sueldoAnual <= 12450) return 0;
+    if (sueldoAnual > 12450 && sueldoAnual < 20199) return 1;
+    else if (sueldoAnual > 20199 && sueldoAnual < 35199) return 2;
+    else if (sueldoAnual > 35199 && sueldoAnual < 59999) return 3;
+    else return 4;
   }
-   if(casado = true){
 
+  public double calculoIrpf() {
+    double irpf = switch (franjaSalarial(sueldoBruto())) {
+      case 0 -> 19;
+      case 1 -> 24;
+      case 2 -> 30;
+      case 3 -> 37;
+      case 4 -> 45;
+      default -> 17;
+    };
+    if (casado){irpf -=2;}
+    if (cantHijos >= 1){ irpf -= cantHijos;}
+    return irpf;
     }
 
+    public double calcularSueldo(){
+    return sueldoBruto() * (1 - (calculoIrpf() / 100));
+    }
+
+    public String toString(){
+        return "NIF: " + nif + "\n" +
+                "Empleado: " + nombre + "\n" +
+                "Sueldo Base: $" + sueldoBase + "\n" +
+                "Tipo IRPF: " + calculoIrpf() + "%\n" +
+                "Casado: " + (casado ? "Sí" : "No") + "\n" +
+                "Hijos: " + (cantHijos > 0 ? cantHijos : "Ninguno") + "\n";
+    }
 
 }
