@@ -1,4 +1,5 @@
 import java.time.Year;
+import org.w3c.dom.ls.LSOutput;
 
 
 public class Fecha {
@@ -88,27 +89,14 @@ public class Fecha {
     if (!fechaCorrecta(dia, mes, anio)) {
       return "Error: La fecha calculada no es valida";
     }
-    return (dia < 10 ? "0" + dia : dia) + "-" + (mes < 10 ? "0" + mes : mes) + "-" + anio;
+    return anio + "-" + (mes < 10 ? "0" + mes : mes) + "-" + (dia < 10 ? "0" + dia : dia);
   }
 
   public boolean esMayorQue(int diaComparar, int mesComparar, int anioComparar) {
-    // Validar que la fecha a comparar sea correcta
-    if (!fechaCorrecta(diaComparar, mesComparar, anioComparar)) {
-      throw new IllegalArgumentException("La fecha a comparar no es válida");
-    }
-
-    // Comparar años
-    if (this.anio != anioComparar) {
-      return this.anio > anioComparar;
-    }
-
-    // Si los años son iguales, comparar meses
-    if (this.mes != mesComparar) {
-      return this.mes > mesComparar;
-    }
-
-    // Si los meses son iguales, comparar días
-    return this.dia > diaComparar;
+    return false;
   }
 
+
+  public boolean esMayorQue(Fecha fechaNacimiento) {
+  }
 }
