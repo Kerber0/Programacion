@@ -1,4 +1,10 @@
 public class Main {
+<<<<<<< HEAD
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+=======
 
   private static ArrayList<Persona> personas = new ArrayList<>();
   private static Scanner scanner = new Scanner(System.in);
@@ -84,3 +90,4 @@ public class Main {
   }
 }
 
+>>>>>>> fae053a4ed808e0dae0e46638e76b6a7f5ffbc1c
