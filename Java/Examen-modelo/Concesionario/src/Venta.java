@@ -7,7 +7,7 @@ private LocalDateTime fecha;
 private Cliente cliente;
 private Vehiculo vehiculo;
 private double precioFinal;
-private String metodoPago;
+
 
 
   public Venta(String id, LocalDateTime fecha, Cliente cliente, Vehiculo vehiculo,
@@ -18,8 +18,7 @@ private String metodoPago;
     this.cliente = cliente;
     this.vehiculo = vehiculo;
     this.precioFinal = precioFinal;
-    this.metodoPago = metodoPago;
-  }
+    }
 
   public String getId() {
     return id;
@@ -61,11 +60,4 @@ private String metodoPago;
     this.precioFinal = precioFinal;
   }
 
-  public String getMetodoPago() {
-    return metodoPago;
-  }
-
-  public void setMetodoPago(String metodoPago) {
-    this.metodoPago = metodoPago;
-  }
 }

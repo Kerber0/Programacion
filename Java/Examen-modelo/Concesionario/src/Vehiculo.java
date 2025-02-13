@@ -1,21 +1,24 @@
 import java.awt.List;
-import java.security.PublicKey;
+import java.util.Scanner;
 
 public class Vehiculo {
 
+  private String id;
   private String marca;
   private String modelo;
   private int year;
   private double precio;
   private int kilometraje;
-  private enum estado{nuevo,usado};
-  private String id;
+  private  Estado  estado;
   private String color;
+  public enum Estado  {NUEVO, USADO, REPARACION, VENDIDO}
 
-  public Vehiculo(String marca, String modelo, int year, double precio, int kilometraje, String id,
+
+  public Vehiculo(String id,String marca, String modelo, Estado estado, int year, double precio, int kilometraje,
       String color) {
     this.marca = marca;
     this.modelo = modelo;
+    this.estado = estado;
     this.year = year;
     this.precio = precio;
     this.kilometraje = kilometraje;
@@ -79,8 +82,21 @@ public class Vehiculo {
     this.color = color;
   }
 
-  public String agregarVehiculo(){
+  public void agregarVehiculo(){
+    Scanner sc = new Scanner(System.in);
+    String marca = sc.nextLine();
+    String  modelo = sc.nextLine();
+    Estado estado = Estado.valueOf(sc.nextLine());
+    int year = Integer.parseInt(sc.nextLine());
+    double precio = Double.parseDouble(sc.nextLine());
+    int kilometraje = Integer.parseInt(sc.nextLine());
+    String id = sc.nextLine();
+    String color = sc.nextLine();
 
+    Vehiculo nuevoVehiculo = new Vehiculo(id, marca, modelo, estado, year,  precio, kilometraje,  color);
+
+
+    //agregar print si esta correcto despues de comprobar datos
 
   }
 
