@@ -1,4 +1,6 @@
 import java.awt.List;
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Vehiculo {
@@ -10,19 +12,29 @@ public class Vehiculo {
   private double precio;
   private int kilometraje;
   private  Estado  estado;
-  private String color;
   public enum Estado  {NUEVO, USADO, REPARACION, VENDIDO}
-
+  private Color color;
+  public enum Color {ROJO, AZUL, NEGRO, BLANCO, GRIS}
+  java.util.List<String> colores = Arrays.asList("Rojo", "Azul", "Negro", "Blanco", "Gris");
+  int currentYear = LocalDate.now().getYear();
 
   public Vehiculo(String id,String marca, String modelo, Estado estado, int year, double precio, int kilometraje,
       String color) {
+    this.id = id;
     this.marca = marca;
     this.modelo = modelo;
+    if (estado)
     this.estado = estado;
-    this.year = year;
-    this.precio = precio;
+
+      if (year>1700 && year < currentYear){
+        this.year = year;
+      }
+      if (precio < 0) {
+        this.precio = precio;
+      }
     this.kilometraje = kilometraje;
-    this.id = id;
+
+      if ()
     this.color = color;
   }
 
