@@ -1,6 +1,6 @@
-import java.awt.List;
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Vehiculo {
@@ -11,130 +11,99 @@ public class Vehiculo {
   private int year;
   private double precio;
   private int kilometraje;
-  private  Estado  estado;
-  public enum Estado  {NUEVO, USADO, REPARACION, VENDIDO}
+  private Estado estado;
   private Color color;
+
+
+  public enum Estado {NUEVO, USADO, REPARACION, VENDIDO}
   public enum Color {ROJO, AZUL, NEGRO, BLANCO, GRIS}
-  java.util.List<String> colores = Arrays.asList("Rojo", "Azul", "Negro", "Blanco", "Gris");
-  int currentYear = LocalDate.now().getYear();
 
-  public Vehiculo(String id,String marca, String modelo, Estado estado, int year, double precio, int kilometraje,
-      String color) {
+  private static final int CURRENT_YEAR = LocalDate.now().getYear();
+
+  // Listas predefinidas de marcas y modelos
+  private static final List<String> MARCAS_VALIDAS = Arrays.asList("Toyota", "Ford", "Chevrolet", "Honda", "Nissan", "BMW", "Mercedes-Benz", "Hyundai", "Kia", "Volkswagen", "Subaru", "Mazda", "Audi", "Jeep", "Tesla");
+  private static final List<String> MODELOS_VALIDOS = Arrays.asList("Corolla", "Focus", "Cruze", "Civic", "Sentra", "Mustang", "Camry", "Elantra", "Tucson", "Golf", "Forester", "CX-5", "A4", "Wrangler", "Model 3", "Accord", "Altima", "Explorer", "X5", "Q5", "RAV4", "F-150", "Silverado", "Outback", "Cherokee", "Model Y", "Rio", "Sonata", "Passat");
+
+  public Vehiculo(String id, String marca, String modelo, Estado estado, int year, double precio, int kilometraje, String color) {
     this.id = id;
-    this.marca = marca;
-    this.modelo = modelo;
-    if (estado)
-    this.estado = estado;
 
-      if (year>1700 && year < currentYear){
-        this.year = year;
-      }
-      if (precio < 0) {
-        this.precio = precio;
-      }
-    this.kilometraje = kilometraje;
+    if (MARCAS_VALIDAS.contains(marca)) {
+      this.marca = marca;
+    } else {
+      throw new IllegalArgumentException("Marca inválida. Debe ser una de: " + MARCAS_VALIDAS);
+    }
 
-      if ()
-    this.color = color;
+    if (MODELOS_VALIDOS.contains(modelo)) {
+      this.modelo = modelo;
+    } else {
+      throw new IllegalArgumentException("Modelo inválido. Debe ser uno de: " + MODELOS_VALIDOS);
+    }
+
+    this.year = (year > 1700 && year <= CURRENT_YEAR) ? year : CURRENT_YEAR;
+
+    this.precio = (precio >= 0) ? precio : 0.0;
+
+    this.kilometraje = (kilometraje >= 0) ? kilometraje : 0;
+
+    if (this.kilometraje == 0){
+      this.estado = Estado.valueOf("NUEVO");
+    } else{
+      this.estado = estado;
+    }
+
+    try {
+      this.color = Color.valueOf(color.toUpperCase());
+    } catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException("Color inválido. Debe ser uno de: " + Arrays.toString(Color.values()));
+    }
   }
 
-  public String getMarca() {
-    return marca;
-  }
 
-  public void setMarca(String marca) {
-    this.marca = marca;
-  }
-
-  public String getModelo() {
-    return modelo;
-  }
-
-  public void setModelo(String modelo) {
-    this.modelo = modelo;
-  }
-
-  public int getYear() {
-    return year;
-  }
-
-  public void setYear(int year) {
-    this.year = year;
-  }
-
-  public double getPrecio() {
-    return precio;
-  }
-
-  public void setPrecio(double precio) {
-    this.precio = precio;
-  }
-
-  public int getKilometraje() {
-    return kilometraje;
-  }
-
-  public void setKilometraje(int kilometraje) {
-    this.kilometraje = kilometraje;
-  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getColor() {
-    return color;
-  }
-
-  public void setColor(String color) {
-    this.color = color;
-  }
-
-  public void agregarVehiculo(){
+  public void modificarVehiculo(){
     Scanner sc = new Scanner(System.in);
-    String marca = sc.nextLine();
-    String  modelo = sc.nextLine();
-    Estado estado = Estado.valueOf(sc.nextLine());
-    int year = Integer.parseInt(sc.nextLine());
-    double precio = Double.parseDouble(sc.nextLine());
-    int kilometraje = Integer.parseInt(sc.nextLine());
-    String id = sc.nextLine();
-    String color = sc.nextLine();
+    System.out.println("Seleccione el vehiculo a modificar: " + Vehiculo.mostrarStock());
+    opcion =  sc.nextLine();
 
-    Vehiculo nuevoVehiculo = new Vehiculo(id, marca, modelo, estado, year,  precio, kilometraje,  color);
-
-
-    //agregar print si esta correcto despues de comprobar datos
 
   }
 
-  public String modificarVehiculo(){
-
-  }
-
-  public void eliminarVehiculo(){
-
-  }
-
-  public Vehiculo buscarVehiculo(){
-
-  }
-
-  public String listarVehiculos(){
-
-  }
-
-  public List filtrarVehiculos(){
-
-  }
-
-  public Vehiculo mostrarVehiculo(){
-
+  public static String mostrarStock(){
+    StringBuilder toret = new StringBuilder("Lista de vehiculos:\n");
+    for (int i = 0; i < Vehiculo.inventario.size(); i++){
+      toret.append(i + stock.get(i).getMarca() + " " + stock.get(i).getmodelo() + " " + stock.get(i).getid()+ "\n");
+    }
+    return toret.toString();
   }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  @Override
+  public String toString() {
+    return "Vehiculo{" +
+        "id='" + id + '\'' +
+        ", marca='" + marca + '\'' +
+        ", modelo='" + modelo + '\'' +
+        ", year=" + year +
+        ", precio=" + String.format("%.2f", precio) +
+        ", kilometraje=" + kilometraje +
+        ", estado=" + estado +
+        ", color=" + color +
+        '}';
+  }
 }

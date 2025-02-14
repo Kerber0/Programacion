@@ -11,8 +11,7 @@ private double precioFinal;
 
 
   public Venta(String id, LocalDateTime fecha, Cliente cliente, Vehiculo vehiculo,
-      double precioFinal,
-      String metodoPago) {
+      double precioFinal) {
     this.id = id;
     this.fecha = fecha;
     this.cliente = cliente;
