@@ -1,3 +1,7 @@
+package ejercicio;
+
+import ejercicio.vehiculos.Vehiculo;
+
 import java.time.LocalDateTime;
 
 public class Venta {
