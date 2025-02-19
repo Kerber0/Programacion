@@ -2,7 +2,7 @@ import java.util.List;
 
 public class Album {
 
-  public static List<Album> albumes;
+  public  List<Album> albums;
   private String nombre;
   private String artista;
   private int year;
