@@ -81,7 +81,7 @@ public class Main {
     for (Contacto contacto : AgendaTelefonica.contactos) {
       if (contacto.getNombre().equalsIgnoreCase(nombreBuscado)) {
         System.out.println("Contacto encontrado: ");
-        System.out.println(contacto.toString()); // Y aquí encontrado = true
+        System.out.println(contacto); // Y aquí encontrado = true
         break;
       } else {
         System.out.println("No se encontró el contacto"); // y aquí meter un if con !encontrado

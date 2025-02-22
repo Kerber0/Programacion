@@ -23,7 +23,7 @@ public class Coleccion {
 
   public String mostrar() {
     StringBuilder resultado = new StringBuilder("Lista de álbumes:\n");
-    ArrayList<Album> aux = (ArrayList<Album>) albums;
+    ArrayList<Album> aux = albums;
     for (Album album : aux) resultado.append(album.toString()).append("\n");
     return resultado.toString();
     }
