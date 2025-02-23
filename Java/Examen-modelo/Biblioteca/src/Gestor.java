@@ -1,6 +1,5 @@
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 import java.util.List;
 import java.time.LocalDate;
@@ -19,14 +18,14 @@ public class Gestor {
         int opcion = -1;
         do {
             System.out.println("""
-                Seleccione la opción deseada:
-                [1] - Mostrar Libros.
-                [2] - Agregar nuevo libro.
-                [3] - Editar libro.
-                [4] - Eliminar libro.
-                [5] - Buscar libro.
-                [0] - Salir.
-                """);
+                    Seleccione la opción deseada:
+                    [1] - Mostrar Libros.
+                    [2] - Agregar nuevo libro.
+                    [3] - Editar libro.
+                    [4] - Eliminar libro.
+                    [5] - Buscar libro.
+                    [0] - Salir.
+                    """);
 
             try {
                 System.out.print("Opción: ");
@@ -43,8 +42,8 @@ public class Gestor {
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Error: Debe ingresar un número válido.");
-            }
 
+            }
         } while (opcion != 0);
     }
 
@@ -90,14 +89,17 @@ public class Gestor {
             System.out.println("No hay libros para mostrar");
             return;
         }
+        List<Libro> librosOrdenados = new ArrayList<>(biblioteca);
+        librosOrdenados.sort(Comparator.comparing(Libro::getTitulo, String.CASE_INSENSITIVE_ORDER));
+
         System.out.println("Lista de libros: ");
-        for (Libro libro : biblioteca){
+        for (Libro libro : librosOrdenados){
             System.out.println(libro);
-            return;
+
         }
     }
 
-    private void mostrarpos(){
+    private void mostrarPos(){
         StringBuilder toret = new StringBuilder("Lista de libros:\n");
         if(biblioteca.isEmpty()){
             System.out.println("La biblioteca esta vacía.");
@@ -120,7 +122,7 @@ public class Gestor {
     }
 
     private void editar() {
-        mostrarpos();
+        mostrarPos();
 
         if (biblioteca.isEmpty()) {
             System.out.println("No hay libros para editar.");
@@ -229,14 +231,15 @@ public class Gestor {
             return;
         }
 
-        mostrarpos();
+        mostrarPos();
 
         try {
             int pos = Integer.parseInt(input("Seleccione la posición del libro a eliminar: "));
 
             if (pos >= 0 && pos < biblioteca.size()) {
-                Libro eliminado = biblioteca.remove(pos);
-                System.out.println("El libro " + eliminado + " se ha eliminado correctamente.");
+                System.out.println("El libro " + biblioteca.get(pos).getTitulo() + " se ha eliminado correctamente.");
+                biblioteca.remove(pos);
+
             } else {
                 System.out.println("Error: Posición inválida.");
             }

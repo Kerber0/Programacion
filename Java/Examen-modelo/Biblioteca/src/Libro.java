@@ -46,9 +46,9 @@ public class Libro {
 
     @Override
     public String toString() {
-        return "Título='" + titulo + '\'' +
-                ", Autor='" + autor + '\'' +
-                ", Año publicación= " + year +
-                ", Número de páginas= " + numPag;
+        return "Título: " + titulo +
+                ", Autor: " + autor +
+                ", Año publicación: " + year +
+                ", Número de páginas: " + numPag;
     }
 }
