@@ -7,7 +7,11 @@ import static java.lang.Double.parseDouble;
 
 public class Gestor {
     private static final Scanner sc = new Scanner(System.in);
-    private final List<Producto> inventario = new ArrayList<>();
+    private final List<Producto> inventario;
+
+    public Gestor() {
+       inventario = new ArrayList<>();
+    }
 
     public void menuPrincipal(){
         System.out.println("Bienvenido al inventario de la tienda!");
@@ -39,7 +43,7 @@ public class Gestor {
                        buscar();
                        break;
                    case 0:
-                       salir();
+                       System.out.println("Adios.");
                        break;
                    default:
                        System.out.println("La opcion seleccionada es inválida, pruebe otra vez.");
@@ -48,10 +52,6 @@ public class Gestor {
                System.out.println("Error: Debe ingresar un número válido.");
            }
        } while (opcion != 0);
-    }
-
-    private void salir() {
-        System.out.println("Adios.");
     }
 
     private void mostrar(){
@@ -211,7 +211,7 @@ public class Gestor {
     }
 
     private void buscar(){
-        int opcion;
+        int opcion = -1;
         do{
             try {
                 System.out.println("""
@@ -247,7 +247,7 @@ public class Gestor {
             }catch (NumberFormatException e){
                 System.out.println("Error: debe introducir un número.");
             }
-        }while (true);
+        }while (opcion != 0);
     }
 
     private void buscarNombre(final String nombre) {
@@ -311,6 +311,8 @@ public class Gestor {
             System.out.println(encontrado);
         }
     }
+
+
 
     private static String input(String text) {
         System.out.println(text);
