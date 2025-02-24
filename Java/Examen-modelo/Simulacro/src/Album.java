@@ -1,15 +1,15 @@
-public class Libro {
+public class Album {
 
     private String titulo;
     private String autor;
     private int year;
-    private int numPag;
+    private int numSong;
 
-    public Libro(String titulo, String autor, int year, int numPag) {
+    public Album(String titulo, String autor, int year, int numSong) {
         this.titulo = titulo;
         this.autor = autor;
         this.year = year;
-        this.numPag = numPag;
+        this.numSong = numSong;
     }
 
     public String getTitulo() {
@@ -36,19 +36,19 @@ public class Libro {
         this.year = year;
     }
 
-    public int getNumPag() {
-        return numPag;
+    public int getNumSong() {
+        return numSong;
     }
 
-    public void setNumPag(int numPag) {
-        this.numPag = numPag;
+    public void setNumSong(int numSong) {
+        this.numSong = numSong;
     }
 
     @Override
     public String toString() {
-        return "Título: " + titulo +
+        return  "Título: " + titulo +
                 ", Autor: " + autor +
                 ", Año publicación: " + year +
-                ", Número de páginas: " + numPag;
+                ", Número canciones: " + numSong;
     }
 }
