@@ -20,8 +20,10 @@ public class Coche extends Vehiculo {
     @Override
     public String toString() {
         return "Coche{" +
-            "numeroPuertas=" + numeroPuertas +
-            ", motor=" + motor +
+            ", marca: " + getMarca() +
+            ", modelo: " + getModelo() +
+            ", numeroPuertas: " + numeroPuertas +
+            "y motor: " + motor +
             '}';
     }
 }
