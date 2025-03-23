@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/GestorVideojuegos/GestorVideojuegos.iml" filepath="$PROJECT_DIR$/GestorVideojuegos/GestorVideojuegos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Inmobiliaria/Inmobiliaria.iml" filepath="$PROJECT_DIR$/Inmobiliaria/Inmobiliaria.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Modelo examen 2 Java.iml" filepath="$PROJECT_DIR$/Modelo examen 2 Java.iml" />
+    </modules>
+  </component>
+</project>
