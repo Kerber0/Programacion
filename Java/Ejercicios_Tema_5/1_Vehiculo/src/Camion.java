@@ -24,4 +24,6 @@ public class Camion extends Vehiculo {
     public void setMotor(Motor motor) {
         this.motor = motor;
     }
+
+
 }
