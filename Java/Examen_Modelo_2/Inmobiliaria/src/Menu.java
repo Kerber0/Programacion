@@ -2,7 +2,7 @@ public interface Menu {
 
     public default void menuPrinpial() {
 
-        System.out.println("Bienvenido al Gestor de Inmuebles!");
+
         System.out.println(""" 
                             
                             [1] - Registrar un nuevo inmueble.
@@ -12,7 +12,10 @@ public interface Menu {
                             [5] - Buscar cliente.
                             [6] - Mostrar el historial de tracciones recientes.
                             [7] - Asignar un inmueble a un cliente en espera.
+                            [8] - Mostrar todos los Inmuebles.
+                            [9] - Mostrar Clientes.
                             [0] - Salir.
+                            
                             
                             """);
     }

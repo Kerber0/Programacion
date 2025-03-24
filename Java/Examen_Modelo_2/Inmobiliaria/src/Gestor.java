@@ -9,9 +9,30 @@ public class Gestor implements Menu, ValidarDatos {
     private HashMap<String, LinkedList<Inmueble>> clienteInmueble = new HashMap<>();
     static Scanner sc = new Scanner(System.in);
 
+    //***********CREACION INMBUEBLES Y CLIENTES PARA TRABAJAR
+    public LinkedList<Inmueble> inmuebles() {
+        while (inmuebles.size() < 9){
+            inmuebles.add(CreacionRandom.generarCasa());
+            inmuebles.add(CreacionRandom.generarDepartamento());
+            inmuebles.add(CreacionRandom.generarLocalComercial());
+        }
+        return inmuebles;
+    }
+
+    public ArrayList<Cliente> clientes () {
+        while (clientes.size() < 5) {
+            clientes.add(CreacionRandom.generarCliente());
+        }
+        return clientes;
+    }
 
     public void inicio() {
+
+        inmuebles();
+        clientes();
+
         Integer choice;
+        System.out.println("Bienvenido al Gestor de Inmuebles!");
         do {
             menuPrinpial();
             choice = inputInt("Seleccione la opción deseada: ");
@@ -27,16 +48,22 @@ public class Gestor implements Menu, ValidarDatos {
                     clientes.add(addCliente());
                     break;
                 case 4:
-                    buscar();
+                    inmueblesDisponible();
                     break;
                 case 5:
-                    buscarCliente();
+                    System.out.println(buscarCliente());
                     break;
                 case 6:
                     mostrarOperaciones();
                     break;
                 case 7:
                     asignarACliente();
+                    break;
+                case 8:
+                    mostrarInmuebles();
+                    break;
+                case 9:
+                    mostrarClientes();
                     break;
                 case 0:
                     despedida();
@@ -48,6 +75,27 @@ public class Gestor implements Menu, ValidarDatos {
             }
 
         }while (choice != 0) ;
+    }
+
+    private void mostrarClientes() {
+        if (clientes.isEmpty()) {
+            System.out.println("No hay clientes para mostrar.");
+        } else {
+            System.out.println("Lista de clientes: ");
+            for(Cliente cliente : clientes) {
+                System.out.println(cliente);
+            }
+        }
+    }
+
+    private void mostrarInmuebles() {
+        if (inmuebles.isEmpty()) {
+            System.out.println("No hay inmuebles para mostrar.");
+        } else {
+            for(Inmueble inmueble : inmuebles) {
+                System.out.println(inmueble);
+            }
+        }
     }
 
     private void asignarACliente() {
@@ -73,6 +121,7 @@ public class Gestor implements Menu, ValidarDatos {
                     System.out.println("Operación realizada con éxito");
                     break;
                 case 2:
+                    mostrarClientes();
                     listaEspera.add(buscarCliente());
                     System.out.println("Operación realizada con éxito");
                     break;
@@ -94,7 +143,7 @@ public class Gestor implements Menu, ValidarDatos {
                 Cliente cliente = buscarCliente();
                 Inmueble inmueble = buscarInmueble();
                 Operaciones.Tipo tipo = (choice == 1) ? Operaciones.Tipo.VENTA : Operaciones.Tipo.COMPRA;
-                    // si choice es 1 operacion es venta, si no operacion es compra
+                // si choice es 1 operacion es venta, si no operacion es compra
                 Operaciones operacion = new Operaciones(cliente, inmueble, tipo);
                 historial.add(operacion);
 
@@ -125,10 +174,10 @@ public class Gestor implements Menu, ValidarDatos {
 
 
     private Cliente addCliente() {
-        String nombre = input("Introduce el nombre del nuevo cliente: ");
-        String apellido1 = input("Introduce el primer apellido del cliente: ");
-        String apellido2 = input("Introduce el segundo apellido del cliente: ");
-        String dni = input("Introduce el DNI del cliente: ");
+        String nombre = datoCliente("nombre");
+        String apellido1 = datoCliente("primer apellido");
+        String apellido2 = datoCliente("segundo apellido");
+        String dni = Cliente.validarDNI(input("Ingrese el DNI del cliente: "));
 
         return new Cliente(nombre, apellido1, apellido2, dni);
 
@@ -139,10 +188,11 @@ public class Gestor implements Menu, ValidarDatos {
 
         do {
             tipoInmueble();
-            choice = inputInt("¿Qué tipo de inmueble desea agregar? (1: Casa, 2: Departamento, 3: Local Comercial, 0 para salir): ");
+            choice = inputInt("¿Qué tipo de inmueble desea agregar?: ");
 
             if (choice == 0) {
                 System.out.println("Registro de inmuebles finalizado.");
+                System.out.println("\n");
                 return;
             }
 
@@ -188,8 +238,9 @@ public class Gestor implements Menu, ValidarDatos {
     }
 
     private Cliente buscarCliente() {
-        Cliente cliente = null;
-        String dni;
+        ArrayList<Cliente> encontrados = new ArrayList<>();
+        Cliente clienteSeleccionado = null;
+        String nombre;
         boolean valido = false;
 
         if (clientes.isEmpty()) {
@@ -198,68 +249,150 @@ public class Gestor implements Menu, ValidarDatos {
         }
 
         do {
-            dni = input("Indique el DNI del cliente o 0 para volver: ");
+            nombre = input("Indique el nombre del cliente que esta buscando o 0 para volver: ");
 
-            if (dni.equals("0")) {
+            if (nombre.equals("0")) {
                 break;
             }
 
-            boolean encontrado = false;
-            for (Cliente cliente1 : clientes) {
-                if (dni.equalsIgnoreCase(cliente1.getDni())) {
-                    cliente = cliente1;
-                    encontrado = true;
-                    break;
+            for (Cliente cliente : clientes) {
+                if (nombre.equalsIgnoreCase(cliente.getNombre())) {
+                    encontrados.add(cliente);
                 }
             }
 
-            if (!encontrado) {
-                System.out.println("Cliente no encontrado. Intente de nuevo.");
+            if (!encontrados.isEmpty()) {
+                System.out.println("Clientes encontrados:");
+                for (int i = 0; i < encontrados.size(); i++) {
+                    System.out.println((i + 1) + ". " + encontrados.get(i).getNombre() + " " + encontrados.get(i).getApellidos() + " - DNI: " + encontrados.get(i).getDni());
+                }
+
+                String dniSeleccionado = input("Indique el DNI del cliente que desea seleccionar o 0 para volver: ");
+                if (dniSeleccionado.equals("0")) {
+                    break;
+                }
+
+                for (Cliente cliente : encontrados) {
+                    if (cliente.getDni().equalsIgnoreCase(dniSeleccionado)) {
+                        clienteSeleccionado = cliente;
+                        valido = true;
+                        break;
+                    }
+                }
+
+                if (clienteSeleccionado == null) {
+                    System.out.println("DNI no encontrado entre los clientes seleccionados. Intente de nuevo.");
+                }
             } else {
-                valido = true;
+                System.out.println("No se encontraron clientes con ese nombre. Intente de nuevo.");
+            }
+        } while (!valido);
+        return clienteSeleccionado;
+    }
+
+    private void inmueblesDisponible() {
+        if (inmuebles.isEmpty()) {
+            System.out.println("No hay inmuebles registrados.");
+            return;
+        }
+
+        ArrayList<Inmueble> inmueblesDisponibles = filtrarInmueblesPorTipoYDisponibilidad();
+
+        if (inmueblesDisponibles == null) {
+            System.out.println("Se ha cancelado la búsqueda.");
+            return;
+        }
+
+        if (inmueblesDisponibles.isEmpty()) {
+            System.out.println("No se encontraron inmuebles disponibles de ese tipo.");
+        } else {
+            System.out.println("Inmuebles disponibles:");
+            for (Inmueble inmueble : inmueblesDisponibles) {
+                System.out.println(inmueble);
+            }
+        }
+    }
+
+    private ArrayList<Inmueble> filtrarInmueblesPorTipoYDisponibilidad() {
+        ArrayList<Inmueble> inmueblesFiltrados = new ArrayList<>();
+        String tipoInmueble;
+
+        do {
+            tipoInmueble = input("Indique el tipo de inmueble que desea buscar (Casa, Departamento, Local Comercial) o 0 para volver: ").trim();
+
+            if (tipoInmueble.equals("0")) {
+                return inmueblesFiltrados; // Retorna una lista vacía para terminar la búsqueda
             }
 
-        } while (!valido);
+            if (!(tipoInmueble.equalsIgnoreCase("casa") ||
+                    tipoInmueble.equalsIgnoreCase("departamento") ||
+                    tipoInmueble.equalsIgnoreCase("local comercial"))) {
+                System.out.println("Tipo de inmueble no válido. Intente nuevamente.");
+            }
+        } while (!(tipoInmueble.equalsIgnoreCase("casa") ||
+                tipoInmueble.equalsIgnoreCase("departamento") ||
+                tipoInmueble.equalsIgnoreCase("local comercial")));
 
-        return cliente;
+        for (Inmueble inmueble : inmuebles) {
+            // Filtrar solo los inmuebles disponibles del tipo seleccionado
+            if (inmueble.getEstadoActual() == Inmueble.Estado.Disponible) {
+                if (tipoInmueble.equalsIgnoreCase("casa") && inmueble instanceof Casa) {
+                    inmueblesFiltrados.add(inmueble);
+                } else if (tipoInmueble.equalsIgnoreCase("departamento") && inmueble instanceof Departamento) {
+                    inmueblesFiltrados.add(inmueble);
+                } else if (tipoInmueble.equalsIgnoreCase("local comercial") && inmueble instanceof LocalComercial) {
+                    inmueblesFiltrados.add(inmueble);
+                }
+            }
+        }
+
+        return inmueblesFiltrados;
     }
+
+
 
     private Inmueble buscarInmueble() {
         Inmueble inmueble = null;
-        int id;
-        boolean valido = false;
 
         if (inmuebles.isEmpty()) {
             System.out.println("No hay inmuebles registrados.");
             return null;
         }
 
-        do {
-            id = inputInt("Ingrese el id del inmueble o 0 para volver.");
+        ArrayList<Inmueble> inmueblesFiltrados = filtrarInmueblesPorTipoYDisponibilidad();
 
-            if (id == 0) {
-                break;
+        if (inmueblesFiltrados == null) {
+            System.out.println("Se ha cancelado la búsqueda.");
+            return null;
+        }
+
+        if (inmueblesFiltrados.isEmpty()) {
+            System.out.println("No se encontraron inmuebles disponibles de ese tipo.");
+            return null;
+        }
+
+        System.out.println("Inmuebles disponibles del tipo seleccionado:");
+        for (Inmueble inm : inmueblesFiltrados) {
+            System.out.println(inm);
+        }
+
+        int id = inputInt("Indique el ID del inmueble que desea seleccionar o 0 para volver: ");
+        if (id == 0) {
+            return null;
+        }
+
+        for (Inmueble inm : inmueblesFiltrados) {
+            if (inm.getId() == id) {
+                return inm;
             }
+        }
 
-            boolean encontrado = false;
-            for (Inmueble inmueble1 : inmuebles) {
-                if (id == inmueble1.getId()) {
-                    inmueble = inmueble1;
-                    encontrado = true;
-                    break;
-                }
-            }
-
-            if (!encontrado) {
-                System.out.println("Inmueble no encontrado. Intente de nuevo.");
-            } else {
-                valido = true;
-            }
-
-        } while (!valido);
-
-        return inmueble;
+        System.out.println("Inmueble no encontrado con ese ID.");
+        return null;
     }
+
+
+
 
     private Operaciones.Tipo tipoOperacion() {
         Operaciones.Tipo tipo = null;
@@ -279,7 +412,7 @@ public class Gestor implements Menu, ValidarDatos {
         } while (!valido);
 
         return tipo;
-    }          // **********no lo utilizo de momento
+    }          // ********** no lo utilizo de momento
 
     private void busquedaDepartamento() {        // ********************** revisar/terminar
 
@@ -299,8 +432,8 @@ public class Gestor implements Menu, ValidarDatos {
             return;
         }
         boolean valido = false;
-         int opcion;
-         LinkedList<Inmueble> aux= new LinkedList<>(inmuebles);
+        int opcion;
+        LinkedList<Inmueble> aux= new LinkedList<>(inmuebles);
         do {
             opcion = inputInt("""
                     Buscar por:
@@ -315,33 +448,41 @@ public class Gestor implements Menu, ValidarDatos {
                 return;
             }
 
-        switch (opcion) {
-            case 1: // Ordenar por ubicación (alfabéticamente)
-                aux.sort(Comparator.comparing(Inmueble::getUbicacion));
-                System.out.println("Inmuebles por ubicación.");
-                break;
+            switch (opcion) {
+                case 1: // Ordenar por ubicación (alfabéticamente)
+                    aux.sort(Comparator.comparing(Inmueble::getUbicacion));
+                    System.out.println("Inmuebles por ubicación.");
+                    break;
 
-            case 2: // Ordenar por precio (de menor a mayor)
-                aux.sort(Comparator.comparingDouble(Inmueble::getPrecio));
-                System.out.println("Inmuebles por precio.");
-                break;
+                case 2: // Ordenar por precio (de menor a mayor)
+                    aux.sort(Comparator.comparingDouble(Inmueble::getPrecio));
+                    System.out.println("Inmuebles por precio.");
+                    break;
 
-            case 3: // Ordenar por superficie (de menor a mayor)
-                aux.sort(Comparator.comparingDouble(Inmueble::getSuperficie));
-                System.out.println("Inmuebles por superficie.");
-                break;
+                case 3: // Ordenar por superficie (de menor a mayor)
+                    aux.sort(Comparator.comparingDouble(Inmueble::getSuperficie));
+                    System.out.println("Inmuebles por superficie.");
+                    break;
 
-            case 0:
-                return;
+                case 0:
+                    return;
 
-            default:
-                System.out.println("Opción inválida. Vuelva a intentar.");
+                default:
+                    System.out.println("Opción inválida. Vuelva a intentar.");
 
-        }
+            }
 
             System.out.println(aux);
-    } while (!valido);
+        } while (!valido);
+
+
+
+
     }   // ********************** revisar/terminar
+
+
+
+//***************inputs
 
     private static String input(String text) {
         System.out.println(text);
@@ -403,7 +544,5 @@ public class Gestor implements Menu, ValidarDatos {
         } while (!valido);
         return num;
     }
-
-
 
 }

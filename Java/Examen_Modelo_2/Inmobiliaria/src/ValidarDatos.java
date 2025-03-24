@@ -5,7 +5,7 @@ public interface ValidarDatos {
 
     Scanner sc = new Scanner(System.in);
 
-// verificación datos inmueble
+//***************verificación datos inmueble
 
     default int idInmueble(int id, LinkedList<Inmueble> inmuebles) {
         boolean valido = false;
@@ -95,7 +95,7 @@ public interface ValidarDatos {
         return superficie;
     }
 
-//verificación datos casa
+//***************verificación datos casa
 
     default int habitacionCasa(int num) {
         boolean valido = false;
@@ -133,7 +133,7 @@ public interface ValidarDatos {
         return size;
     }
 
-//verificación datos departamento
+//***************verificación datos departamento
 
     default int pisoDepartamento(int piso) {
         boolean valido = false;
@@ -193,7 +193,7 @@ public interface ValidarDatos {
 
 
 
-//verificación datos local comercial
+//***************verificación datos local comercial
 
     default String zonaLocal (String zona) {
         boolean valido = false;
@@ -215,7 +215,24 @@ public interface ValidarDatos {
         return zona;
     }
 
+//***************verificación datos cliente
 
+    default String datoCliente (String dato) {
+        while (true) {
+
+            String nombre = input("Ingrese el " + dato + " del cliente: ");
+
+            if (nombre.matches("^[a-zA-Z]+$")) {
+                return nombre; // Devuelve el nombre válido
+            } else {
+                System.out.println(dato + " inválido. Solo se permiten letras sin espacios, números ni caracteres especiales.");
+            }
+        }
+    }
+
+
+
+//***************inputs
 
     private static String input(String text) {
         System.out.println(text);
@@ -252,6 +269,6 @@ public interface ValidarDatos {
         return num;
     }
 
+
+
 }
-
-
