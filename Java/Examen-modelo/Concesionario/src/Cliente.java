@@ -66,8 +66,8 @@ public class Cliente {
     this.historialCompra = historialCompra;
   }
 
-public Cliente(cliente){
-    cliente = new Cliente();
+public Cliente nuevocliente(){
+
 }
 
 

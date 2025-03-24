@@ -1,5 +1,5 @@
-import java.awt.List;
-import java.security.PublicKey;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Vehiculo {
 
@@ -8,17 +8,23 @@ public class Vehiculo {
   private int year;
   private double precio;
   private int kilometraje;
-  private enum estado{nuevo,usado};
+  private Estado estado;
   private String id;
   private String color;
+  private static List<Vehiculo> listaVehiculos = new ArrayList<>();
 
-  public Vehiculo(String marca, String modelo, int year, double precio, int kilometraje, String id,
-      String color) {
+  public enum Estado {
+    NUEVO, USADO
+  }
+
+  public Vehiculo(String marca, String modelo, int year, double precio, int kilometraje, Estado estado, String id,
+                  String color) {
     this.marca = marca;
     this.modelo = modelo;
     this.year = year;
     this.precio = precio;
     this.kilometraje = kilometraje;
+    this.estado = estado;
     this.id = id;
     this.color = color;
   }
@@ -79,34 +85,28 @@ public class Vehiculo {
     this.color = color;
   }
 
-  public String agregarVehiculo(){
+  public static String agregarVehiculo(String marca, String modelo, int year, double precio, int kilometraje, Estado estado, String id, String color) {
+    for (Vehiculo v : listaVehiculos) {
+      if (v.getId().equals(id)) {
+        return "Error: Ya existe un vehículo con el ID " + id;
+      }
+    }
 
+    if (year < 1886 || year > 2025) {
+      return "Error: El año ingresado no es válido.";
+    }
+    if (precio <= 0) {
+      return "Error: El precio debe ser mayor a 0.";
+    }
+    if (kilometraje < 0) {
+      return "Error: El kilometraje no puede ser negativo.";
+    }
 
+    Vehiculo nuevoVehiculo = new Vehiculo(marca, modelo, year, precio, kilometraje, estado, id, color);
+    listaVehiculos.add(nuevoVehiculo);
+    return "Vehículo agregado con éxito: " + marca + " " + modelo;
   }
 
-  public String modificarVehiculo(){
-
-  }
-
-  public void eliminarVehiculo(){
-
-  }
-
-  public Vehiculo buscarVehiculo(){
-
-  }
-
-  public String listarVehiculos(){
-
-  }
-
-  public List filtrarVehiculos(){
-
-  }
-
-  public Vehiculo mostrarVehiculo(){
-
-  }
-
+public List<> mostrarVehiculos
 
 }
