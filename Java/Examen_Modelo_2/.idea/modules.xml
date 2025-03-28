@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/GestorFutball/GestorFutball.iml" filepath="$PROJECT_DIR$/GestorFutball/GestorFutball.iml" />
       <module fileurl="file://$PROJECT_DIR$/GestorInstituto/GestorInstituto.iml" filepath="$PROJECT_DIR$/GestorInstituto/GestorInstituto.iml" />
       <module fileurl="file://$PROJECT_DIR$/GestorVideojuegos/GestorVideojuegos.iml" filepath="$PROJECT_DIR$/GestorVideojuegos/GestorVideojuegos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Simulacro/Simulacro.iml" filepath="$PROJECT_DIR$/Simulacro/Simulacro.iml" />
     </modules>
   </component>
 </project>

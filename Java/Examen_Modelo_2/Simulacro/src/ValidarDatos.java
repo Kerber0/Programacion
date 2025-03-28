@@ -2,7 +2,6 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public interface ValidarDatos {
-
     Scanner sc = new Scanner(System.in);
 
 //***************verificación datos inmueble
@@ -37,18 +36,18 @@ public interface ValidarDatos {
         return id;
     }
 
-    default String ubicacionInmueble (String ubicacion) {
+    default String direccionInmueble (String ubicacion) {
         boolean valido = false;
         do {
             try {
                 if (ubicacion == null || ubicacion.trim().isEmpty()) {
-                    ubicacion = input("La ubicación no puede estar vacía. Intenta nuevamente.");
+                    ubicacion = input("La calle no puede estar vacía. Intenta nuevamente.");
                 } else {
                     valido = true;                 }
             } catch (NullPointerException e) {
                 System.out.println("Hubo un error con la entrada. Por favor, intente nuevamente.");
             } catch (IllegalArgumentException e) {
-                System.out.println("La ubicación es incorrecta, inténtelo de nuevo.");
+                System.out.println("La calle es incorrecta, inténtelo de nuevo.");
             } catch (Exception e) {
                 System.out.println("Ocurrió un error inesperado: " + e.getMessage());
             }
@@ -57,26 +56,26 @@ public interface ValidarDatos {
         return ubicacion;
     }
 
-    default double precioInmueble (double precio) {
+    default int numeroInmueble (int superficie) {
         boolean valido = false;
 
         do {
             try {
-                if (precio <= 0) {
-                    throw new IllegalArgumentException("El precio debe ser mayor que 0.");
+                if (superficie <= 0) {
+                    throw new IllegalArgumentException("El número debe ser mayor que 0.");
                 } else {
                     valido = true;
                 }
             } catch (IllegalArgumentException e) {
                 System.out.println("Error: " + e.getMessage());
-                precio = inputDouble("Ingrese un precio válido para el inmueble: ");
+                superficie = inputInt("Ingrese un número válid para el inmueble: ");
             }
         } while (!valido);
 
-        return precio;
+        return superficie;
     }
 
-    default double superficieInmueble (double superficie) {
+    default int superficieInmueble(int superficie) {
         boolean valido = false;
 
         do {
@@ -88,7 +87,7 @@ public interface ValidarDatos {
                 }
             } catch (IllegalArgumentException e) {
                 System.out.println("Error: " + e.getMessage());
-                superficie = inputDouble("Ingrese una superficie válida para el inmueble: ");
+                superficie = inputInt("Ingrese una superficie válida para el inmueble: ");
             }
         } while (!valido);
 
@@ -97,50 +96,34 @@ public interface ValidarDatos {
 
 //***************verificación datos casa
 
-    default int habitacionCasa(int num) {
+    default int pisosCasa(int num) {
         boolean valido = false;
         do {
             try {
                 if (num <= 0) {
-                    System.out.println("La casa debe tener un número de habitaciones mayor que 0.");
-                    num = inputInt("Ingrese un número de habitaciones válido");
+                    System.out.println("La casa debe tener un número de pisos igual o  mayor que 0.");
+                    num = inputInt("Ingrese un número de pisos válido");
                 } else {
                     valido = true;
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Error: Se debe ingresar un número válido.");
-                num = inputInt("Ingrese un número de habitaciones válido");
+                num = inputInt("Ingrese un número de número válido");
             }
         } while (!valido);
         return num;
     }
 
-    default double jardinCasa(double size) {
-        boolean valido = false;
-        do {
-            try {
-                if (size < 0) {
-                    System.out.println("El jardín debe tener un tamaño mayor o igual a 0.");
-                    size = inputDouble("Ingrese un tamaño válido para el jardín");
-                } else {
-                    valido = true;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Error: Se debe ingresar un número válido.");
-                size = inputDouble("Ingrese un tamaño válido para el jardín");
-            }
-        } while (!valido);
-        return size;
-    }
-
 //***************verificación datos departamento
 
-    default int pisoDepartamento(int piso) {
+    default int pisoDepartamento() {
         boolean valido = false;
+        int piso = inputInt("Ingrese el piso del apartamento: ");
         do {
+
             try {
                 if (piso <=  0) {
-                    System.out.println("El número de pisos del departamento debe ser positivo.");
+                    System.out.println("El número de pisos del apartamento debe ser positivo.");
                     piso = inputInt("Ingrese un número de piso válido");
                 } else {
                     valido = true;
@@ -153,14 +136,18 @@ public interface ValidarDatos {
         return piso;
     }
 
-    default String letraDepartamento (String letra) {
+    default String letraDepartamento () {
         boolean valido = false;
+        String letra = input("ingrese la letra del departamento: ");
         do {
             try {
                 if (letra == null || letra.trim().isEmpty()) {
                     letra = input("La letra del departamento no puede estar vacía. Intenta nuevamente.");
+                } else if (letra.length() > 2) {
+                    letra =input("Solo se puede ingresar una letra. Intente nuevamente.");
                 } else {
-                    valido = true;                 }
+                    valido = true;
+                }
             } catch (NullPointerException e) {
                 System.out.println("Hubo un error con la entrada. Por favor, intente nuevamente.");
             } catch (IllegalArgumentException e) {
@@ -172,64 +159,6 @@ public interface ValidarDatos {
 
         return letra;
     }
-
-    default double expensasDepartamento (double expensas) {
-        boolean valido = false;
-        do {
-            try {
-                if (expensas < 0) {
-                    System.out.println("Las expensas deben tener un valor mayor que 0.");
-                    expensas = inputDouble("Ingrese un importe válido para las expensas");
-                } else {
-                    valido = true;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Error: Se debe ingresar un importe válido.");
-                expensas = inputDouble("Ingrese un importe válido para las expensas.");
-            }
-        } while (!valido);
-        return expensas;
-    }
-
-
-
-//***************verificación datos local comercial
-
-    default String zonaLocal (String zona) {
-        boolean valido = false;
-        do {
-            try {
-                if (zona == null || zona.trim().isEmpty()) {
-                    zona = input("La zona del local no puede estar vacía. Intenta nuevamente.");
-                } else {
-                    valido = true;                 }
-            } catch (NullPointerException e) {
-                System.out.println("Hubo un error con la entrada. Por favor, intente nuevamente.");
-            } catch (IllegalArgumentException e) {
-                System.out.println("La zona es incorrecta, inténtelo de nuevo.");
-            } catch (Exception e) {
-                System.out.println("Ocurrió un error inesperado: " + e.getMessage());
-            }
-        } while (!valido);
-
-        return zona;
-    }
-
-//***************verificación datos cliente
-
-    default String datoCliente (String dato) {
-        while (true) {
-
-            String nombre = input("Ingrese el " + dato + " del cliente: ");
-
-            if (nombre.matches("^[a-zA-Z]+$")) {
-                return nombre; // Devuelve el nombre válido
-            } else {
-                System.out.println(dato + " inválido. Solo se permiten letras sin espacios, números ni caracteres especiales.");
-            }
-        }
-    }
-
 
 
 //***************inputs
@@ -268,5 +197,6 @@ public interface ValidarDatos {
         } while (!valido);
         return num;
     }
+
 
 }

@@ -5,7 +5,7 @@ public class Inmueble extends LinkedList<Inmueble> {
     private String ubicacion;
     private double precio;
     private double superficie;
-    private Estado estadoActual;
+    public Estado estadoActual;
 
     public enum Estado {
         Disponible, Vendido, Alquilado

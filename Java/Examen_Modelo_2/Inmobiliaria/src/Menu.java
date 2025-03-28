@@ -1,6 +1,6 @@
 public interface Menu {
 
-    public default void menuPrinpial() {
+    default void menuPrinpial() {
 
 
         System.out.println(""" 
