@@ -9,7 +9,7 @@ public class Gestor implements Generador {
     static String[] CURSOS = {
             "1 ESO", "2 ESO", "3 ESO", "4 ESO", "1 Bachillerato", "2 Bachillerato"
     };
-    Scanner sc = new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
 
     public ArrayList<Profesor> profesores() {
         while (profesores.size() < 5) {
@@ -305,12 +305,22 @@ public class Gestor implements Generador {
 
 
     //INPUTS
-    private  String input(String text) {
-        System.out.println(text);
-        return sc.nextLine();
+    public static String input(String text) {
+       boolean textcorrect = false;
+       String resultado;
+        do {
+            System.out.println(text);
+            resultado = sc.nextLine();
+           if (text.isEmpty()){
+               System.out.println("Se debe ingresar algo: ");
+           } else {
+               textcorrect = true;
+           }
+       }while (!textcorrect);
+        return resultado;
     }
 
-    private  Integer inputInt(String text) {
+    public  Integer inputInt(String text) {
         int num = -1;
         boolean valido = false;
 
@@ -326,7 +336,7 @@ public class Gestor implements Generador {
         return num;
     }
 
-    private boolean inputBoolean(String mensaje) {
+    public boolean inputBoolean(String mensaje) {
         try {
 
             if (mensaje == null || mensaje.trim().isEmpty()) {
@@ -351,7 +361,7 @@ public class Gestor implements Generador {
     }
 
 
-    private  Double inputDouble(String text) {
+    public  Double inputDouble(String text) {
         double num = 0.0;
         boolean valido = false;
         do {
@@ -367,12 +377,11 @@ public class Gestor implements Generador {
     }
 
     public static LocalDate inputLocalDate() {
-        Scanner scanner = new Scanner(System.in);
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         while (true) {
-            System.out.println("Introduce una fecha de nacimiento en formato dd/MM/yyyy: ");
-            String input = scanner.nextLine();
+            String input = input("Introduce una fecha de nacimiento en formato dd/MM/yyyy: ");
 
             try {
                 return LocalDate.parse(input, formatter);
