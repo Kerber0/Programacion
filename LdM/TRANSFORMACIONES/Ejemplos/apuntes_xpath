@@ -1,0 +1,285 @@
+Estructura del XML Base
+Recordemos que el XML base es similar a:
+
+xml
+Copy
+<equipos>
+  <máquina nome="PC017">
+    <hardware>
+      <tipo>PC Sobremesa</tipo>
+      <fabricante>Dell</fabricante>
+      <procesador marca="Intel" num_nucleos="4" velocidade="3,1">i7</procesador>
+      <memoria tecnoloxía="DDR3">8</memoria>
+      <disco tecnoloxía="SATA" capacidade="2000" />
+      <gravadora tipo="DVD" />
+    </hardware>
+    <config>
+      <OS>Windows 7</OS>
+      <IP>192.168.20.105</IP>
+      <gateway>192.168.20.1</gateway>
+    </config>
+  </máquina>
+  <!-- ... más máquinas ... -->
+</equipos>
+XPath en la Transformación
+En el XSLT para este ejercicio se emplean diversas expresiones XPath en función del contexto actual:
+
+Desde la raíz del documento:
+
+/ o /equipos
+
+Uso: La plantilla principal tiene match="/".
+
+Función: Inicia la transformación en la raíz del documento.
+
+Ejemplo en código:
+
+xml
+Copy
+<xsl:template match="/">
+  <html>
+    <!-- ... -->
+    <xsl:apply-templates select="equipos/máquina" />
+  </html>
+</xsl:template>
+equipos/máquina
+
+Uso: Selecciona todos los nodos <máquina> que son hijos directos de <equipos>.
+
+Función: Permite iterar sobre cada máquina para transformarla individualmente.
+
+Dentro de cada <máquina> (contexto actual: nodo <máquina>):
+
+@nome
+
+Uso: Dentro de la plantilla que procesa <máquina>, se utiliza para obtener el atributo nome.
+
+Función: Muestra el nombre de la máquina.
+
+Ejemplo:
+
+xml
+Copy
+<xsl:value-of select="@nome" />
+config/IP
+
+Uso: Dentro de una plantilla, en el atributo href del enlace:
+
+xml
+Copy
+<a href="http://{config/IP}">
+Función: Accede al elemento <IP> que se encuentra dentro del nodo <config> del mismo <máquina>.
+
+Nota: Al estar en un atributo de plantilla, se utiliza la sintaxis de Attribute Value Template para insertar el valor directamente.
+
+hardware/procesador/@marca
+
+Uso: Para obtener el atributo marca del elemento <procesador> que está dentro de <hardware>.
+
+Función: Permite mostrar la marca del procesador.
+
+Ejemplo:
+
+xml
+Copy
+<xsl:value-of select="hardware/procesador/@marca" />
+hardware/procesador/text()
+
+Uso: Para obtener el contenido textual del elemento <procesador>.
+
+Función: Muestra el modelo o nombre del procesador (por ejemplo, “i7” o “Xeon”).
+
+Ejemplo:
+
+xml
+Copy
+<xsl:value-of select="hardware/procesador/text()" />
+hardware/memoria
+
+Uso: Accede al elemento <memoria> dentro de <hardware>.
+
+Función: Extrae el valor numérico (por ejemplo, “8”) que indica la cantidad de memoria.
+
+Ejemplo:
+
+xml
+Copy
+<xsl:value-of select="hardware/memoria" />
+hardware/memoria/@tecnoloxía
+
+Uso: Extrae el atributo tecnoloxía del elemento <memoria>.
+
+Función: Indica la tecnología de la memoria (por ejemplo, “DDR3”).
+
+Ejemplo:
+
+xml
+Copy
+<xsl:value-of select="hardware/memoria/@tecnoloxía" />
+descendant::disco
+
+Uso: Dentro de la celda para los discos, se utiliza para seleccionar todos los nodos <disco> que sean descendientes del nodo actual (es decir, que se encuentren en cualquier nivel dentro de <máquina>).
+
+Función: Permite procesar cada disco, aunque en este XML suelen estar directamente en <hardware>, el uso de descendant:: (o alternativamente .//disco) garantiza flexibilidad en caso de estructuras más profundas.
+
+Ejemplo:
+
+xml
+Copy
+<xsl:apply-templates select="descendant::disco" />
+Dentro de cada <disco> (contexto actual: nodo <disco>):
+
+@capacidade
+
+Uso: Obtiene el atributo capacidade del disco.
+
+Función: Indica la capacidad de almacenamiento (por ejemplo, “2000”).
+
+Ejemplo:
+
+xml
+Copy
+<xsl:value-of select="@capacidade" />
+@tecnoloxía
+
+Uso: Accede al atributo tecnoloxía del disco.
+
+Función: Muestra la tecnología del disco (por ejemplo, “SATA”).
+
+Ejemplo:
+
+xml
+Copy
+<xsl:value-of select="@tecnoloxía" />
+Razonamiento General
+Contexto y Rutas Relativas:
+Cada vez que se usa una expresión XPath, se toma como punto de partida el nodo actual (por ejemplo, el nodo <máquina> o <disco>). Esto hace que las rutas sean relativas y modulares.
+
+Selección Directa vs. Descendente:
+Se usa hardware/procesador para acceder a elementos que son hijos directos y descendant::disco para garantizar que se capturen todos los discos, sin importar la profundidad.
+
+Uso en Atributos de Plantilla:
+La sintaxis {config/IP} dentro de un atributo (por ejemplo, en href) permite insertar dinámicamente el valor del nodo <IP>.
+
+Ejercicio XML 4
+Objetivo: Generar un nuevo XML “resumido” de las máquinas, en el que cada <máquina> se represente mediante un elemento que utilice un conjunto de atributos (definido con xsl:attribute-set) para agrupar información del hardware.
+
+Estructura del XML Base
+Se usa el mismo XML base que en el ejercicio anterior.
+
+XPath en la Transformación con Attribute-Set
+Definición del xsl:attribute-set llamado atr_máquina:
+Este conjunto se aplica a cada <máquina> para incluir varios atributos con información del hardware.
+
+hardware/tipo
+
+Uso:
+
+xml
+Copy
+<xsl:value-of select="hardware/tipo"/>
+Función: Accede al nodo <tipo> dentro de <hardware> para obtener, por ejemplo, “PC Sobremesa” o “Torre”.
+
+Nota: La ruta es relativa al nodo <máquina>.
+
+hardware/fabricante
+
+Uso:
+
+xml
+Copy
+<xsl:value-of select="hardware/fabricante"/>
+Función: Extrae el fabricante, como “Dell” o “Fujitsu-Siemens”.
+
+concat(hardware/procesador/@marca, ' ', hardware/procesador/@num_nucleos, ' núcleos a ', hardware/procesador/@velocidade, ' GHz')
+
+Uso:
+
+xml
+Copy
+<xsl:value-of select="concat(hardware/procesador/@marca, ' ', hardware/procesador/@num_nucleos, ' núcleos a ', hardware/procesador/@velocidade, ' GHz')" />
+Función: Concatena varios valores del procesador: la marca, el número de núcleos y la velocidad para crear un resumen descriptivo del procesador.
+
+Detalles:
+
+hardware/procesador/@marca: Accede al atributo marca.
+
+hardware/procesador/@num_nucleos: Número de núcleos.
+
+hardware/procesador/@velocidade: Velocidad del procesador.
+
+concat(count(hardware/disco), ' con ', sum(hardware/disco/@capacidade), 'GB')
+
+Uso:
+
+xml
+Copy
+<xsl:value-of select="concat(count(hardware/disco), ' con ', sum(hardware/disco/@capacidade), 'GB')"/>
+Función:
+
+count(hardware/disco): Cuenta el número de elementos <disco> que hay dentro de <hardware>.
+
+sum(hardware/disco/@capacidade): Suma las capacidades (tomadas de los atributos capacidade) de todos los discos.
+
+Concatena ambos resultados para dar un resumen, por ejemplo, “3 con 600GB”.
+
+Plantilla para el nodo raíz <equipos>:
+
+match="equipos"
+
+Uso:
+
+xml
+Copy
+<xsl:template match="equipos">
+  <xsl:element name="máquinas">
+    <xsl:apply-templates select="máquina"/>
+  </xsl:element>
+</xsl:template>
+Función: Inicia la transformación generando un nuevo elemento <máquinas> que contendrá los elementos transformados de cada <máquina>.
+
+Plantilla para cada <máquina> (contexto actual: nodo <máquina>):
+
+Uso de use-attribute-sets="atr_máquina"
+
+Código:
+
+xml
+Copy
+<xsl:template match="máquina">
+  <xsl:element name="máquina" use-attribute-sets="atr_máquina" />
+</xsl:template>
+Función:
+Crea un nuevo elemento <máquina> en la salida y aplica todos los atributos definidos en el attribute-set atr_máquina.
+Cada uno de los XPath definidos en el conjunto se evaluará en el contexto del nodo <máquina> actual.
+
+Razonamiento General
+Centralización de Atributos:
+Al definir un xsl:attribute-set, se centraliza la forma de generar los atributos de cada máquina. Esto evita repetir código y asegura la uniformidad de la salida.
+
+Rutas Relativas:
+Todas las expresiones XPath en el attribute-set son relativas al nodo <máquina>, lo que significa que se pueden escribir de forma sencilla sin tener que usar rutas absolutas.
+
+Uso de Funciones:
+Se usan funciones XPath como concat(), count() y sum() para manipular y resumir la información de forma dinámica, ofreciendo una salida compacta y descriptiva.
+
+Resumen Final
+Ejercicio XML 3:
+Se utiliza una combinación de rutas absolutas (desde la raíz) y rutas relativas (dentro de <máquina>) para acceder a:
+
+Atributos (como @nome, @marca, @tecnoloxía).
+
+Elementos hijos (como hardware/procesador, hardware/memoria y config/IP).
+
+Todos los discos mediante descendant::disco (o su forma abreviada .//disco).
+
+Ejercicio XML 4:
+Se centra en generar un XML de salida resumido, aprovechando un conjunto de atributos definidos con xsl:attribute-set. Las expresiones XPath aquí permiten:
+
+Acceder directamente a elementos hijos (como hardware/tipo y hardware/fabricante).
+
+Extraer y concatenar atributos del procesador.
+
+Realizar cálculos con count() y sum() sobre los nodos <disco>.
+
+Cada uno de estos enfoques demuestra cómo se pueden utilizar las rutas XPath para navegar y transformar el XML de manera flexible, aprovechando tanto rutas absolutas como relativas según el contexto y las necesidades de la transformación.

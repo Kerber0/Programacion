@@ -71,6 +71,7 @@ public class Cli implements Menus, ValidarDatos {
             if (choice == 0) {
                 System.out.println("Registro de inmuebles finalizado.");
                 System.out.println("\n");
+                sc.close();
                 return;
             }
 
@@ -85,7 +86,7 @@ public class Cli implements Menus, ValidarDatos {
             String calle = direccionInmueble("Ingrese la calle del inmueble: ");
             int numero = numeroInmueble(inputInt("Ingrese el número del inmueble: "));
             Inmueble.Estado estado = Inmueble.Estado.DISPONIBLE;
-            double precio = -100;
+            Double precio = null;
             int id = inputInt("Ingrese el ID del nuevo inmueble: ");
             idInmueble(id, inmuebles);
 
@@ -115,17 +116,17 @@ public class Cli implements Menus, ValidarDatos {
         } while (choice != 0);
     }
 
-//    private void aVenta() {
-//        System.out.println("Estos son los inmuebles disponibles: ");
-//        inmueblesDisponible();
-//        int id = inputInt("Seleccione el Id del inmueble que quiere pasar a ´En Venta´: ");
-//        for (Inmueble inmueble : inmuebles) {
-//            if(id == inmueble.getId()) {
-//                inmueble.setEstado(Estado.EN_VENTA);
-//                inmueble.setPrecio();
-//            }
-//        }
-//    }
+    private void aVenta() {
+        System.out.println("Estos son los inmuebles disponibles: ");
+        inmueblesDisponible();
+        int id = inputInt("Seleccione el Id del inmueble que quiere pasar a ´En Venta´: ");
+        for (Inmueble inmueble : inmuebles) {
+            if(id == inmueble.getId()) {
+                inmueble.setEstado(Inmueble.Estado.EN_VENTA);
+                inmueble.setPrecio(inmueble.precioVenta());
+            }
+        }
+    }
 // ver la llamada para fijar el precio del inmueble
 
     private void aAlquiler() {
@@ -135,7 +136,7 @@ public class Cli implements Menus, ValidarDatos {
         for (Inmueble inmueble : inmuebles) {
             if(id == inmueble.getId()) {
                 inmueble.setEstado(Inmueble.Estado.EN_ALQUILER);
-                inmueble.setPrecio(precioAlquiler(inmueble));
+                inmueble.setPrecio(inmueble.precioAlquiler());
             }
         }
     }
@@ -200,12 +201,7 @@ public class Cli implements Menus, ValidarDatos {
         return inmueblesFiltrados;
     }
 
-    public double precioAlquiler(Inmueble inmueble) {
-        double precio = inmueble.getSuperficie() * 70;
-        if(inmueble.isGaraje()){
-            return precio + 60;
-        }else return precio;
-    }
+
 
     private static String input (String text){
         System.out.println(text);

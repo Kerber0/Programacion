@@ -92,7 +92,14 @@ public abstract class  Inmueble {
         this.id = id;
     }
 
+    public  abstract double precioVenta();
 
+    public  double precioAlquiler() {
+        double precio = getSuperficie() * 70;
+        if(isGaraje()){
+            return precio + 60;
+        }else return precio;
+    }
 
     @Override
     public String toString() {

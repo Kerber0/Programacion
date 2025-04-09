@@ -24,8 +24,8 @@ public class Departamento extends Inmueble {
     public void setLetra(String letra) {
         this.letra = letra;
     }
-    public double precioVenta(Inmueble inmueble) {
-        double precio = inmueble.getSuperficie() * 1000 + getPiso() * 15000;
+    public double precioVenta() {
+        double precio = getSuperficie() * 1000 + getPiso() * 15000;
         if (isGaraje()) {
             return precio + 35000;
         }

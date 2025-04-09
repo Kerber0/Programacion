@@ -7,7 +7,7 @@ public class Casa extends Inmueble{
         double precio, int superficie, int numPisos, boolean piscina) {
         super(id, numHabitaciones, garaje, calle, numero, estado, precio, superficie);
         this.numPisos = numPisos;
-        this.piscina = this.piscina;
+        this.piscina = piscina;
     }
 
     public int getNumPisos() {
@@ -26,8 +26,8 @@ public class Casa extends Inmueble{
         this.piscina = picina;
     }
 
-    public double precioVenta(Inmueble inmueble) {
-        double precio = inmueble.getSuperficie() * 1000 + getNumPisos() * 20000;
+    public double precioVenta() {
+        double precio = getSuperficie() * 1000 + getNumPisos() * 20000;
         if(isPicina()) {
             precio += 50000;
         } else if (isGaraje()) {

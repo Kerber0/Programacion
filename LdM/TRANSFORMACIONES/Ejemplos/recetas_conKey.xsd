@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="recetas">
+    <xs:complexType>
+    <xs:sequence>
+    <xs:element name="receta">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nombreR" type="xs:string"/>
+                <xs:element name="comensales" type="xs:integer"/>
+                <xs:element name="ingredientes">
+                    <xs:complexType>
+                    <xs:element name="ingrediente" maxOccurs="unbounded">
+                    <xs:sequence>
+                    <xs:element name="cantidad" type="xs:integer"/>
+                    <xs:attribute name="medida" type="xs:string"/>
+                    </xs:sequence>
+                      <xs:key name="pertenece">
+                      <xs:selector xpath=".//producto" />
+                      <xs:field xpath="@idProducto" />
+                      </xs:key>
+                      <xs:keyref name="relacionado" refer="pertenece">
+                      <xs:selector xpath=".//ingrediente" />
+                      <xs:field xpath="@codigo" />
+                      </xs:keyref>
+                </xs:element>
+                <xs:element name="proceso">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="paso" type="xs:string" maxOccurs="unbounded">
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+              </xs:complexType>
+            </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="productos">
+        <xs:complexType>
+        <xs:sequence>
+        <xs:element name="producto" type="xs:string" maxOccurs="unbounded">
+        <xs:sequence>
+        <xs:attribute name="idProducto" type="xs:unsignedByte"/>
+        <xs:attribute name="codProveedor" type="codigoTipo"/>
+        </xs:sequence>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+      <xs:simpleType name="codigoTipo">
+      <xs:restriction base="xs:string">
+            <xs:pattern value="[PE]\d{3}"/>
+      </xs:restriction>
+      </xs:simpleType>
+      </xs:element>
+      </xs:sequence>
+      </xs:complexType>
+      </xs:element>
+</xs:schema>

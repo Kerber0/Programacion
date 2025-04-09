@@ -1,0 +1,145 @@
+### Apuntes de Lenguaje de Marcas: XPath y Transformaciones
+
+#### 1. Introducción a XPath
+XPath (XML Path Language) es un lenguaje de consulta que permite navegar por la estructura de un documento XML.
+
+##### **Selección de Nodos:**
+```xml
+/bookstore/book
+```
+Selecciona todos los nodos `<book>` que sean hijos de `<bookstore>`.
+
+```xml
+//book
+```
+Selecciona todos los nodos `<book>` en el documento sin importar su posición.
+
+```xml
+/bookstore/book[1]
+```
+Selecciona el primer `<book>` dentro de `<bookstore>`.
+
+```xml
+/bookstore/book[last()]
+```
+Selecciona el último `<book>` dentro de `<bookstore>`.
+
+```xml
+/bookstore/book[position()<3]
+```
+Selecciona los primeros dos `<book>` dentro de `<bookstore>`.
+
+```xml
+//book[@category='cooking']
+```
+Selecciona los nodos `<book>` con el atributo `category` igual a "cooking".
+
+##### **Operadores y Funciones:**
+```xml
+//book[@price>30]
+```
+Selecciona los `<book>` cuyo atributo `price` sea mayor a 30.
+
+```xml
+//book[title='XML Guide']
+```
+Selecciona el `<book>` cuyo hijo `<title>` tenga el valor "XML Guide".
+
+```xml
+//book[contains(title, 'XML')]
+```
+Selecciona los `<book>` donde el `<title>` contenga "XML".
+
+```xml
+//book[starts-with(title, 'X')]
+```
+Selecciona los `<book>` donde el `<title>` comience con "X".
+
+```xml
+//book[count(author)>1]
+```
+Selecciona los `<book>` que tengan más de un `<author>`.
+
+---
+#### 2. Transformaciones XSLT (Extensible Stylesheet Language Transformations)
+XSLT se usa para transformar documentos XML en otros formatos como HTML, texto plano, u otros XML.
+
+##### **Estructura Básica de XSLT:**
+```xml
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:template match="/">
+    <html>
+      <body>
+        <h2>Libros Disponibles</h2>
+        <table border="1">
+          <tr>
+            <th>Título</th>
+            <th>Autor</th>
+          </tr>
+          <xsl:for-each select="bookstore/book">
+            <tr>
+              <td><xsl:value-of select="title"/></td>
+              <td><xsl:value-of select="author"/></td>
+            </tr>
+          </xsl:for-each>
+        </table>
+      </body>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>
+```
+Este XSLT convierte un XML de libros en una tabla HTML.
+
+##### **Uso de `apply-templates`:**
+```xml
+<xsl:apply-templates select="book"/>
+```
+Aplica las plantillas a todos los nodos `<book>`.
+
+##### **Filtrado con `if` y `choose`:**
+```xml
+<xsl:if test="price>30">
+  <p>Este libro es caro.</p>
+</xsl:if>
+```
+Muestra un mensaje si el precio del libro es mayor a 30.
+
+```xml
+<xsl:choose>
+  <xsl:when test="price>30">
+    <p>Libro caro</p>
+  </xsl:when>
+  <xsl:otherwise>
+    <p>Libro económico</p>
+  </xsl:otherwise>
+</xsl:choose>
+```
+Muestra un mensaje dependiendo del precio.
+
+##### **Ordenamiento (`sort`):**
+```xml
+<xsl:for-each select="bookstore/book">
+  <xsl:sort select="title" order="ascending"/>
+  <xsl:value-of select="title"/>
+</xsl:for-each>
+```
+Ordena los libros por título en orden ascendente.
+
+---
+### **Resumen de Uso Rápido**
+| Expresión XPath | Descripción |
+|-----------------|-------------|
+| `/root/element` | Selecciona nodos hijos directos |
+| `//element` | Selecciona nodos en cualquier nivel |
+| `element[@attr='value']` | Filtra por atributo |
+| `element[position()=n]` | Selecciona el elemento en la posición `n` |
+| `contains(text(), 'value')` | Filtra si el nodo contiene un valor |
+| `starts-with(text(), 'value')` | Filtra si el nodo comienza con un valor |
+| `count(element)>n` | Filtra por cantidad de hijos |
+| `apply-templates` | Aplica plantillas XSLT |
+| `value-of` | Obtiene el valor de un nodo |
+| `for-each` | Itera sobre nodos en XSLT |
+| `if` y `choose` | Control de flujo en XSLT |
+| `sort` | Ordena elementos en XSLT |
+
+Estos apuntes te ayudarán a recordar lo más importante de XPath y XSLT durante tu examen.

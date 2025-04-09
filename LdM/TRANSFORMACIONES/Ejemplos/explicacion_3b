@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output encoding="UTF-8" indent="yes" method="html"/>
+
+  <!-- 1. Plantilla principal: punto de entrada de la transformación -->
+  <xsl:template match="/">
+    <html>
+      <head>
+        <title>Táboa máquinas</title>
+      </head>
+      <body>
+        <h1>Táboa das máquinas</h1>
+        <!-- Se crea una tabla HTML con un borde para mostrar la información -->
+        <table border="1">
+          <!-- Encabezado de la tabla -->
+          <tr>
+            <th>Máquina</th>
+            <th>Procesador</th>
+            <th>Memoria</th>
+            <th>Disco(s)</th>
+          </tr>
+          <!-- 2. Se aplica la plantilla a cada nodo <máquina> encontrado en el XML base -->
+          <xsl:apply-templates select="equipos/máquina" />
+        </table>
+      </body>
+    </html>
+  </xsl:template>
+
+  <!-- 3. Plantilla para cada nodo <máquina> -->
+  <xsl:template match="máquina">
+    <!-- Se genera una fila para cada máquina -->
+    <tr>
+      <!-- Celda para el nombre de la máquina: se usa un enlace con la IP -->
+      <td>
+        <!-- La URL se construye dinámicamente usando Attribute Value Template:
+             {config/IP} evalúa el nodo <IP> dentro del nodo <config> del nodo <máquina> actual -->
+        <a href="http://{config/IP}">
+          <!-- Se extrae el atributo "nome" de la máquina -->
+          <xsl:value-of select="@nome" />
+        </a>
+      </td>
+      <!-- Celda para la información del procesador -->
+      <td>
+        <!-- Se accede al atributo "marca" del nodo <procesador> que está dentro de <hardware> -->
+        <xsl:value-of select="hardware/procesador/@marca" />
+        -
+        <!-- Se accede al contenido textual del nodo <procesador> (por ejemplo, "i7" o "Xeon") -->
+        <xsl:value-of select="hardware/procesador/text()" />
+      </td>
+      <!-- Celda para la memoria -->
+      <td>
+        <!-- Se extrae el contenido del nodo <memoria> (ej. "8") -->
+        <xsl:value-of select="hardware/memoria" />
+        GB 
+        <!-- Se extrae el atributo "tecnoloxía" del nodo <memoria> (ej. "DDR3") -->
+        <xsl:value-of select="hardware/memoria/@tecnoloxía" />
+      </td>
+      <!-- Celda para la lista de discos -->
+      <td>
+        <!-- Se crea una lista no ordenada -->
+        <ul>
+          <!-- 4. Se aplica la plantilla a cada nodo <disco> que sea descendiente del nodo <máquina>.
+               Usamos "descendant::disco" para cubrir todos los discos sin importar su profundidad exacta
+               (aunque en este XML suelen estar directamente en <hardware>) -->
+          <xsl:apply-templates select="descendant::disco" />
+        </ul>
+      </td>
+    </tr>
+  </xsl:template>
+
+  <!-- 5. Plantilla para cada nodo <disco> -->
+  <xsl:template match="disco">
+    <!-- Se genera un elemento de lista para cada disco -->
+    <li>
+      <!-- Se extrae el atributo "capacidade" (ej. "2000") -->
+      <xsl:value-of select="@capacidade" />
+      GB -
+      <!-- Se extrae el atributo "tecnoloxía" (ej. "SATA") -->
+      <xsl:value-of select="@tecnoloxía" />
+      -
+    </li>
+  </xsl:template>
+
+</xsl:stylesheet>

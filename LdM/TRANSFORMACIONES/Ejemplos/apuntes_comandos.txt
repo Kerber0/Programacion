@@ -1,0 +1,78 @@
+
+Comando para iniciar la transformación en saxon
+
+javar -jar el nombre de la versión de saxon -xsl:archivoTransformacion.xsl -s:archivoTransformado.xml -o:archivoSalida.txt
+
+java -jar saxon-he-11.4.jar -xsl:beta.xsl -s:biblioteca.xml -o:salida2.txt
+
+para compilar el tasks.json -> control+shift+b
+
+EXAMEN
+Cogemos el html, lo transformamos en xml editor, guardamos 
+la transformacion y la transformamos.
+
+
+
+
+Acceso a atributos y nodos:
+
+@atributo para acceder a un atributo.
+
+nodo/hijo para acceder a elementos anidados.
+
+../../ para subir en el árbol (útil cuando se necesita información del nodo padre o abuelo).
+
+
+Funciones XPath Útiles
+
+concat():
+Para concatenar cadenas de texto.
+<xsl:value-of select="concat(hardware/procesador/@marca, '-', hardware/procesador/text())" />
+
+count() y sum():
+Útiles para operaciones de agregación, como contar elementos o sumar valores numéricos.
+<xsl:value-of select="concat(count(hardware/disco), ' discos')" />
+<xsl:value-of select="sum(hardware/disco/@capacidade)" />
+
+Mostrar un listado (listas <ul> y <li>) donde cada día se detalla con sus asignaturas.
+   <ul>
+      <xsl:apply-templates select="horario/dia" />
+    </ul>
+
+    <ul>
+     <xsl:apply-templates select="materia" />
+   </ul>
+
+   Lee con atención el XML de entrada:
+Comprende la estructura y la jerarquía. Fíjate en qué elementos contienen atributos, cuáles son nodos de texto y cómo se relacionan entre sí.
+
+Planifica la transformación:
+Antes de escribir la hoja XSLT, define qué salida necesitas (HTML o XML) y qué información debe extraerse.
+
+Utiliza plantillas de forma modular:
+Divide la transformación en partes (por ejemplo, una plantilla para <hora>, otra para <dia>, etc.). Esto facilita el mantenimiento y la lectura.
+
+Aplica correctamente XPath:
+Asegúrate de usar rutas correctas para acceder a nodos y atributos. Practica el uso de . (nodo actual), .. (nodo padre) y rutas relativas.
+
+Verifica la sintaxis:
+Comprueba que cada etiqueta XSLT esté bien cerrada y que los atributos se extraigan correctamente.
+
+Usa xsl:output según la salida deseada:
+Recuerda que para HTML debes usar method="html" y para XML method="xml".
+
+Prueba en un navegador o editor XML:
+Si tienes tiempo, realiza pruebas en un navegador que soporte XSLT para ver la salida y detectar errores.
+
+Consulta ejemplos de transformaciones:
+Repasa los ejercicios que hemos visto; entender cómo se construyen tablas, listas y nuevos XML te dará confianza para cualquier variación en el examen.
+
+Definición de la Salida
+xml
+Copy
+<xsl:output method="html" encoding="UTF-8" indent="yes"/>
+method: Puede ser "html", "xml" o "text".
+
+encoding: Define la codificación (ej. UTF-8).
+
+indent: Facilita la lectura del documento generado.

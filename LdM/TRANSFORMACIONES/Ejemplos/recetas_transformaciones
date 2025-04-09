@@ -1,0 +1,207 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <!-- Definición de la salida en HTML -->
+  <xsl:output method="html" encoding="UTF-8" indent="yes"/>
+
+  <!-- Plantilla principal: punto de entrada, se procesa la raíz -->
+  <xsl:template match="/recetas">
+    <html>
+      <head>
+        <title><xsl:value-of select="receta/nombreR"/></title>
+      </head>
+      <body>
+        <h1><xsl:value-of select="receta/nombreR"/></h1>
+        <p><strong>Comensales:</strong> <xsl:value-of select="receta/comensales"/></p>
+        
+        <!-- Sección de Ingredientes -->
+        <h2>Ingredientes</h2>
+        <ul>
+          <!-- Se recorren todos los ingredientes -->
+          <xsl:for-each select="receta/ingredientes/ingrediente">
+            <li>
+              Código: <xsl:value-of select="@codigo"/>
+              - Cantidad: <xsl:value-of select="cantidad"/>
+              <xsl:text> </xsl:text>
+              <xsl:value-of select="cantidad/@medida"/>
+            </li>
+          </xsl:for-each>
+        </ul>
+        
+        <!-- Sección de Proceso -->
+        <h2>Proceso</h2>
+        <ol>
+          <!-- Se recorren todos los pasos -->
+          <xsl:for-each select="receta/proceso/paso">
+            <li>
+              <xsl:value-of select="."/>
+            </li>
+          </xsl:for-each>
+        </ol>
+      </body>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>
+Explicación Detallada:
+
+<xsl:template match="/recetas">
+Inicia la transformación sobre el nodo raíz <recetas>.
+
+<title><xsl:value-of select="receta/nombreR"/></title>
+Toma el nombre de la receta y lo coloca en el título de la página.
+
+<xsl:for-each select="receta/ingredientes/ingrediente">
+Recorre cada ingrediente. Dentro del bucle, se accede a:
+
+@codigo: El atributo que identifica el ingrediente.
+
+cantidad: El contenido numérico.
+
+cantidad/@medida: La unidad de medida.
+
+<xsl:for-each select="receta/proceso/paso">
+Recorre cada paso dentro del proceso y los muestra en una lista ordenada.
+
+Transformación 2: Generar una Tabla HTML de Productos
+Esta transformación genera una página HTML que lista todos los productos (del bloque <productos>) en una tabla. Cada fila muestra el ID del producto, el proveedor y el nombre (contenido textual).
+
+Código XSLT:
+
+xml
+Copy
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="html" encoding="UTF-8" indent="yes"/>
+
+  <!-- Plantilla principal: procesa el nodo raíz -->
+  <xsl:template match="/recetas">
+    <html>
+      <head>
+        <title>Listado de Productos</title>
+      </head>
+      <body>
+        <h1>Productos</h1>
+        <table border="1">
+          <tr>
+            <th>ID Producto</th>
+            <th>Cod. Proveedor</th>
+            <th>Nombre</th>
+          </tr>
+          <!-- Se aplican templates a cada producto -->
+          <xsl:apply-templates select="productos/producto"/>
+        </table>
+      </body>
+    </html>
+  </xsl:template>
+  
+  <!-- Plantilla para cada <producto> -->
+  <xsl:template match="producto">
+    <tr>
+      <td><xsl:value-of select="@idProducto"/></td>
+      <td><xsl:value-of select="@codProveedor"/></td>
+      <td><xsl:value-of select="."/></td>
+    </tr>
+  </xsl:template>
+</xsl:stylesheet>
+Explicación Detallada:
+
+<xsl:apply-templates select="productos/producto"/>
+Selecciona todos los nodos <producto> que están dentro de <productos>.
+
+<xsl:template match="producto">
+Para cada producto se crea una fila en la tabla.
+
+<xsl:value-of select="@idProducto"/> y similares
+Se extraen los atributos y el contenido textual de cada producto.
+
+Transformación 3: Generar un XML Resumido de la Receta Combinando Ingredientes y Productos
+Esta transformación crea un nuevo XML que relacione cada ingrediente (de la receta) con su producto correspondiente, utilizando el atributo codigo de <ingrediente> y el idProducto de <producto>.
+Para esto se puede usar la técnica de keys en XSLT (Muenchian grouping) para hacer búsquedas eficientes.
+
+Código XSLT:
+
+xml
+Copy
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
+
+  <!-- Definir una key para relacionar productos por su idProducto -->
+  <xsl:key name="productoById" match="productos/producto" use="@idProducto"/>
+
+  <!-- Plantilla principal: procesa el nodo raíz -->
+  <xsl:template match="/recetas">
+    <recipeSummary>
+      <nombre>
+        <xsl:value-of select="receta/nombreR"/>
+      </nombre>
+      <comensales>
+        <xsl:value-of select="receta/comensales"/>
+      </comensales>
+      <ingredientes>
+        <!-- Recorremos cada ingrediente -->
+        <xsl:for-each select="receta/ingredientes/ingrediente">
+          <ingrediente>
+            <codigo>
+              <xsl:value-of select="@codigo"/>
+            </codigo>
+            <cantidad medida="{cantidad/@medida}">
+              <xsl:value-of select="cantidad"/>
+            </cantidad>
+            <!-- Se realiza una búsqueda en el nodo productos usando la key definida -->
+            <productoRelacionado>
+              <xsl:value-of select="key('productoById', @codigo)"/>
+            </productoRelacionado>
+          </ingrediente>
+        </xsl:for-each>
+      </ingredientes>
+      <proceso>
+        <xsl:for-each select="receta/proceso/paso">
+          <paso>
+            <xsl:value-of select="."/>
+          </paso>
+        </xsl:for-each>
+      </proceso>
+    </recipeSummary>
+  </xsl:template>
+</xsl:stylesheet>
+Explicación Detallada:
+
+Definición de Key:
+
+<xsl:key name="productoById" match="productos/producto" use="@idProducto"/>
+Se crea una clave que asocia cada <producto> a su atributo idProducto. Esto permite buscar de forma eficiente el producto correspondiente a un ingrediente.
+
+Template Principal (match="/recetas"):
+Se genera un nuevo XML con nodo raíz <recipeSummary>.
+
+Dentro del For-Each sobre Ingredientes:
+
+Para cada <ingrediente>, se extrae el atributo @codigo y se muestra la cantidad junto con su atributo medida (usando un AVT: medida="{cantidad/@medida}").
+
+<xsl:value-of select="key('productoById', @codigo)"/>
+Utiliza la key definida para buscar el <producto> cuyo idProducto coincide con el @codigo del ingrediente.
+
+Procesamiento del Proceso:
+Se recorre cada <paso> para incluirlo en la salida XML.
+
+Conclusión
+Hemos visto:
+
+Todos los XPath posibles:
+Desde rutas absolutas como /recetas/receta/nombreR hasta rutas relativas y el uso de ejes como //ingrediente y expresiones en atributos (por ejemplo, @medida).
+
+Transformaciones XSLT variadas:
+
+Una transformación para generar una página HTML completa de la receta (incluyendo ingredientes y pasos).
+
+Una transformación para generar una tabla HTML con el listado de productos.
+
+Una transformación avanzada que genera un nuevo XML combinando información de la receta con la de productos mediante el uso de keys para realizar búsquedas.
+
+Cada transformación se estructura de forma modular, comenzando por una plantilla principal que define la salida (ya sea HTML o XML), usando <xsl:apply-templates> o <xsl:for-each> para recorrer nodos y extrayendo valores con <xsl:value-of>. Se aprovechan las expresiones XPath para acceder a los nodos deseados, aprovechando tanto rutas absolutas (cuando se parte de la raíz) como relativas (dentro de cada contexto de nodo).
+
+Esta explicación detallada te ayudará a comprender cada aspecto del XML, los XPath y las posibilidades de transformación con XSLT.

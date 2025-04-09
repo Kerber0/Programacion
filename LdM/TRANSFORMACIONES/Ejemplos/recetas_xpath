@@ -1,0 +1,71 @@
+XPath desde la raíz y sobre cada sección
+Raíz y Acceso a los Elementos Principales
+
+/recetas
+Selecciona el nodo raíz <recetas>.
+
+/recetas/receta
+Selecciona el nodo <receta> (en este caso, hay uno, pero podría haber más).
+
+/recetas/productos
+Selecciona el bloque de productos.
+
+Dentro de <receta>
+
+/recetas/receta/nombreR
+Accede al elemento <nombreR> que contiene el nombre de la receta.
+
+/recetas/receta/comensales
+Devuelve el número de comensales.
+
+/recetas/receta/ingredientes
+Selecciona el nodo que agrupa todos los ingredientes.
+
+/recetas/receta/ingredientes/ingrediente
+Devuelve todos los elementos <ingrediente> (cada uno con su atributo codigo).
+
+/recetas/receta/ingredientes/ingrediente[@codigo='CB']
+Selecciona el ingrediente cuyo atributo codigo es "CB" (por ejemplo, la cebolla).
+
+/recetas/receta/ingredientes/ingrediente/cantidad
+Devuelve el elemento <cantidad> de cada ingrediente.
+
+/recetas/receta/ingredientes/ingrediente/cantidad/@medida
+Extrae el atributo medida (como "kg", "l", etc.) de cada <cantidad>.
+
+Dentro de <proceso>
+
+/recetas/receta/proceso
+Selecciona el bloque que agrupa los pasos.
+
+/recetas/receta/proceso/paso
+Devuelve todos los elementos <paso> que contienen las instrucciones del proceso.
+
+Dentro de <productos>
+
+/recetas/productos/producto
+Selecciona cada uno de los productos.
+
+/recetas/productos/producto[@idProducto='CB']
+Selecciona el producto cuya propiedad idProducto es "CB".
+
+/recetas/productos/producto/@codProveedor
+Extrae el atributo codProveedor de cada producto.
+
+/recetas/productos/producto/text()
+Devuelve el texto contenido en el producto (el nombre real, por ejemplo, "cebolla").
+
+XPath con Ejes y Rutas Relativas
+
+//ingrediente
+Selecciona todos los nodos <ingrediente> en el documento, sin importar dónde estén.
+
+//paso
+Selecciona todos los nodos <paso>.
+
+Dentro de un nodo <ingrediente>, para acceder a la cantidad podríamos usar:
+cantidad o child::cantidad (en el contexto del <ingrediente>).
+
+Si estás en un <cantidad> y necesitas acceder al atributo medida:
+@medida (porque el contexto es el nodo <cantidad>).
+

@@ -1,0 +1,1049 @@
+Enunciado 1: Consultas XPath en XML de Recetas
+Contexto:
+Se te proporciona el siguiente XML (simplificado) de recetas:
+
+xml
+Copy
+<recetas>
+  <receta>
+    <nombreR>Sopa de cebolla</nombreR>
+    <comensales>4</comensales>
+    <ingredientes>
+      <ingrediente codigo="CB">
+        <cantidad medida="kg">1</cantidad>
+      </ingrediente>
+      <ingrediente codigo="CC">
+        <cantidad medida="l">2</cantidad>
+      </ingrediente>
+      <!-- Más ingredientes... -->
+    </ingredientes>
+    <proceso>
+      <paso>Pelar y cortar las cebollas</paso>
+      <paso>Rehogar en mantequilla</paso>
+      <!-- Más pasos... -->
+    </proceso>
+  </receta>
+  <productos>
+    <producto idProducto="CB" codProveedor="P-222">cebolla</producto>
+    <producto idProducto="CC" codProveedor="E-222">caldo de carne</producto>
+    <!-- Más productos... -->
+  </productos>
+</recetas>
+Requerimientos:
+Escribe expresiones XPath que permitan obtener lo siguiente:
+
+El nombre de la receta.
+Sugerencia: /recetas/receta/nombreR
+
+El número de comensales.
+Sugerencia: /recetas/receta/comensales
+
+La cantidad y la unidad (medida) del ingrediente cuyo atributo codigo sea "CC".
+Sugerencia:
+
+Cantidad: /recetas/receta/ingredientes/ingrediente[@codigo='CC']/cantidad
+
+Medida: /recetas/receta/ingredientes/ingrediente[@codigo='CC']/cantidad/@medida
+
+Todos los pasos del proceso de la receta.
+Sugerencia: /recetas/receta/proceso/paso
+
+El nombre del producto cuyo idProducto sea igual al atributo codigo de un ingrediente. Por ejemplo, para el ingrediente con código "CB".
+Sugerencia: /recetas/productos/producto[@idProducto = 'CB']
+
+Enunciado 2: Transformación XSLT a HTML para Mostrar la Receta
+Contexto:
+Utilizando el mismo XML de recetas, crea una hoja de estilo XSLT que genere una página HTML que muestre la información de la receta.
+
+Requisitos de la Transformación:
+
+Encabezado y Datos Generales:
+
+El título de la página y un encabezado (<h1>) que muestre el nombre de la receta.
+
+Un párrafo que indique el número de comensales.
+
+Listado de Ingredientes:
+
+Una tabla o una lista (por ejemplo, <ul>) en la que se muestre para cada ingrediente:
+
+El código (atributo codigo).
+
+La cantidad y la unidad de medida (obtenidos de <cantidad> y su atributo medida).
+
+Además, para cada ingrediente, se debe generar un enlace (con <a>) que apunte a una URL del estilo:
+http://www.ejemplo.com/productos?id={codigo}
+(donde {codigo} se sustituya dinámicamente).
+
+Listado de Pasos:
+
+Una lista ordenada (<ol>) que muestre cada paso del proceso.
+
+Ejemplo de Estructura Esperada de la Salida HTML:
+
+html
+Copy
+<html>
+  <head>
+    <title>Sopa de cebolla</title>
+  </head>
+  <body>
+    <h1>Sopa de cebolla</h1>
+    <p>Comensales: 4</p>
+    <h2>Ingredientes</h2>
+    <ul> lista desordenada
+      <li>
+        Código: CB - Cantidad: 1 kg - 
+        <a href="http://www.ejemplo.com/productos?id=CB">Ver Producto</a>
+      </li>
+      <!-- Más ingredientes... -->
+    </ul>
+    <h2>Proceso</h2>
+    <ol> // lista ordenada
+      <li>Pelar y cortar las cebollas</li>
+      <li>Rehogar en mantequilla</li>
+      <!-- Más pasos... -->
+    </ol>
+  </body>
+</html>
+Enunciado 3: Transformación XSLT a XML Resumido Utilizando Keys
+Contexto:
+Usando el XML de recetas, diseña una transformación XSLT que genere un nuevo XML con un resumen de la receta. El XML resultante deberá tener la siguiente estructura:
+
+xml
+Copy
+<recetaResumen>
+  <nombre>Sopa de cebolla</nombre>
+  <comensales>4</comensales>
+  <ingredientes>
+    <ingrediente codigo="CB" cantidad="1" medida="kg" producto="cebolla"/>
+    <!-- Más ingredientes... -->
+  </ingredientes>
+  <totalIngredientes>...</totalIngredientes>
+  <proceso>
+    <paso>Pelar y cortar las cebollas</paso>
+    <!-- Más pasos... -->
+  </proceso>
+</recetaResumen>
+Requisitos de la Transformación:
+
+Datos Generales:
+
+Extraer el nombre de la receta y el número de comensales.
+
+Listado de Ingredientes con Información Combinada:
+
+Para cada ingrediente se deben incluir los siguientes atributos:
+
+codigo (del ingrediente).
+
+cantidad (el contenido del nodo <cantidad>).
+
+medida (el atributo medida del nodo <cantidad>).
+
+producto (el contenido textual del <producto> correspondiente, obtenido mediante una key que relacione el atributo codigo del ingrediente con el atributo idProducto del producto en el bloque <productos>).
+
+Cálculo del Total de Ingredientes:
+
+Incluir un elemento <totalIngredientes> que contenga el número total de ingredientes presentes en la receta (puedes usar la función count()).
+
+Listado de Pasos:
+
+Recorrer y copiar cada paso del proceso.
+
+Uso de Key:
+
+Define una key para relacionar productos con ingredientes:
+
+xml
+Copy
+<xsl:key name="prodById" match="productos/producto" use="@idProducto"/>
+Utiliza la función key('prodById', @codigo) para recuperar el nombre del producto correspondiente a cada ingrediente.
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Apuntes de XPath y XSLT
+1. Introducción
+XML: Lenguaje de marcado para representar datos de forma estructurada.
+
+XPath: Lenguaje para navegar por la estructura XML y seleccionar nodos mediante rutas y condiciones.
+
+XSLT: Lenguaje basado en XML para transformar documentos XML en otros formatos (HTML, XML, texto).
+
+2. Estructura Básica de un Documento XSLT
+Declaración y Elemento Raíz
+xml
+Copy
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  ...
+</xsl:stylesheet>
+<?xml ...?>: Define el documento como XML.
+
+<xsl:stylesheet>: Elemento raíz de la hoja XSLT; version indica la versión y xmlns:xsl define el espacio de nombres.
+
+Definición de la Salida
+xml
+Copy
+<xsl:output method="html" encoding="UTF-8" indent="yes"/>
+method: Puede ser "html", "xml" o "text".
+
+encoding: Define la codificación (ej. UTF-8).
+
+indent: Facilita la lectura del documento generado.
+
+3. Plantillas (Templates) y Puntos de Entrada
+Plantilla Principal
+xml
+Copy
+<xsl:template match="/">
+  <!-- Aquí se define la estructura global -->
+</xsl:template>
+match="/": Se activa para el nodo raíz del XML de entrada.
+
+Es el punto de partida para la transformación.
+
+Uso de <xsl:apply-templates>
+Permite delegar la transformación a plantillas específicas.
+
+xml
+Copy
+<xsl:apply-templates select="recetas/receta"/>
+Selecciona todos los nodos <receta> dentro de <recetas> y ejecuta la plantilla correspondiente para cada uno.
+
+Uso de <xsl:for-each>
+Itera sobre un conjunto de nodos.
+
+xml
+Copy
+<xsl:for-each select="receta/ingredientes/ingrediente">
+  <!-- Procesa cada <ingrediente> -->
+</xsl:for-each>
+Útil cuando se requiere realizar acciones iterativas sin cambiar el contexto mediante plantillas.
+
+4. Expresiones XPath Esenciales
+Rutas Absolutas y Relativas
+Ruta Absoluta:
+Ejemplo: /recetas/receta/nombreR
+– Comienza desde la raíz del documento.
+
+Ruta Relativa:
+Ejemplo: ingredientes/ingrediente
+– Se usa en el contexto del nodo actual.
+
+Uso de Predicados con Corchetes []
+Filtrado de Nodos:
+Ejemplo:
+
+xpath
+Copy
+/recetas/productos/producto[@idProducto='CB']
+– Selecciona solo los nodos <producto> que tengan un atributo idProducto con el valor 'CB'.
+
+Operador Punto (.)
+<xsl:value-of select="."/>:
+– Devuelve el contenido textual del nodo actual.
+
+Ejemplo:
+Si estás en <paso>Pelar y cortar...</paso>, . retorna "Pelar y cortar...".
+
+Otros Ejemplos de XPath
+Seleccionar todos los nodos <paso>:
+
+xpath
+Copy
+/recetas/receta/proceso/paso
+Acceder a atributos:
+
+xpath
+Copy
+cantidad/@medida
+– En el contexto de un nodo <cantidad>, extrae el valor del atributo medida.
+
+5. Attribute Value Templates (AVT)
+Permiten insertar valores dinámicos en atributos HTML generados por XSLT.
+
+Ejemplo:
+
+xml
+Copy
+<a href="http://www.ejemplo.com/productos?id={@codigo}">
+  Ver Producto
+</a>
+– La parte { @codigo } se evalúa y se inserta el valor del atributo codigo del nodo actual.
+
+6. Uso de Keys en XSLT (Búsqueda Eficiente)
+Las keys permiten acceder rápidamente a nodos sin recorrer todo el documento.
+
+Definición de Key
+xml
+Copy
+<xsl:key name="prodById" match="productos/producto" use="@idProducto"/>
+name="prodById": Nombre de la key.
+
+match="productos/producto": Indica en qué nodos se aplica la key.
+
+use="@idProducto": Usa el atributo idProducto para la indexación.
+
+Uso de la Key
+xml
+Copy
+<xsl:value-of select="key('prodById', @codigo)"/>
+Busca el nodo <producto> cuyo @idProducto coincide con el @codigo del nodo actual.
+
+7. Ejemplos Prácticos
+Ejemplo 1: Transformación XSLT a HTML (Receta Completa)
+xml
+Copy
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0"
+   xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="html" encoding="UTF-8" indent="yes"/>
+  
+  <xsl:template match="/recetas">
+    <html>
+      <head>
+        <title><xsl:value-of select="receta/nombreR"/></title>
+      </head>
+      <body>
+        <h1><xsl:value-of select="receta/nombreR"/></h1>
+        <p>
+          <strong>Comensales:</strong>
+          <xsl:value-of select="receta/comensales"/>
+        </p>
+        <h2>Ingredientes</h2>
+        <ul>
+          <xsl:for-each select="receta/ingredientes/ingrediente">
+            <li>
+              Código: <xsl:value-of select="@codigo"/> - 
+              Cantidad: <xsl:value-of select="cantidad"/> 
+              <xsl:text> </xsl:text>
+              <xsl:value-of select="cantidad/@medida"/> - 
+              <a href="http://www.ejemplo.com/productos?id={@codigo}">
+                Ver Producto
+              </a>
+            </li>
+          </xsl:for-each>
+        </ul>
+        <h2>Proceso</h2>
+        <ol>
+          <xsl:for-each select="receta/proceso/paso">
+            <li>
+              <xsl:value-of select="."/>
+            </li>
+          </xsl:for-each>
+        </ol>
+      </body>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>
+Qué hace:
+– Genera una página HTML con título, encabezado y párrafos.
+– Itera sobre los ingredientes y pasos, extrayendo información con XPath.
+– Utiliza AVTs para construir dinámicamente enlaces.
+
+Ejemplo 2: Transformación XSLT a XML Resumido (Uso de Keys)
+xml
+Copy
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0"
+   xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
+  
+  <!-- Definición de key para relacionar productos con ingredientes -->
+  <xsl:key name="prodById" match="productos/producto" use="@idProducto"/>
+  
+  <xsl:template match="/recetas">
+    <recetaResumen>
+      <nombre>
+        <xsl:value-of select="receta/nombreR"/>
+      </nombre>
+      <comensales>
+        <xsl:value-of select="receta/comensales"/>
+      </comensales>
+      <ingredientes>
+        <xsl:for-each select="receta/ingredientes/ingrediente">
+          <ingrediente codigo="{@codigo}"
+                       cantidad="{cantidad}"
+                       medida="{cantidad/@medida}">
+            <producto>
+              <xsl:value-of select="key('prodById', @codigo)"/>
+            </producto>
+          </ingrediente>
+        </xsl:for-each>
+      </ingredientes>
+      <totalIngredientes>
+        <xsl:value-of select="count(receta/ingredientes/ingrediente)"/>
+      </totalIngredientes>
+      <proceso>
+        <xsl:for-each select="receta/proceso/paso">
+          <paso>
+            <xsl:value-of select="."/>
+          </paso>
+        </xsl:for-each>
+      </proceso>
+    </recetaResumen>
+  </xsl:template>
+</xsl:stylesheet>
+Qué hace:
+– Crea un nuevo XML llamado <recetaResumen> que agrupa la información de la receta.
+– Para cada ingrediente, añade atributos y utiliza la key prodById para relacionarlo con el producto correspondiente.
+– Calcula el total de ingredientes con la función count().
+
+8. Notas Adicionales y Consejos
+Estructura y Contexto:
+Comprende la jerarquía del XML de entrada. Usa rutas relativas para trabajar en el contexto actual y rutas absolutas para empezar desde la raíz.
+
+Depuración:
+Si un valor no se muestra, revisa la ruta XPath y el contexto del nodo en que se está evaluando.
+
+Uso de AVT:
+Permiten insertar valores directamente en atributos (p. ej. en href="...").
+
+Keys en XSLT:
+Son fundamentales para búsquedas eficientes, especialmente en XML grandes o para relacionar datos de nodos distintos.
+
+Etiquetas HTML Semánticas:
+Puedes usar etiquetas como <strong>, <em>, etc., en la salida HTML para dar formato semántico al contenido.
+------------------------------------------------------------------------------------------------------------------------------------------------
+    Apuntes de Examen: XPath y Transformaciones XSLT (Caso: Librería)
+1. Introducción
+XML:
+Lenguaje de marcado para estructurar datos. En nuestro ejemplo, modelamos una librería.
+
+XPath:
+Lenguaje para navegar y seleccionar nodos en un documento XML mediante rutas y predicados.
+
+XSLT:
+Lenguaje para transformar documentos XML en otros formatos (HTML, XML, texto) usando plantillas.
+
+2. Ejemplo de XML de una Librería
+Imagina que tienes el siguiente documento XML que representa una biblioteca:
+
+xml
+Copy
+<?xml version="1.0" encoding="UTF-8"?>
+<biblioteca>
+  <libro id="L1">
+    <titulo>Don Quijote</titulo>
+    <autor>Miguel de Cervantes</autor>
+    <anio>1605</anio>
+    <categoria>Novela</categoria>
+  </libro>
+  <libro id="L2">
+    <titulo>Cien Años de Soledad</titulo>
+    <autor>Gabriel García Márquez</autor>
+    <anio>1967</anio>
+    <categoria>Novela</categoria>
+  </libro>
+  <libro id="L3">
+    <titulo>El nombre de la rosa</titulo>
+    <autor>Umberto Eco</autor>
+    <anio>1980</anio>
+    <categoria>Misterio</categoria>
+  </libro>
+  <libro id="L4">
+    <titulo>La sombra del viento</titulo>
+    <autor>Carlos Ruiz Zafón</autor>
+    <anio>2001</anio>
+    <categoria>Misterio</categoria>
+  </libro>
+</biblioteca>
+3. Expresiones XPath en la Librería
+Selección Básica
+Seleccionar todos los libros:
+
+xpath
+Copy
+/biblioteca/libro
+Devuelve una lista con todos los elementos <libro>.
+
+Seleccionar el título del primer libro:
+
+xpath
+Copy
+/biblioteca/libro[1]/titulo
+Devuelve el nodo <titulo> del primer <libro> (en este caso, "Don Quijote").
+
+Uso de Predicados
+Filtrar libros por categoría "Novela":
+
+xpath
+Copy
+/biblioteca/libro[categoria='Novela']
+Devuelve solo los <libro> cuya etiqueta <categoria> sea "Novela".
+
+Filtrar libro con un atributo específico:
+
+xpath
+Copy
+/biblioteca/libro[@id='L3']
+Devuelve el <libro> cuyo atributo id es "L3" (el libro "El nombre de la rosa").
+
+Selección de Nodos Hijos y Atributos
+Obtener el autor de "Cien Años de Soledad":
+
+xpath
+Copy
+/biblioteca/libro[titulo='Cien Años de Soledad']/autor
+Obtener el valor del atributo id del segundo libro:
+
+xpath
+Copy
+/biblioteca/libro[2]/@id
+Navegación Relativa
+Desde un nodo libro, obtener su título: Dentro del contexto de un <libro>, la expresión:
+
+xpath
+Copy
+titulo
+Selecciona el hijo <titulo> del libro actual.
+
+Uso del punto (.) para obtener el contenido textual del nodo actual:
+
+xpath
+Copy
+<xsl:value-of select="."/>
+Si se usa en el contexto de <titulo>, devuelve "Don Quijote" (por ejemplo).
+
+4. Transformaciones XSLT con Ejemplos de Uso
+A continuación, se presentan dos ejemplos de transformación XSLT aplicados al XML de la librería.
+
+Ejemplo 1: Transformación a HTML (Lista de Libros)
+Objetivo: Generar una página HTML que muestre una tabla con los libros, sus títulos, autores, año y categoría.
+
+Código XSLT:
+
+xml
+Copy
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" 
+      xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  
+  <!-- Define la salida en HTML -->
+  <xsl:output method="html" encoding="UTF-8" indent="yes"/>
+  
+  <!-- Plantilla principal: se aplica al documento completo -->
+  <xsl:template match="/">
+    <html>
+      <head>
+        <title>Catálogo de Libros</title>
+      </head>
+      <body>
+        <h1>Catálogo de Libros</h1>
+        <table border="1">
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Año</th>
+            <th>Categoría</th>
+          </tr>
+          <!-- Se aplica la plantilla a cada libro -->
+          <xsl:apply-templates select="biblioteca/libro"/>
+        </table>
+      </body>
+    </html>
+  </xsl:template>
+  
+  <!-- Plantilla para cada elemento libro -->
+  <xsl:template match="libro">
+    <tr>
+      <td><xsl:value-of select="@id"/></td>
+      <td><xsl:value-of select="titulo"/></td>
+      <td><xsl:value-of select="autor"/></td>
+      <td><xsl:value-of select="anio"/></td>
+      <td><xsl:value-of select="categoria"/></td>
+    </tr>
+  </xsl:template>
+  
+</xsl:stylesheet>
+Explicación:
+
+La plantilla principal (match="/") crea la estructura HTML básica (con <html>, <head>, <body>).
+
+Se genera una tabla HTML con encabezados usando <th>.
+
+<xsl:apply-templates select="biblioteca/libro"/> recorre cada libro.
+
+La plantilla para <libro> extrae los datos de cada nodo (atributo id, y elementos <titulo>, <autor>, <anio>, <categoria>) y los coloca en celdas de tabla <td>.
+
+Ejemplo 2: Transformación a XML Resumido (Libros por Categoría)
+Objetivo: Generar un nuevo XML que agrupe los libros por categoría. Por ejemplo:
+
+xml
+Copy
+<catalogo>
+  <categoria nombre="Novela">
+    <libro id="L1">
+      <titulo>Don Quijote</titulo>
+      <autor>Miguel de Cervantes</autor>
+      <anio>1605</anio>
+    </libro>
+    <libro id="L2">
+      <titulo>Cien Años de Soledad</titulo>
+      <autor>Gabriel García Márquez</autor>
+      <anio>1967</anio>
+    </libro>
+  </categoria>
+  <categoria nombre="Misterio">
+    <libro id="L3">
+      <titulo>El nombre de la rosa</titulo>
+      <autor>Umberto Eco</autor>
+      <anio>1980</anio>
+    </libro>
+    <libro id="L4">
+      <titulo>La sombra del viento</titulo>
+      <autor>Carlos Ruiz Zafón</autor>
+      <anio>2001</anio>
+    </libro>
+  </categoria>
+</catalogo>
+Código XSLT (utilizando keys para agrupar):
+
+xml
+Copy
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" 
+      xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  
+  <!-- Salida en XML -->
+  <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
+  
+  <!-- Definición de key para agrupar libros por categoría -->
+  <xsl:key name="librosPorCategoria" match="libro" use="categoria"/>
+  
+  <!-- Plantilla principal -->
+  <xsl:template match="/biblioteca">
+    <catalogo>
+      <!-- Se seleccionan las categorías únicas -->
+      <xsl:for-each select="libro[generate-id() = generate-id(key('librosPorCategoria', categoria)[1])]">
+        <categoria nombre="{categoria}">
+          <!-- Para cada categoría, se muestran los libros asociados -->
+          <xsl:for-each select="key('librosPorCategoria', categoria)">
+            <libro id="{@id}">
+              <titulo><xsl:value-of select="titulo"/></titulo>
+              <autor><xsl:value-of select="autor"/></autor>
+              <anio><xsl:value-of select="anio"/></anio>
+            </libro>
+          </xsl:for-each>
+        </categoria>
+      </xsl:for-each>
+    </catalogo>
+  </xsl:template>
+  
+</xsl:stylesheet>
+Explicación:
+
+Key "librosPorCategoria":
+Se define para indexar cada <libro> según el valor de su elemento <categoria>.
+
+Agrupación:
+El primer <xsl:for-each> usa la función generate-id() para seleccionar solo un representante por cada grupo único de categoría.
+
+Atributos dinámicos:
+En <categoria nombre="{categoria}">, se usa una AVT para insertar el valor de la categoría.
+
+Anidación:
+Se recorre, para cada categoría, los libros asociados con key('librosPorCategoria', categoria), creando un nuevo elemento <libro> en la salida resumida.
+
+5. Conceptos Clave y Consejos
+XPath:
+
+Permite seleccionar nodos con rutas absolutas y relativas.
+
+Los predicados ([...]) filtran nodos basándose en condiciones.
+
+XSLT:
+
+Se basa en plantillas que se aplican a nodos específicos del XML.
+
+<xsl:apply-templates> y <xsl:for-each> son fundamentales para recorrer nodos.
+
+AVTs (Attribute Value Templates) facilitan la inserción de valores dinámicos.
+
+Las keys permiten realizar agrupaciones y búsquedas eficientes en el XML.
+
+Transformación a HTML vs. XML:
+
+La salida HTML se usa para generar páginas web.
+
+La salida XML se usa para generar documentos estructurados que pueden reutilizarse o procesarse nuevamente.
+
+Ejemplo Complejo
+Supongamos que tenemos el siguiente XML de una biblioteca:
+
+xml
+Copy
+<biblioteca>
+  <libro id="L1">
+    <titulo>Don Quijote</titulo>
+    <autor>Miguel de Cervantes</autor>
+    <anio>1605</anio>
+    <categoria>Novela</categoria>
+  </libro>
+  <libro id="L2">
+    <titulo>Cien Años de Soledad</titulo>
+    <autor>Gabriel García Márquez</autor>
+    <anio>1967</anio>
+    <categoria>Novela</categoria>
+  </libro>
+  <libro id="L3">
+    <titulo>El nombre de la rosa</titulo>
+    <autor>Umberto Eco</autor>
+    <anio>1980</anio>
+    <categoria>Misterio</categoria>
+  </libro>
+  <libro id="L4">
+    <titulo>La sombra del viento</titulo>
+    <autor>Carlos Ruiz Zafón</autor>
+    <anio>2001</anio>
+    <categoria>Misterio</categoria>
+  </libro>
+  <!-- Más libros... -->
+</biblioteca>
+Y queremos una expresión XPath que seleccione los libros que cumplan todas las siguientes condiciones:
+
+La categoría sea Novela o Misterio.
+
+El año de publicación sea mayor que 1950.
+
+El título no contenga la palabra "sombra".
+
+El autor contenga la cadena "Gabriel" o "Umberto".
+
+Además, entre los hermanos anteriores del libro (aquellos que vienen antes en el mismo nivel) con la misma categoría, la cantidad sea par (esto es, el libro ocupa una posición par dentro de los libros de su categoría).
+
+La expresión XPath podría ser:
+
+xpath
+Copy
+/biblioteca/libro[
+  (categoria = 'Novela' or categoria = 'Misterio')
+  and number(anio) > 1950
+  and not(contains(titulo, 'sombra'))
+  and (contains(autor, 'Gabriel') or contains(autor, 'Umberto'))
+  and (count(preceding-sibling::libro[categoria = current()/categoria]) mod 2) = 0
+]
+Desglose y Explicación de Cada Parte
+/biblioteca/libro[ ... ]
+
+Se inicia en el nodo raíz <biblioteca> y se seleccionan todos los nodos <libro>.
+
+El predicado (lo que está entre corchetes [...]) filtra esos libros para quedarnos solo con aquellos que cumplan todas las condiciones especificadas.
+
+(categoria = 'Novela' or categoria = 'Misterio')
+
+Comprueba que el contenido del elemento <categoria> sea exactamente "Novela" o "Misterio".
+
+Esto asegura que solo se consideren libros de esas dos categorías.
+
+and number(anio) > 1950
+
+La función number(anio) convierte el contenido de <anio> a un número.
+
+Se seleccionan solo los libros cuyo año de publicación sea mayor que 1950.
+
+and not(contains(titulo, 'sombra'))
+
+La función contains(titulo, 'sombra') verifica si el elemento <titulo> contiene la subcadena "sombra".
+
+El not(...) invierte el resultado, por lo que se seleccionan solo los libros cuyo título no incluya "sombra".
+
+and (contains(autor, 'Gabriel') or contains(autor, 'Umberto'))
+
+Se evalúa si el elemento <autor> contiene la cadena "Gabriel" o la cadena "Umberto".
+
+Esto limita la selección a libros escritos por autores cuyo nombre incluya alguna de esas cadenas.
+
+and (count(preceding-sibling::libro[categoria = current()/categoria]) mod 2) = 0
+
+preceding-sibling::libro: Selecciona todos los nodos <libro> que sean hermanos anteriores (es decir, que aparecen antes en el mismo nivel) al libro actual.
+
+[categoria = current()/categoria]: De esos hermanos, se filtra para quedarse solo con aquellos que tienen el mismo valor en <categoria> que el libro actual.
+
+count(...): Cuenta cuántos hermanos cumplen esa condición.
+
+mod 2 = 0: El operador mod calcula el residuo de la división del número obtenido por 2. Si el residuo es 0, significa que hay un número par de hermanos anteriores en la misma categoría.
+
+Nota sobre current():
+En el contexto de XSLT, current() devuelve el nodo actual del contexto original (antes de entrar en el predicado). Así, se asegura que la comparación se realice con la categoría del libro que se está evaluando.
+
+
+Ejemplo de XML usando id e idref
+Imagina el siguiente XML que modela personas y relaciones de amistad:
+
+xml
+Copy
+<?xml version="1.0" encoding="UTF-8"?>
+<personas>
+  <persona id="p1">
+    <nombre>Ana</nombre>
+  </persona>
+  <persona id="p2">
+    <nombre>Carlos</nombre>
+  </persona>
+  <persona id="p3">
+    <nombre>Elena</nombre>
+  </persona>
+  <amistades>
+    <!-- Aquí el atributo "ref" actúa como un idref, referenciando el id de una persona -->
+    <amigo ref="p1"/>
+    <amigo ref="p3"/>
+  </amistades>
+</personas>
+En este ejemplo:
+
+Cada <persona> tiene un atributo id único (por ejemplo, "p1", "p2", "p3").
+
+Los elementos <amigo> tienen un atributo ref que funciona como idref, referenciando el id de alguna persona.
+
+Ejemplo de Expresiones XPath
+Seleccionar una persona mediante id()
+Si queremos obtener la persona cuyo id es "p1", podemos usar:
+
+xpath
+Copy
+id('p1')
+Esta expresión devolverá el nodo <persona id="p1">...</persona>.
+
+Encontrar a los amigos usando id() y el atributo ref
+Supongamos que estamos procesando un elemento <amigo> y queremos obtener el nodo de la persona referenciada. En ese contexto, podríamos hacer algo como:
+
+xpath
+Copy
+id(@ref)
+Aquí, @ref extrae el valor del atributo ref (por ejemplo, "p1" o "p3").
+
+La función id() luego busca en el documento el nodo que tenga ese id.
+
+Esto es muy útil para "unir" información. Por ejemplo, en una transformación XSLT podrías tener una plantilla para <amigo> que muestre el nombre de la persona a la que hace referencia:
+
+xml
+Copy
+<xsl:template match="amigo">
+  <p>
+    Amigo: <xsl:value-of select="id(@ref)/nombre"/>
+  </p>
+</xsl:template>
+En este caso, id(@ref)/nombre navega desde el nodo <persona> obtenido mediante id(@ref) y selecciona su hijo <nombre>.
+
+Resumen
+id: Atributo único que identifica un nodo.
+
+idref: Atributo que referencia el id de otro nodo.
+
+Función id() en XPath:
+Permite obtener el nodo (o nodos) cuyo atributo de tipo id coincide con el valor especificado.
+
+Ejemplo de uso práctico en XSLT:
+Puedes usar id(@ref) para "saltar" desde un nodo que contiene una referencia hasta el nodo al que hace referencia, lo que es muy útil para unir información en una transformación.
+
+Código XSLT (Fragmento relevante)
+xml
+Copy
+<!-- Definición de key para agrupar libros por categoría -->
+<xsl:key name="librosPorCategoria" match="libro" use="categoria"/>
+
+<!-- Plantilla principal -->
+<xsl:template match="/biblioteca">
+  <catalogo>
+    <!-- Se seleccionan las categorías únicas -->
+    <xsl:for-each select="libro[generate-id() = generate-id(key('librosPorCategoria', categoria)[1])]">
+      <categoria nombre="{categoria}">
+        <!-- Para cada categoría, se muestran los libros asociados -->
+        <xsl:for-each select="key('librosPorCategoria', categoria)">
+          <libro id="{@id}">
+            <titulo><xsl:value-of select="titulo"/></titulo>
+            <autor><xsl:value-of select="autor"/></autor>
+            <anio><xsl:value-of select="anio"/></anio>
+          </libro>
+        </xsl:for-each>
+      </categoria>
+    </xsl:for-each>
+  </catalogo>
+</xsl:template>
+Explicación Detallada
+1. Definición de la Key
+xml
+Copy
+<xsl:key name="librosPorCategoria" match="libro" use="categoria"/>
+Propósito:
+Se define una key llamada librosPorCategoria que indexa todos los nodos <libro> del documento usando el valor del elemento hijo <categoria> como clave.
+
+Cómo funciona:
+Cada <libro> se asocia a la cadena que resulta de evaluar su <categoria>. Por ejemplo, si un libro tiene <categoria>Novela</categoria>, ese nodo se indexa bajo la clave "Novela".
+
+2. Selección de Categorías Únicas (Uso de generate-id() y key())
+xml
+Copy
+<xsl:for-each select="libro[generate-id() = generate-id(key('librosPorCategoria', categoria)[1])]">
+Objetivo del Predicado:
+Este predicado se usa para agrupar los libros por categoría. En XSLT 1.0, no existe una función de agrupación directa, así que se usa el siguiente truco:
+
+key('librosPorCategoria', categoria)
+Esta función devuelve todos los nodos <libro> que tienen el mismo valor en <categoria> que el nodo actual.
+
+key('librosPorCategoria', categoria)[1]
+Selecciona el primer libro de ese grupo.
+
+generate-id()
+Genera un identificador único para un nodo. Así, generate-id(key('librosPorCategoria', categoria)[1]) devuelve el identificador del primer nodo en el grupo.
+
+Comparación:
+La expresión completa:
+
+xpath
+Copy
+generate-id() = generate-id(key('librosPorCategoria', categoria)[1])
+se evalúa para cada <libro>. Solo el libro que sea el primero en su grupo (es decir, cuyo identificador único coincide con el del primer elemento del grupo) cumple la condición.
+
+Resultado:
+Esta parte del código selecciona solo un libro representativo para cada valor único de <categoria>. Es decir, se genera una iteración para cada categoría única encontrada en todos los <libro>.
+
+3. Creación de Elemento <categoria>
+xml
+Copy
+<categoria nombre="{categoria}">
+AVT (Attribute Value Template):
+La expresión {categoria} inserta dinámicamente el valor del hijo <categoria> del libro representativo en el atributo nombre del nuevo elemento <categoria>.
+
+Función:
+Se crea un elemento <categoria> para cada grupo único de libros, y su atributo nombre toma el valor (por ejemplo, "Novela" o "Misterio").
+
+4. Iteración Interna: Seleccionar Todos los Libros de la Categoría
+xml
+Copy
+<xsl:for-each select="key('librosPorCategoria', categoria)">
+Uso de la key:
+Aquí, se vuelve a utilizar la función key(). Esta vez, para el valor de categoria (del libro representativo), se recuperan todos los libros que pertenecen a ese grupo.
+
+Contexto:
+Para cada categoría, se iteran todos los <libro> asociados a esa categoría.
+
+5. Creación de Elementos <libro>
+Dentro del bucle anterior, se crea un nuevo elemento <libro> en la salida, con sus atributos y elementos hijos:
+
+xml
+Copy
+<libro id="{@id}">
+  <titulo><xsl:value-of select="titulo"/></titulo>
+  <autor><xsl:value-of select="autor"/></autor>
+  <anio><xsl:value-of select="anio"/></anio>
+</libro>
+id="{@id}":
+Inserta el valor del atributo id del <libro> original en el atributo id del nuevo elemento.
+
+Elementos hijos:
+Cada uno de <titulo>, <autor>, <anio> se llena con el contenido correspondiente del libro.
+
+Ejemplo de Salida Final
+Supongamos que el XML de entrada es:
+
+xml
+Copy
+<?xml version="1.0" encoding="UTF-8"?>
+<biblioteca>
+  <libro id="L1">
+    <titulo>Don Quijote</titulo>
+    <autor>Miguel de Cervantes</autor>
+    <anio>1605</anio>
+    <categoria>Novela</categoria>
+  </libro>
+  <libro id="L2">
+    <titulo>Cien Años de Soledad</titulo>
+    <autor>Gabriel García Márquez</autor>
+    <anio>1967</anio>
+    <categoria>Novela</categoria>
+  </libro>
+  <libro id="L3">
+    <titulo>El nombre de la rosa</titulo>
+    <autor>Umberto Eco</autor>
+    <anio>1980</anio>
+    <categoria>Misterio</categoria>
+  </libro>
+  <libro id="L4">
+    <titulo>La sombra del viento</titulo>
+    <autor>Carlos Ruiz Zafón</autor>
+    <anio>2001</anio>
+    <categoria>Misterio</categoria>
+  </libro>
+</biblioteca>
+La transformación XSLT generará el siguiente XML resumido:
+
+xml
+Copy
+<catalogo>
+  <categoria nombre="Novela">
+    <libro id="L1">
+      <titulo>Don Quijote</titulo>
+      <autor>Miguel de Cervantes</autor>
+      <anio>1605</anio>
+    </libro>
+    <libro id="L2">
+      <titulo>Cien Años de Soledad</titulo>
+      <autor>Gabriel García Márquez</autor>
+      <anio>1967</anio>
+    </libro>
+  </categoria>
+  <categoria nombre="Misterio">
+    <libro id="L3">
+      <titulo>El nombre de la rosa</titulo>
+      <autor>Umberto Eco</autor>
+      <anio>1980</anio>
+    </libro>
+    <libro id="L4">
+      <titulo>La sombra del viento</titulo>
+      <autor>Carlos Ruiz Zafón</autor>
+      <anio>2001</anio>
+    </libro>
+  </categoria>
+</catalogo>
+Resumen
+Clave y Agrupación:
+La clave librosPorCategoria permite agrupar los nodos <libro> según el valor de <categoria>.
+
+Predicado con generate-id():
+La expresión libro[generate-id() = generate-id(key('librosPorCategoria', categoria)[1])] selecciona un único representante por cada categoría única.
+
+Uso de key():
+Dentro de cada grupo, se usan los libros recuperados por la key para generar la lista completa de libros para esa categoría.
+
+Salida Final:
+La transformación genera un XML organizado por categorías, con cada categoría conteniendo sus libros correspondientes.
+
+Este ejemplo demuestra cómo usar expresiones XPath avanzadas junto con keys y predicados para agrupar y transformar datos de manera eficiente en XSLT.
+
+
+
+
+
+
+You said:
+no esta generando una salida identica al original ?
+
+
+ChatGPT said:
+Reasoned for 9 seconds
+No, la salida no es idéntica al XML original. La transformación está diseñada para reorganizar la información, agrupando los libros por categoría. En el XML original, los libros están listados de forma secuencial dentro del elemento <biblioteca>.
+
+Con la transformación:
+
+Se crea un nuevo documento con la raíz <catalogo>.
+
+Se agrupan los libros por categoría, generando un elemento <categoria> para cada valor único de <categoria> (por ejemplo, "Novela" o "Misterio").
+
+Dentro de cada <categoria> se listan todos los libros que pertenecen a esa categoría, manteniendo solo algunos elementos (como <titulo>, <autor>, <anio>) y el atributo id.
+
+Por lo tanto, la estructura final es diferente: en vez de tener un listado plano de <libro>, tendrás una estructura jerárquica que agrupa los libros bajo categorías. Esto es precisamente lo que se logra con el uso de keys y el predicado con generate-id().
+
+
+
+
+
+

@@ -1,0 +1,249 @@
+Enunciado 1: Consultas XPath en el XML de Recetas
+Se te pide escribir expresiones XPath para obtener ciertos datos del siguiente XML:
+
+xml
+Copy
+<recetas>
+  <receta>
+    <nombreR>Sopa de cebolla</nombreR>
+    <comensales>4</comensales>
+    <ingredientes>
+      <ingrediente codigo="CB">
+        <cantidad medida="kg">1</cantidad>
+      </ingrediente>
+      <ingrediente codigo="CC">
+        <cantidad medida="l">2</cantidad>
+      </ingrediente>
+      <!-- Más ingredientes… -->
+    </ingredientes>
+    <proceso>
+      <paso>Pelar y partir las cebollas en rodajas finas</paso>
+      <paso>Rehogarlas con la mantequilla, sal y pimienta a fuego lento hasta que estén transparentes sin dorarse</paso>
+      <!-- Más pasos… -->
+    </proceso>
+  </receta>
+  <productos>
+    <producto idProducto="CB" codProveedor="P-222">cebolla</producto>
+    <producto idProducto="CC" codProveedor="E-222">caldo de carne</producto>
+    <!-- Más productos… -->
+  </productos>
+</recetas>
+Solución de las expresiones XPath
+Obtener el nombre de la receta:
+
+xpath
+Copy
+/recetas/receta/nombreR
+Devuelve "Sopa de cebolla".
+
+Obtener el número de comensales:
+
+xpath
+Copy
+/recetas/receta/comensales
+Devuelve "4".
+
+Obtener la cantidad y la unidad del ingrediente con código "CC":
+
+Cantidad:
+
+xpath
+Copy
+/recetas/receta/ingredientes/ingrediente[@codigo='CC']/cantidad
+Devuelve "2".
+
+Unidad (atributo medida):
+
+xpath
+Copy
+/recetas/receta/ingredientes/ingrediente[@codigo='CC']/cantidad/@medida
+Devuelve "l".
+
+Obtener todos los pasos del proceso:
+
+xpath
+Copy
+/recetas/receta/proceso/paso
+Devuelve la lista de todos los elementos <paso>.
+
+Obtener el nombre del producto cuyo idProducto sea igual a "CB":
+
+xpath
+Copy
+/recetas/productos/producto[@idProducto='CB']
+Devuelve "cebolla".
+
+Enunciado 2: Transformación XSLT a HTML para Mostrar la Receta
+Se requiere crear una hoja de estilo XSLT que genere una página HTML con:
+
+Título y encabezado que muestren el nombre de la receta.
+
+Un párrafo con el número de comensales.
+
+Una lista (por ejemplo, <ul>) de ingredientes en la que cada elemento muestre el código, la cantidad, la unidad de medida y un enlace dinámico con la URL http://www.ejemplo.com/productos?id={codigo}.
+
+Una lista ordenada (<ol>) con los pasos del proceso.
+
+Solución (Código XSLT):
+xml
+Copy
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0"
+   xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <!-- Se especifica la salida en HTML -->
+  <xsl:output method="html" encoding="UTF-8" indent="yes"/>
+
+  <!-- Plantilla principal: inicia la transformación en la raíz <recetas> -->
+  <xsl:template match="/recetas">
+    <html>
+      <head>
+        <title>
+          <xsl:value-of select="receta/nombreR"/>
+        </title>
+      </head>
+      <body>
+        <h1>
+          <xsl:value-of select="receta/nombreR"/>
+        </h1>
+        <p>
+          <strong>Comensales:</strong>
+          /que es strong en HTML
+          <!-- Se extrae el número de comensales -->
+          <xsl:value-of select="receta/comensales"/>
+        </p>
+        <h2>Ingredientes</h2>
+        <ul>
+          <!-- Se recorre cada ingrediente -->
+          <xsl:for-each select="receta/ingredientes/ingrediente">
+            <li>
+              Código: <xsl:value-of select="@codigo"/> - 
+              Cantidad: <xsl:value-of select="cantidad"/> 
+              <xsl:text> </xsl:text>
+              <xsl:value-of select="cantidad/@medida"/> - 
+              <!-- Enlace dinámico usando el código del ingrediente -->
+              <a href="http://www.ejemplo.com/productos?id={@codigo}">
+                Ver Producto
+              </a>
+            </li>
+          </xsl:for-each>
+        </ul>
+        <h2>Proceso</h2>
+        <ol>
+          <!-- Se recorren los pasos del proceso -->
+          <xsl:for-each select="receta/proceso/paso">
+            <li>
+              <xsl:value-of select="."/>
+              La instrucción <xsl:value-of select="."/> se utiliza para extraer y mostrar el contenido textual del nodo actual en el que se encuentra el procesador XSLT.
+            </li>
+          </xsl:for-each>
+        </ol>
+      </body>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>
+Explicación:
+<xsl:template match="/recetas">
+Procesa la raíz del XML.
+
+<xsl:value-of select="receta/nombreR"/>
+Extrae el nombre de la receta y lo usa tanto en el título como en el encabezado.
+
+<xsl:for-each select="receta/ingredientes/ingrediente">
+Itera sobre cada ingrediente, extrayendo el atributo codigo, el contenido del nodo <cantidad> y el valor del atributo medida.
+
+href="http://www.ejemplo.com/productos?id={@codigo}"
+Utiliza una AVT (Attribute Value Template) para insertar el valor del atributo codigo en la URL.
+
+<xsl:for-each select="receta/proceso/paso">
+Recorre cada paso, mostrándolo en un elemento <li> dentro de una lista ordenada.
+
+Enunciado 3: Transformación XSLT a XML Resumido Utilizando Keys
+Se te pide generar un nuevo XML con la siguiente estructura:
+
+xml
+Copy
+<recetaResumen>
+  <nombre>Sopa de cebolla</nombre>
+  <comensales>4</comensales>
+  <ingredientes>
+    <ingrediente codigo="CB" cantidad="1" medida="kg" producto="cebolla"/>
+    <!-- Más ingredientes... -->
+  </ingredientes>
+  <totalIngredientes>...</totalIngredientes>
+  <proceso>
+    <paso>Pelar y partir las cebollas en rodajas finas</paso>
+    <!-- Más pasos... -->
+  </proceso>
+</recetaResumen>
+Para relacionar cada ingrediente con el producto correspondiente, se usará una key que asocie el atributo @codigo del ingrediente con el atributo @idProducto de los productos.
+
+Solución (Código XSLT):
+xml
+Copy
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0"
+   xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <!-- Se define la salida en XML -->
+  <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
+
+  <!-- Definición de la key para buscar productos por su idProducto -->
+  <xsl:key name="prodById" match="productos/producto" use="@idProducto"/>
+
+  <!-- Plantilla principal: procesa la raíz <recetas> -->
+  <xsl:template match="/recetas">
+    <recetaResumen>
+      <nombre>
+        <xsl:value-of select="receta/nombreR"/>
+      </nombre>
+      <comensales>
+        <xsl:value-of select="receta/comensales"/>
+      </comensales>
+      <ingredientes>
+        <!-- Se recorren los ingredientes -->
+        <xsl:for-each select="receta/ingredientes/ingrediente">
+          <ingrediente codigo="{@codigo}"
+                       cantidad="{cantidad}"
+                       medida="{cantidad/@medida}">
+            <producto>
+              <!-- Se utiliza la key para obtener el contenido del producto correspondiente -->
+              <xsl:value-of select="key('prodById', @codigo)"/>
+            </producto>
+          </ingrediente>
+        </xsl:for-each>
+      </ingredientes>
+      <totalIngredientes>
+        <!-- Se cuenta el número total de ingredientes -->
+        <xsl:value-of select="count(receta/ingredientes/ingrediente)"/>
+      </totalIngredientes>
+      <proceso>
+        <!-- Se recorren los pasos del proceso -->
+        <xsl:for-each select="receta/proceso/paso">
+          <paso>
+            <xsl:value-of select="."/>
+          </paso>
+        </xsl:for-each>
+      </proceso>
+    </recetaResumen>
+  </xsl:template>
+</xsl:stylesheet>
+Explicación:
+<xsl:key name="prodById" match="productos/producto" use="@idProducto"/>
+Define una clave llamada prodById que permite, dado un valor (en este caso, el @codigo del ingrediente), buscar el <producto> cuyo atributo idProducto coincide.
+
+Atributos en el elemento <ingrediente>:
+Se usan AVTs para definir los atributos codigo, cantidad y medida directamente con los valores extraídos del XML de entrada.
+
+Uso de key('prodById', @codigo):
+Recupera el <producto> correspondiente al código del ingrediente y, al usar <xsl:value-of>, extrae el contenido textual (por ejemplo, "cebolla").
+
+<xsl:value-of select="count(receta/ingredientes/ingrediente)"/>:
+Calcula el total de ingredientes.
+
+En XPath, los corchetes [] se usan para definir predicados que filtran los nodos según una condición. En la expresión:
+
+xpath
+Copy
+/recetas/productos/producto[@idProducto='CB']
+los corchetes indican que se deben seleccionar solo aquellos elementos <producto> que tengan un atributo idProducto cuyo valor sea exactamente 'CB'. Es decir, el predicado [@idProducto='CB'] filtra la lista de nodos <producto> devolviendo únicamente aquellos que cumplen la condición.
+
+Este mecanismo permite afinar la selección de nodos basándose en sus atributos, contenido u otras características, haciendo que las consultas XPath sean muy poderosas y precisas.
