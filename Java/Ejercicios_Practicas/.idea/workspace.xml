@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e5fe1eb-949c-4bda-94e2-8bb05053799d" name="Changes" comment="Ejercicios Java 09/02/2025" />
+    <list default="true" id="1e5fe1eb-949c-4bda-94e2-8bb05053799d" name="Changes" comment="Ejercicios Java 09/02/2025">
+      <change afterPath="$PROJECT_DIR$/../GestorAlimentacion/src/Gestor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GestorAlimentacion/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../GestorAlimentacion/src/Producto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicios_Tema_6/Ej_03_Notas/estudiantes.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicios_Tema_6/Ej_03_Notas/notas_55.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ejercicios_Tema_6/Ej_3_Notas/src/GestorNotas.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Ejercicios_Tema_6/Ej_3_Notas/src/GestorNotas.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,7 +59,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Nicolás/Desktop/Programacion/Java/Ejercicios_Practicas"
+    "last_opened_file_path": "C:/Users/a24nicolasmpp/Desktop/Programacion/Java/Ejercicios_Practicas"
   }
 }]]></component>
   <component name="RecentsManager">

@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class GestorNotas {
-    private static final Path DIR = Paths.get("Ej_03_Notas");
+    private static final Path DIR = Paths.get("Ej_03_Notas_Archivos");
     private static final Path ESTUDIANTES_FILE = DIR.resolve("estudiantes.txt");
     private final Scanner scanner = new Scanner(System.in);
 
