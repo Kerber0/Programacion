@@ -1,0 +1,2 @@
+2025-05-19 18:34:46Cliente: 1 alquiló terminator2025-05-19 18:36:56 Cliente: 1 devolvió terminator2025-05-20 16:43:57 Cliente: 1 alquiló "asdfasd"
+2025-05-20 16:44:13 Cliente: 1 devolvió "ssdfsdf"
