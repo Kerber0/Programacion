@@ -98,6 +98,7 @@ public class Gestor {
             System.out.println("Error al leer el archivo " + e.getMessage());
         }
     }
+
     public static String input(String text) {
         boolean textcorrect = false;
         String resultado;
