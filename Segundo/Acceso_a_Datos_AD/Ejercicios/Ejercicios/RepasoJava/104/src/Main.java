@@ -1,3 +1,5 @@
+
+
 /* Crea una clase Ejercicio_Piscina que sirva para calcular el aforo de una piscina comunitaria.
 
 Con las medidas de seguridad derivadas de la situación sanitaria por motivos del COVID-19, las comunidades de
@@ -49,23 +51,42 @@ Introduzca anchura de la parcela:
 El aforo de la piscina es: 17 personas */
 
 
+import java.util.Scanner;
 
 
-
-
-
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+    static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        double largoPisc = inputDouble("Ingrese el largo de la piscina: ");
+        double anchoPisc = inputDouble("Ingrese el ancho de la piscina: ");
+        double largoParcela = inputDouble("Ingrese el largo de la parcela: ");
+        double anchoParcela = inputDouble("Ingrese el ancho de la parcela: ");
+
+        Piscina piscina = new Piscina(largoPisc, anchoPisc, largoParcela, anchoParcela);
+        piscina.setAforo();
+
+        System.out.println("El aforo de la piscina es: " + piscina.getAforo() + " personas");
+
     }
+
+
+    private static Double inputDouble(String text) {
+        double num = -1;
+        boolean valido = false;
+
+        while (!valido) {
+            try {
+                System.out.println(text);
+                num = Double.parseDouble(sc.nextLine());
+                valido = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Por favor ingrese un número decimal válido.");
+            }
+        }
+        return num;
+    }
+
+
 }

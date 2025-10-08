@@ -98,19 +98,97 @@ Introduzca número de franja donde quiere reservar [1-6]:*/
 
 
 
+import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
 public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+    static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        menu();
+
     }
+
+
+    private static void menu() {
+        System.out.println("Bienvenido al gestor.");
+        System.out.println("Primero vamos a cargar la piscina para calcular su aforo.");
+        agregarPiscina();
+        reservar();
+    }
+
+    private static void agregarPiscina() {
+        double largoPisc = inputDouble("Ingrese el largo de la piscina: ");
+        double anchoPisc = inputDouble("Ingrese el ancho de la piscina: ");
+        double largoParcela = inputDouble("Ingrese el largo de la parcela: ");
+        double anchoParcela = inputDouble("Ingrese el ancho de la parcela: ");
+
+        Piscina piscina = new Piscina(largoPisc, anchoPisc, largoParcela, anchoParcela);
+        piscina.setAforo();
+
+        System.out.println("El aforo de la piscina es: " + piscina.getAforo() + " personas");
+    }
+
+    private static void reservar() {
+        int opcion;
+        System.out.println("Ahora seleccione la franja horaria deseada indicando el numero: ");
+
+        do {
+            opcion = inputInt("""
+               Franja 1 → 08:00h -10:00h
+               
+               Franja 2 → 10:00h- 12:00h
+               
+               Franja 3 → 12:00h -14:00h
+               
+               Franja 4 → 14:00h- 16:00h
+               
+               Franja 5 → 16:00h -18:00h
+               
+               Franja 6 → 18:00h- 20:00h
+               
+               """);
+            if (opcion < 1 || opcion > 6) {
+                System.out.println("Debe elegir la franja horaria selecionando del 1 al 6.");
+            }
+
+        } while (opcion < 1 || opcion > 6);
+
+
+    }
+
+    private static Double inputDouble(String text) {
+        double num = -1;
+        boolean valido = false;
+
+        while (!valido) {
+            try {
+                System.out.println(text);
+                num = Double.parseDouble(sc.nextLine());
+                valido = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Por favor ingrese un número decimal válido.");
+            }
+        }
+        return num;
+    }
+
+     private static Integer inputInt (String text){
+             int num = -1;
+             boolean valido = false;
+
+             while (!valido) {
+                 try {
+                     System.out.println(text);
+                     num = Integer.parseInt(sc.nextLine());
+                     valido = true;
+                 } catch (NumberFormatException e) {
+                     System.out.println("Error: Por favor ingrese un número válido.");
+                 }
+             }
+             return num;
+         }
+
+
 }
