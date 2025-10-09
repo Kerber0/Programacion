@@ -1,8 +1,10 @@
 /*
 Utilizando la base de datos de empleados, crea en Java:
 
-una clase llamada ConsultaNombres que devuelva los nombres de los empleados que empiezan por una letra determinada. Esta letra será introducida por el usuario.
-una clase llamada BorradoEmpleados que permita borrar un empleado con un número determinado. Este número será introducido por el usuario.
+una clase llamada ConsultaNombres que devuelva los nombres de los empleados que empiezan por una letra determinada.
+ Esta letra será introducida por el usuario.
+una clase llamada BorradoEmpleados que permita borrar un empleado con un número determinado. Este número
+será introducido por el usuario.
  */
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or

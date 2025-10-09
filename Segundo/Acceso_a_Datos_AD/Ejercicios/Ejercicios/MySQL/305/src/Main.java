@@ -1,5 +1,6 @@
 /*
-Desarrolla una aplicación, siguiendo el patrón MVC, que sume dos números y muestre el resultado. Para ello puedes utilizar el siguiente proyecto como plantilla.
+Desarrolla una aplicación, siguiendo el patrón MVC, que sume dos números y muestre el resultado.
+Para ello puedes utilizar el siguiente proyecto como plantilla.
 
 TODO
 En el proyecto de plantilla hay comentarios marcados con la palabra TODO que indica lo que habría que hacer.
