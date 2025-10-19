@@ -4,11 +4,13 @@ Dado la base de datos de libros, la cual tiene el siguiente diagrama ER:
 
 
 
-Se pide, desarrollar una aplicación Java que permita realizar consultas y recuperar los datos utilizando los siguientes procedimientos almacenados:
+Se pide, desarrollar una aplicación Java que permita realizar consultas y recuperar los datos
+utilizando los siguientes procedimientos almacenados:
 
 pa_libros_limite_stock(): devuelve la lista de libros en stock
 get_libro_by_id(IN id int): devuelve la información de un libro por le código
-contar_libros_precio(IN precio decimal(5,2), OUT total int): permite obtener el número de libros que cuestan más que una determinada cantidad
+contar_libros_precio(IN precio decimal(5,2), OUT total int): permite obtener el número de libros
+que cuestan más que una determinada cantidad
  */
 
 

@@ -1,3 +1,12 @@
+/*
+Utilizando la base de datos de empleados, crea en Java:
+
+una clase llamada ConsultaNombres que devuelva los nombres de los empleados que empiezan por una letra determinada.
+ Esta letra será introducida por el usuario.
+una clase llamada BorradoEmpleados que permita borrar un empleado con un número determinado. Este número
+será introducido por el usuario.
+ */
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -13,23 +22,3 @@ public class Main {
         }
     }
 }
-
-    public static void main(String[] args) {
-        String usuario = "root";
-        String clave = "abc123.";
-        String url ="jdbc:mysql://localhost:3306/empleados";
-        Connection conn;
-        try {
-            conn = DriverManager.getConnection(url, usuario,clave);
-            amosarInformacionBD(conn);
-            amosarProxectos(conn);
-            inserirProxecto(conn, 11, "Bases de datos", "Lugo", 3);
-            amosarProxectos(conn);
-            eliminarProxecto(conn, 11);
-            amosarProxectos(conn);
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Example.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    conn

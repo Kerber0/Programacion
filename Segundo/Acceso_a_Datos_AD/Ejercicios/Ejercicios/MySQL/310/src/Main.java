@@ -1,5 +1,6 @@
 /*
-Se pide desarrollar una pequeña aplicación que permita realizar pedidos a clientes en una tienda. Para ello, crea una base de datos tienda teniendo en cuenta el siguiente diagrama E-R:
+Se pide desarrollar una pequeña aplicación que permita realizar pedidos a clientes en una tienda.
+Para ello, crea una base de datos tienda teniendo en cuenta el siguiente diagrama E-R:
 
 
 
@@ -22,7 +23,8 @@ Precio total: 245,60
 Después, diseña e implementa la aplicación, que nos debe permitir:
 
 Consultar la información personal de un cliente.
-Consultar los pedidos realizados por un cliente. Se debe mostrar la fecha en la que realizó el pedido, los productos que compró y el precio total del pedido.
+Consultar los pedidos realizados por un cliente. Se debe mostrar la fecha en la que realizó el pedido, los productos
+que compró y el precio total del pedido.
 Realizar un pedido. El cliente introducirá su dni e indicará los productos que quiere añadir al pedido
  */
 
