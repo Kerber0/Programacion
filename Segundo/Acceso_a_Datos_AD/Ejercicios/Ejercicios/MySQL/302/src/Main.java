@@ -15,153 +15,119 @@ PreparedStatement: para poder reutilizar consultas.
 SQLException: para gestionar las excepciones
  */
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.sql.*;
+
+
 public class Main {
+
+
     public static void main(String[] args) {
         String user = "root";
-        String clave = "abc123.";
+        String clave = "abc123";
         String url = "jdbc:mysql://localhost:3306/";
         String bd = "empleados";
         Connection conn;
 
         try {
             conn = DriverManager.getConnection(url+bd, user, clave);
+            infoBD(conn);
+            System.out.println(" ");
+            infoProyectos(conn);
+            deleteProyecto(conn, 11);
+            System.out.println(" ");
+            insertProyecto(conn, 11, "Bases de datos", "Lugo", 3);
+            System.out.println(" ");
+            infoProyectos(conn);
+            System.out.println(" ");
+            deleteProyecto(conn, 11);
+            System.out.println(" ");
+            infoProyectos(conn);
 
 
 
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
 
-    private static void infoBD (Connection conn) {
+
+
+    private static void infoBD(Connection conn) {
+        try {
+            DatabaseMetaData dbmd = conn.getMetaData();
+            String gestor = dbmd.getDatabaseProductName();
+            String conector = dbmd.getDriverName();
+            String url = dbmd.getURL();
+            String usuario = dbmd.getUserName();
+
+            System.out.println("Informacion de base de datos: ");
+            System.out.println( "-----------------------------");
+            System.out.println("*Gestor : " + gestor);
+            System.out.println("*Conector : " + conector);
+            System.out.println("*URL : " + url);
+            System.out.println("*Usiaurio : " + usuario);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 
+    private static void infoProyectos(Connection conn) {
+        Statement st;
+        ResultSet rs;
+        String sql = "SELECT * from proyecto;";
+        try {
+           st = conn.createStatement();
+           rs = st.executeQuery(sql);
+           while (rs.next()) {
+               System.out.println("Numero: " + rs.getInt("Numproy") +
+                       ", Nombre: " + rs.getString("Nombreproy") +
+                       ", Lugar: " + rs.getString("Lugarproy") +
+                       ", Departamento: " + rs.getInt("departamento_Numdep"));
+           };
+           st.close();
+           rs.close();
 
-public static String input(String text) {
-        boolean textcorrect = false;
-        String resultado;
-        do {
-            System.out.println(text);
-            resultado = sc.nextLine();
-            if (resultado.isEmpty()){
-                System.out.println("Se debe ingresar algo.");
-            } else {
-                textcorrect = true;
-            }
-        }while (!textcorrect);
-        return resultado;
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-       import Connection;
-       import DriverManager;
-       import SQLException;
-       import Level;
-       import Logger;
+    private static void insertProyecto(Connection conn, int num, String nombre, String lugar, int depto) {
+        String sql = "INSERT INTO proyecto VALUES (?, ?, ?, ?);";
+        try (PreparedStatement ps = conn.prepareStatement(sql)){
+            ps.setInt(1, num);
+            ps.setString(2, nombre);
+            ps.setString(3, lugar);
+            ps.setInt(4, depto);
+            int numTuplas = ps.executeUpdate();
+            System.out.println("Sentencia: " + ps);
+            System.out.println("Tuplas afectadas: " + numTuplas);
 
-       /**
-        * TEMPLATE DE CONEXIÓN JDBC
-        *
-        * Este modelo permite conectar fácilmente a bases de datos MySQL o PostgreSQL.
-        * Solo se deben editar las variables marcadas según el tipo de conexión.
-        *
-        * Ejemplo de uso:
-        *   Connection conn = DBConnectionTemplate.getConnection();
-        */
-       public class DBConnectionTemplate {
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    private static void deleteProyecto(Connection conn, int num) {
+        String sql = "DELETE FROM  proyecto WHERE Numproy = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, num);
+            int numTuplas = ps.executeUpdate();
+            System.out.println("Sentencia: " + ps);
+            System.out.println("Tuplas afectadas: " + numTuplas);
 
-           // ===============================
-           // 🔧 CONFIGURACIÓN GENERAL
-           // ===============================
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-           // 👉 Tipo de base de datos: "mysql" o "postgresql"
-           private static final String DB_TYPE = "mysql";
 
-           // 👉 Nombre del host o IP del servidor de base de datos
-           private static final String HOST = "localhost";
 
-           // 👉 Puerto por defecto:
-           // MySQL → 3306
-           // PostgreSQL → 5432
-           private static final String PORT = "3306";
-
-           // 👉 Nombre de la base de datos a conectar
-           private static final String DATABASE = "nombre_de_tu_base";
-
-           // 👉 Credenciales de acceso
-           private static final String USER = "tu_usuario";
-           private static final String PASSWORD = "tu_contraseña";
-
-           // ===============================
-           // ⚙️ MÉTODO DE CONEXIÓN
-           // ===============================
-
-           /**
-            * Devuelve una conexión JDBC según el tipo de base de datos configurado.
-            */
-           public static Connection getConnection() {
-               Connection conn = null;
-               String url = "";
-
-               try {
-                   switch (DB_TYPE.toLowerCase()) {
-                       case "mysql":
-                           // Formato URL MySQL: jdbc:mysql://HOST:PORT/DATABASE
-                           url = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE
-                                   + "?useSSL=false&serverTimezone=UTC";
-                           // Cargar driver de MySQL (opcional con JDBC 4.0+)
-                           Class.forName("com.mysql.cj.jdbc.Driver");
-                           break;
-
-                       case "postgresql":
-                           // Formato URL PostgreSQL: jdbc:postgresql://HOST:PORT/DATABASE
-                           url = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DATABASE;
-                           // Cargar driver de PostgreSQL (opcional con JDBC 4.0+)
-                           Class.forName("org.postgresql.Driver");
-                           break;
-
-                       default:
-                           throw new IllegalArgumentException("Tipo de base de datos no soportado: " + DB_TYPE);
-                   }
-
-                   conn = DriverManager.getConnection(url, USER, PASSWORD);
-                   System.out.println("✅ Conexión exitosa a " + DB_TYPE.toUpperCase() + " → " + DATABASE);
-
-               } catch (ClassNotFoundException ex) {
-                   Logger.getLogger(DBConnectionTemplate.class.getName())
-                         .log(Level.SEVERE, "❌ No se encontró el driver JDBC.", ex);
-               } catch (SQLException ex) {
-                   Logger.getLogger(DBConnectionTemplate.class.getName())
-                         .log(Level.SEVERE, "❌ Error al conectar con la base de datos.", ex);
-               }
-               return conn;
-           }
-
-           /**
-            * Cierra una conexión abierta de forma segura.
-            */
-           public static void closeConnection(Connection conn) {
-               if (conn != null) {
-                   try {
-                       conn.close();
-                       System.out.println("🔒 Conexión cerrada correctamente.");
-                   } catch (SQLException ex) {
-                       Logger.getLogger(DBConnectionTemplate.class.getName())
-                             .log(Level.WARNING, "⚠️ Error al cerrar la conexión.", ex);
-                   }
-               }
-           }
-       }
+    }
 
 
 
