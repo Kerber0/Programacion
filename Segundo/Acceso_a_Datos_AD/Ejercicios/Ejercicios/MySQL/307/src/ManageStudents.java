@@ -3,14 +3,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ManageStudents {
-    private Connection connection;
-    private final String user = "root";
-    private final String clave = "abc123";
-    private final String url = "jdbc:mysql://localhost:3306/school";
+    private static Connection connection;
+    private static final String user = "root";
+    private static final String clave = "abc123";
+    private static final String url = "jdbc:mysql://localhost:3306/school";
 
-    void openConnection() {
+    static void openConnection() {
         try {
-            this.connection = DriverManager.getConnection(url, user, clave);
+            connection = DriverManager.getConnection(url, user, clave);
             System.out.println("Conexión establecida correctamente.");
         } catch (SQLException e) {
             System.out.println("Error en la conexión.");
@@ -74,26 +74,72 @@ public class ManageStudents {
 
     public boolean deleteStudent() {
         String id = Datos.input("Ingrese el id del alumno a borrar: ");
-        try {
-            PreparedStatement ps = this.connection.prepareStatement("DELETE FROM student WHERE id = ?");
+        try (PreparedStatement ps = this.connection.prepareStatement(
+                "DELETE FROM student WHERE id = ?")) {
             ps.setString(1, id);
 
             if (ps.executeUpdate() > 0) {
                 System.out.println("El alumno se ha eliminado correctamente.");
             } else {
-                System.out.println("Error al eliminar el alumno.");
+                System.out.println("No se encontró un alumno con ese ID.");
+                return false;
             }
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            closeConnection();
             return false;
         }
         return true;
     }
 
     public void modifyStudent() {
+        String id = Datos.input("Ingrese el id del estudiante a modificar: ");
+        Student s = null;
 
+        try (PreparedStatement ps = this.connection.prepareStatement(
+                "SELECT * FROM student WHERE id = ?")) {
+            ps.setString(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    s = new Student(rs.getString("id"),
+                            rs.getString("name"),
+                            rs.getString("surname"),
+                            rs.getInt("age"));
+                } else {
+                    System.out.println("No se encontró un estudiante con ese ID.");
+                    return;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        System.out.println("Deje vacío si no quiere cambiar el campo.");
+        String nuevoNombre = Datos.input("Nombre actual: " + s.getName() + " - Nuevo nombre:");
+        String nuevoApellido = Datos.input("Apellido actual: " + s.getSurname() + " - Nuevo apellido:");
+        String nuevaEdadStr = Datos.input("Edad actual: " + s.getAge() + " - Nueva edad:");
+
+        if (!nuevoNombre.isEmpty()) s.setName(nuevoNombre);
+        if (!nuevoApellido.isEmpty()) s.setSurname(nuevoApellido);
+        if (!nuevaEdadStr.isEmpty()) s.setAge(Integer.parseInt(nuevaEdadStr));
+
+        try (PreparedStatement ps = this.connection.prepareStatement(
+                "UPDATE student SET name = ?, surname = ?, age = ? WHERE id = ?")) {
+            ps.setString(1, s.getName());
+            ps.setString(2, s.getSurname());
+            ps.setInt(3, s.getAge());
+            ps.setString(4, s.getId());
+
+            if (ps.executeUpdate() > 0) {
+                System.out.println("Estudiante modificado correctamente.");
+            } else {
+                System.out.println("No se pudo modificar el estudiante.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public Student getStudent() {
@@ -126,24 +172,21 @@ public class ManageStudents {
         }
     }
 
-
     public List<Student> getStudentList() {
-        try {
-            PreparedStatement ps = this.connection.prepareStatement("SELECT * FROM student");
-            ResultSet rs = ps.executeQuery();
+        ArrayList<Student> listaEstudiantes = new ArrayList<>();
+        try (PreparedStatement ps = this.connection.prepareStatement("SELECT * FROM student");
+             ResultSet rs = ps.executeQuery()) {
 
-            ArrayList<Student> listaEstudiantes = new ArrayList<Student>();
             while (rs.next()) {
-                listaEstudiantes.add(new Student(rs.getString("id"), rs.getString("name"),
-                        rs.getString("surname"),rs.getInt("age")));
+                listaEstudiantes.add(new Student(rs.getString("id"),
+                        rs.getString("name"),
+                        rs.getString("surname"),
+                        rs.getInt("age")));
             }
-            return listaEstudiantes;
-
 
         } catch (SQLException e) {
             e.printStackTrace();
-            closeConnection();
-            return new ArrayList<Student>();
         }
+        return listaEstudiantes;
     }
 }

@@ -1,7 +1,6 @@
-import java.util.Scanner;
+import java.util.List;
 
 public class AppStudents {
-    static Scanner sc = new Scanner(System.in);
     static ManageStudents manage = new ManageStudents();
 
     final String opciones = """
@@ -21,7 +20,7 @@ public class AppStudents {
     }
 
     private void menu() {
-        System.out.println("🎓 Bienvenido a APPStudents");
+        System.out.println("Bienvenido a APPStudents");
         int opcion;
         do {
             opcion = Datos.inputInt(opciones);
@@ -29,8 +28,22 @@ public class AppStudents {
                 case 1 -> manage.addStudent(inputID());
                 case 2 -> manage.deleteStudent();
                 case 3 -> manage.modifyStudent();
-                case 4 -> manage.getStudent();
-                case 5 -> manage.getStudentList();
+                case 4 -> {
+                    Student s = manage.getStudent();
+                    if (s != null) {
+                        System.out.println("ID: " + s.getId());
+                        System.out.println("Nombre: " + s.getName());
+                        System.out.println("Apellido: " + s.getSurname());
+                        System.out.println("Edad: " + s.getAge());
+                    }
+                }
+                case 5 -> {
+                    List<Student> lista = manage.getStudentList();
+                    for (Student s : lista) {
+                        System.out.println("ID: " + s.getId() + ", Nombre: " + s.getName() +
+                                ", Apellido: " + s.getSurname() + ", Edad: " + s.getAge());
+                    }
+                }
                 case 0 -> System.out.println("Adiós!");
                 default -> System.out.println("Opción errónea, pruebe otra vez.");
             }
