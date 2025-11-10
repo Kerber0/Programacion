@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/13"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fitToWidth="true"
+            fx:controller="com.mycompany.tareaunidad2.FXMLDocumentController">
+    <content>
+        <VBox spacing="16">
+            <padding><Insets top="18" right="18" bottom="18" left="18"/></padding>
+
+            <Label text="DATOS PERSONALES" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+            <GridPane hgap="10" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="140"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <children>
+                    <Label text="DNI:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtDni" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Label text="Nombre y apellidos:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtNombre" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="Dirección:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtDireccion" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                    <Label text="Localidad:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtLocalidad" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                    <Label text="Provincia:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtProvincia" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                </children>
+            </GridPane>
+
+            <Separator/>
+
+            <Label text="DATOS DE LA RESERVA" style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+            <GridPane hgap="10" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="180"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <children>
+                    <Label text="Fecha de llegada:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <DatePicker fx:id="dpLlegada" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Label text="Fecha de salida:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <DatePicker fx:id="dpSalida" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="Número de personas:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="txtPersonas" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                    <Label text="Tipo de habitación:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="comboBox" prefWidth="220" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                </children>
+            </GridPane>
+
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <CheckBox fx:id="checkBox" text="_Fumador" mnemonicParsing="true" onAction="#handleCheckBox"/>
+            </HBox>
+
+            <Label fx:id="labelAviso"
+                   wrapText="true"
+                   style="-fx-text-fill: #b22222; -fx-font-weight: bold;"
+                   text="En virtud de la ley de sanidad se informa a los clientes de que solo podrán fumar en las habitaciones reservadas para tal fin."/>
+
+            <TitledPane text="Régimen de alojamiento" expanded="true">
+                <content>
+                    <HBox spacing="14">
+                        <children>
+                            <RadioButton fx:id="rbAd" text="Alojamiento y desayuno" toggleGroup="$regimenGroup"/>
+                            <RadioButton fx:id="rbMp" text="Media pensión" toggleGroup="$regimenGroup"/>
+                            <RadioButton fx:id="rbPc" text="Pensión completa" toggleGroup="$regimenGroup"/>
+                            <RadioButton fx:id="rbOtro" text="Otro" toggleGroup="$regimenGroup"/>
+                        </children>
+                    </HBox>
+                </content>
+            </TitledPane>
+
+            <HBox spacing="10">
+                <Button text="_Aceptar" mnemonicParsing="true" onAction="#handleAceptar"/>
+                <Button text="_Cancelar" mnemonicParsing="true" onAction="#handleCancelar"/>
+            </HBox>
+        </VBox>
+    </content>
+</ScrollPane>

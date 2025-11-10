@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/13"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.mycompany.tareaunidad2.FormularioPrincipalController">
+
+    <top>
+        <Label text="Hotel Demo"
+               style="-fx-font-size: 20; -fx-font-weight: bold; -fx-padding: 12 12 12 12;"
+               BorderPane.alignment="CENTER"/>
+    </top>
+
+    <center>
+        <VBox spacing="14" alignment="CENTER">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+                 cambia 'hotel.png' por el nombre real si lo tienes. Si no tienes imagen, deja vacío el ImageView. -->
+            <ImageView fitWidth="320" preserveRatio="true">
+            </ImageView>
+
+            <HBox spacing="12">
+                <Button fx:id="btnReservas" text="_Reservas" mnemonicParsing="true" onAction="#handlebtnReservas"/>
+                <Button fx:id="btnSalir" text="_Salir" mnemonicParsing="true" onAction="#handlebtnSalir"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
