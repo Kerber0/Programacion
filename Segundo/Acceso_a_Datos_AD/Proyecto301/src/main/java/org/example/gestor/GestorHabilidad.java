@@ -55,15 +55,12 @@ public class GestorHabilidad {
 
         HabilidadDO habilidad = habilidadOpt.get();
 
-        // Romper la relación ManyToMany desde el lado de Personaje:
 
         new java.util.HashSet<>(habilidad.getPersonajes())
                 .forEach(p -> p.getHabilidades().remove(habilidad));
 
-        // Limpiar el set inverso (opcional pero deja todo consistente en memoria)
         habilidad.getPersonajes().clear();
 
-        // Ahora sí se puede borrar la habilidad sin que queden filas en Personaje_Habilidad
         repo.remove(habilidad);
 
         System.out.println("Habilidad eliminada con éxito.");
@@ -106,7 +103,6 @@ public class GestorHabilidad {
         System.out.println("Habilidad actualizada.");
     }
 
-
     public void asignarHabilidadAPersonaje(Session session) {
         Repository<PersonajeDO> repoPer = new Repository<>(session);
         Repository<HabilidadDO> repoHab = new Repository<>(session);
@@ -139,13 +135,11 @@ public class GestorHabilidad {
             return;
         }
 
-        // Asignar (mantener ambos lados sincronizados)
         personaje.getHabilidades().add(habilidad);
         habilidad.getPersonajes().add(personaje);
 
         System.out.println("Habilidad asignada correctamente.");
     }
-
 
     public void contarPersonajesConHabilidad(Session session) {
 

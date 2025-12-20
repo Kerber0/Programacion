@@ -16,20 +16,15 @@ public class GestorTrajes {
         return traje;
     }
 
-
-
-    public void cambiarTrajeDePersonaje(Session session) {
+    public void cambiarTrajeDePersonaje(Session session, String nombre, String especificacion) {
 
         Repository<PersonajeDO> repoPersonaje = new Repository<>(session);
         Repository<TrajeDO> repoTraje = new Repository<>(session);
 
-        // 1️⃣ Pedimos personaje
-        String nombrePersonaje = Inputs.input("Nombre del personaje: ")
-                .trim().toUpperCase();
+        nombre = nombre.trim().toUpperCase();
+        especificacion = especificacion.trim();
 
-        var personajeOpt =
-                repoPersonaje.findOneByField(PersonajeDO.class, "nombre", nombrePersonaje);
-
+        var personajeOpt = repoPersonaje.findOneByField(PersonajeDO.class, "nombre", nombre);
         if (personajeOpt.isEmpty()) {
             System.out.println("No existe un personaje con ese nombre.");
             return;
@@ -37,10 +32,7 @@ public class GestorTrajes {
 
         PersonajeDO personaje = personajeOpt.get();
 
-        String especificacion = Inputs.input("Especificación del traje: ").trim();
-
-        var trajeOpt =
-                repoTraje.findOneByField(TrajeDO.class, "especificacion", especificacion);
+        var trajeOpt = repoTraje.findOneByField(TrajeDO.class, "especificacion", especificacion);
 
         TrajeDO traje;
 
@@ -75,6 +67,7 @@ public class GestorTrajes {
 
         System.out.println("Traje asignado correctamente a " + personaje.getNombre());
     }
+
 
 
 }

@@ -44,7 +44,6 @@ public class GestorPersonaje {
 
         switch (opcion) {
             case 1 -> {
-                // No se asigna traje
             }
 
             case 2 -> {

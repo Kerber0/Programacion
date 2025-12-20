@@ -51,7 +51,14 @@ public class Menu {
 
                 case 8 -> ejecutarConTransaccion(GestorParticipa.instance()::registrarParticipacion);
 
-                case 10 -> ejecutarConTransaccion(GestorTrajes.instance()::cambiarTrajeDePersonaje);
+                case 10 -> {
+                    String nombre = Inputs.input("Nombre personaje: ");
+                    String especificacion = Inputs.input("Especificacion traje: ");
+
+                    ejecutarConTransaccion(session ->
+                            GestorTrajes.instance().cambiarTrajeDePersonaje(session, nombre, especificacion)
+                    );
+                }
 
                 case 11 -> ejecutarConTransaccion(GestorPersonaje.instance()::mostrarDatosDePersonaje);
 

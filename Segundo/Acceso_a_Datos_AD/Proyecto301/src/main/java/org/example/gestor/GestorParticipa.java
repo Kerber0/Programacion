@@ -26,11 +26,9 @@ public class GestorParticipa {
         Repository<EventoDO> repoEvento = new Repository<>(session);
         Repository<ParticipaDO> repoParticipa = new Repository<>(session);
 
-        // 1) Pedir datos base
         String nombrePersonaje = Inputs.input("Nombre del personaje: ").trim().toUpperCase();
         String nombreEvento = Inputs.input("Nombre del evento: ").trim().toUpperCase();
 
-        // 2) Buscar personaje
         Optional<PersonajeDO> personajeOpt =
                 repoPersonaje.findOneByField(PersonajeDO.class, "nombre", nombrePersonaje);
 
@@ -39,8 +37,6 @@ public class GestorParticipa {
             int op = Inputs.inputInt("1) Crear personaje  0) Cancelar: ");
             switch (op) {
                 case 1 -> {
-                    // Si ya tienes GestorPersonaje: GestorPersonaje.instance().crearPersonaje(session);
-                    // O crea mínimo:
                     int nuevoId = repoPersonaje.nextId(PersonajeDO.class);
                     String alias = Inputs.input("Alias del personaje: ").trim().toUpperCase();
                     PersonajeDO nuevo = new PersonajeDO(nuevoId, nombrePersonaje, alias);
@@ -53,7 +49,6 @@ public class GestorParticipa {
             }
         }
 
-        // 3) Buscar evento
         Optional<EventoDO> eventoOpt =
                 repoEvento.findOneByField(EventoDO.class, "nombre", nombreEvento);
 
@@ -80,16 +75,13 @@ public class GestorParticipa {
         PersonajeDO personaje = personajeOpt.get();
         EventoDO evento = eventoOpt.get();
 
-        // 4) Pedir rol y fecha
         String rol = Inputs.input("Rol: ").trim().toUpperCase();
         LocalDate fecha = Inputs.inputFecha("Fecha (dd/MM/yyyy): ");
 
-        // 5) Crear ID compuesto
         ParticipaId id = new ParticipaId();
         id.setIdPersonaje(personaje.getId());
         id.setIdEvento(evento.getId());
 
-        // 6) Si ya existe la participación (misma PK), decidir qué hacer
         ParticipaDO yaExiste = session.get(ParticipaDO.class, id);
         if (yaExiste != null) {
             System.out.println("Ya existe participación de " + nombrePersonaje + " en " + nombreEvento);
@@ -98,7 +90,6 @@ public class GestorParticipa {
                 case 1 -> {
                     yaExiste.setRol(rol);
                     yaExiste.setFecha(fecha);
-                    // No hace falta merge si está managed (lo está si lo obtuviste con session.get)
                     System.out.println("Participación actualizada.");
                 }
                 default -> {
@@ -108,7 +99,6 @@ public class GestorParticipa {
             return;
         }
 
-        // 7) Crear ParticipaDO y persistir
         ParticipaDO participa = new ParticipaDO();
         participa.setId(id);
         participa.setPersonaje(personaje);
@@ -116,7 +106,6 @@ public class GestorParticipa {
         participa.setRol(rol);
         participa.setFecha(fecha);
 
-        // Mantener consistencia bidireccional (recomendado)
         personaje.getParticipaciones().add(participa);
         evento.getParticipaciones().add(participa);
 
